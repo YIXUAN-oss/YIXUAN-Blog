@@ -345,3 +345,132 @@ a.tutorial-card:focus {
     border-bottom: none !important;
   }
 }
+
+// ============================================
+// 文章详情页内容宽度优化
+// ============================================
+
+// 增加文章内容区域的最大宽度
+.page-container,
+.page .theme-reco-content,
+.theme-reco-content {
+  max-width: 1200px !important;
+}
+
+// 文章内容主体宽度
+.page-content-wrapper,
+.content__default {
+  max-width: 1200px !important;
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
+}
+
+// 调整侧边栏和内容区域的布局
+.page {
+  .page-wrapper {
+    max-width: 1400px !important;
+    margin: 0 auto;
+  }
+}
+
+// 平板设备响应式
+@media (max-width: 1400px) {
+  .page-container,
+  .page .theme-reco-content,
+  .theme-reco-content {
+    max-width: 95% !important;
+  }
+}
+
+// 移动设备响应式
+@media (max-width: 768px) {
+  .page-content-wrapper,
+  .content__default {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+// ============================================
+// 侧边栏宽度优化
+// ============================================
+
+// 增加左侧侧边栏宽度
+.sidebar,
+.sidebar-wrapper,
+.page-sidebar {
+  width: 320px !important;
+  max-width: 320px !important;
+}
+
+// 侧边栏内部内容宽度
+.sidebar-items,
+.sidebar-group,
+.sidebar-links {
+  width: 100%;
+}
+
+// 侧边栏标题文字不换行，超出显示省略号
+.sidebar-heading,
+.sidebar-link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 1rem;
+}
+
+// 侧边栏分组标题
+.sidebar-group-title {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+// 侧边栏链接
+.sidebar-link {
+  padding: 0.5rem 1rem 0.5rem 2rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  
+  &:hover {
+    background-color: var(--reco-bg-color-secondary, rgba(0, 0, 0, 0.05));
+  }
+  
+  &.active {
+    color: var(--reco-brand-color, #3eaf7c);
+    background-color: var(--reco-bg-color-secondary, rgba(62, 175, 124, 0.1));
+  }
+}
+
+// 调整主内容区域的左边距以适应更宽的侧边栏
+.page.has-sidebar {
+  padding-left: 340px !important;
+}
+
+// 移动端侧边栏保持原有宽度
+@media (max-width: 1024px) {
+  .sidebar,
+  .sidebar-wrapper,
+  .page-sidebar {
+    width: 280px !important;
+    max-width: 280px !important;
+  }
+  
+  .page.has-sidebar {
+    padding-left: 300px !important;
+  }
+}
+
+// 移动设备侧边栏响应式
+@media (max-width: 768px) {
+  .sidebar,
+  .sidebar-wrapper,
+  .page-sidebar {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .page.has-sidebar {
+    padding-left: 0 !important;
+  }
+}

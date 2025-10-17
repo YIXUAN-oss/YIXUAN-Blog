@@ -1,111 +1,154 @@
 ---
-title: 计算机网络
+title: 计算机网络教程
 sidebar: false
 article: false
 categories:
   - 教程
 tags:
   - 计算机网络
+  - TCP/IP
+  - 网络协议
 ---
 
 # 🌐 计算机网络教程
 
-深入理解网络协议与通信原理，掌握计算机网络的核心知识。
+欢迎来到计算机网络教程中心！这里将带你系统学习计算机网络的基础知识和核心原理。
 
-## 📚 课程内容
+## 📖 教程目录
 
-本教程涵盖计算机网络的各个方面，从基础概念到高级应用：
+### 🌟 基础篇
 
-- **网络基础**：网络体系结构、OSI模型、TCP/IP协议栈
-- **物理层与数据链路层**：传输介质、以太网、交换机
-- **网络层**：IP协议、路由算法、子网划分
-- **传输层**：TCP/UDP协议、可靠传输、流量控制
-- **应用层**：HTTP/HTTPS、DNS、FTP、SMTP
-- **网络安全**：加密技术、防火墙、VPN
+掌握计算机网络的基础概念和物理层知识。
 
-## 🎯 学习目标
+<div class="course-list">
+  <div class="course-item">
+    <a href="./计算机网络第1章（概述）.html">
+      <h3>📘 第1章 网络概述</h3>
+      <p>计算机网络的基本概念、体系结构和网络分类</p>
+    </a>
+  </div>
+</div>
 
-通过本教程的学习，你将能够：
+### 🌟 物理层
 
-- ✅ 理解计算机网络的基本原理和协议
-- ✅ 掌握TCP/IP协议栈的工作机制
-- ✅ 了解常见网络问题的排查方法
-- ✅ 掌握网络安全的基本概念和技术
+<div class="course-list">
+  <div class="course-item">
+    <a href="./计算机网络第2章（物理层）.html">
+      <h3>🔌 第2章 物理层</h3>
+      <p>物理层的功能、传输介质和信道复用技术</p>
+    </a>
+  </div>
+</div>
 
-## 📖 教程列表
+### 🔗 数据链路层
 
-- [计算机网络第1章（概述）](./计算机网络第1章（概述）.md)
-- [计算机网络第2章（物理层）](./计算机网络第2章（物理层）.md)
+学习数据链路层的核心协议和技术。
+
+<div class="course-list">
+  <div class="course-item">
+    <a href="./计算机网络第3章（数据链路层）.html">
+      <h3>📦 第3章 数据链路层</h3>
+      <p>帧封装、差错检测、MAC协议和以太网技术</p>
+    </a>
+  </div>
+</div>
+
+### 🌍 网络层
+
+深入理解IP协议和路由选择算法。
+
+<div class="course-list">
+  <div class="course-item">
+    <a href="./计算机网络第4章（网络层）.html">
+      <h3>🗺️第4章 网络层</h3>
+      <p>IP地址、子网划分、路由协议和ICMP</p>
+    </a>
+  </div>
+</div>
+
+### 🚀 运输层
+
+掌握TCP和UDP协议的工作原理。
+
+<div class="course-list">
+  <div class="course-item">
+    <a href="./计算机网络第5章（运输层）.html">
+      <h3>📮 第5章 运输层</h3>
+      <p>TCP连接管理、流量控制和拥塞控制</p>
+    </a>
+  </div>
+</div>
+
+### 💻 应用层
+
+学习常见的应用层协议和服务。
+
+<div class="course-list">
+  <div class="course-item">
+    <a href="./计算机网络第6章（应用层）.html">
+      <h3>🌐 第6章 应用层</h3>
+      <p>HTTP、DNS、FTP、SMTP等应用层协议</p>
+    </a>
+  </div>
+</div>
+
+## 💡 学习建议
+
+1. **循序渐进**：按照章节顺序学习，构建完整的知识体系
+2. **理解原理**：重点理解协议的工作原理和设计思想
+3. **动手实践**：使用 Wireshark 等工具抓包分析
+4. **多做习题**：通过练习巩固所学知识
+5. **关注应用**：将理论知识与实际应用相结合
+
+## 📚 推荐资源
+
+- [计算机网络（谢希仁第7版）](https://book.douban.com/subject/26960678/)
+- [Wireshark 网络分析工具](https://www.wireshark.org/)
+- [菜鸟教程 - 计算机网络](https://www.runoob.com/w3cnote_genre/network)
+
+---
+
+<div style="text-align: center; margin-top: 40px;">
+  <p>🎓 开始你的计算机网络学习之旅吧！</p>
+</div>
 
 <style scoped>
-.tutorial-intro {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-  border: 2px solid var(--border-color, #eaecef);
-  border-radius: 16px;
-  padding: 30px;
+.course-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
   margin: 30px 0;
 }
 
-.tutorial-intro h2 {
-  color: var(--text-color, #2c3e50);
-  font-size: 1.8em;
-  margin-bottom: 20px;
-  border: none;
-}
-
-.tutorial-intro ul {
-  list-style: none;
-  padding: 0;
-}
-
-.tutorial-intro li {
-  padding: 8px 0;
-  color: var(--text-color-secondary, #6a737d);
-  line-height: 1.8;
-}
-
-.tutorial-intro li strong {
-  color: var(--text-color, #2c3e50);
-  font-weight: 600;
-}
-
-.goals-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
-  margin: 20px 0;
-}
-
-.goal-item {
-  background: #f5f7fa;
-  padding: 15px 20px;
-  border-radius: 12px;
-  border-left: 4px solid #667eea;
+.course-item {
+  background: var(--bg-color-secondary, #f6f8fa);
+  border: 1px solid var(--border-color, #eaecef);
+  border-radius: 10px;
+  padding: 20px;
   transition: all 0.3s ease;
 }
 
-.goal-item:hover {
-  transform: translateX(5px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+.course-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-color, #3eaf7c);
 }
 
-[data-theme="dark"] .tutorial-intro {
-  background: rgba(102, 126, 234, 0.1);
-  border-color: rgba(102, 126, 234, 0.3);
+.course-item a {
+  text-decoration: none;
+  color: inherit;
 }
 
-[data-theme="dark"] .goal-item {
-  background: #2a2a2a;
-  border-left-color: #8b5cf6;
+.course-item h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--text-color, #2c3e50);
+  border: none;
+}
+
+.course-item p {
+  margin: 0;
+  color: var(--text-color-secondary, #6a737d);
+  font-size: 0.9em;
 }
 </style>
-
-<div class="tutorial-intro">
-  <p style="font-size: 1.1em; line-height: 1.8; margin-bottom: 20px;">
-    💡 <strong>温馨提示：</strong>教程内容正在持续更新中，敬请期待！
-  </p>
-  <p style="color: var(--text-color-secondary, #6a737d); line-height: 1.6;">
-    本教程将以系统化的方式讲解计算机网络的核心知识，结合实际案例帮助你深入理解网络原理。
-  </p>
-</div>
-

@@ -13,138 +13,155 @@ tags:
 
 掌握算法思维与编程能力，提升解决问题的核心竞争力。
 
-## 📚 课程内容
+## 📖 教程目录
 
-本教程系统讲解数据结构与算法的核心知识：
+### 🌟 基础篇
 
-- **基础数据结构**：数组、链表、栈、队列、哈希表
-- **树形结构**：二叉树、二叉搜索树、AVL树、红黑树、B树
-- **图论算法**：图的表示、遍历、最短路径、最小生成树
-- **排序算法**：冒泡、选择、插入、归并、快速、堆排序
-- **查找算法**：二分查找、哈希查找、树表查找
-- **算法设计思想**：分治、动态规划、贪心、回溯、分支限界
+掌握常用的基础数据结构。
 
-## 🎯 学习目标
+<div class="course-list">
+  <div class="course-item">
+    <a href="./basic/array.html">
+      <h3>📘 数组与链表</h3>
+      <p>线性表的顺序存储和链式存储</p>
+    </a>
+  </div>
+  
+  <div class="course-item">
+    <a href="./basic/stack-queue.html">
+      <h3>🎯 栈与队列</h3>
+      <p>后进先出(LIFO)和先进先出(FIFO)</p>
+    </a>
+  </div>
+  
+  <div class="course-item">
+    <a href="./basic/hash.html">
+      <h3>🔑 哈希表</h3>
+      <p>散列表、哈希函数和冲突处理</p>
+    </a>
+  </div>
+</div>
 
-通过本教程的学习，你将能够：
+### 🌳 树与图
 
-- ✅ 掌握常用数据结构的实现与应用
-- ✅ 理解各种算法的设计思想和时间复杂度
-- ✅ 提升算法思维和代码实现能力
-- ✅ 轻松应对技术面试和编程竞赛
+学习树形结构和图论算法。
 
-## 📖 教程列表
+<div class="course-list">
+  <div class="course-item">
+    <a href="./tree/binary-tree.html">
+      <h3>🌲 二叉树</h3>
+      <p>二叉树的遍历和应用</p>
+    </a>
+  </div>
+  
+  <div class="course-item">
+    <a href="./tree/balanced-tree.html">
+      <h3>⚖️ 平衡树</h3>
+      <p>AVL树、红黑树、B树</p>
+    </a>
+  </div>
+  
+  <div class="course-item">
+    <a href="./graph/graph.html">
+      <h3>🕸️ 图论算法</h3>
+      <p>图的表示、遍历和最短路径</p>
+    </a>
+  </div>
+</div>
+
+### 🚀 算法进阶
+
+掌握经典的算法设计思想。
+
+<div class="course-list">
+  <div class="course-item">
+    <a href="./algorithm/sort.html">
+      <h3>🔢 排序算法</h3>
+      <p>冒泡、快速、归并、堆排序</p>
+    </a>
+  </div>
+  
+  <div class="course-item">
+    <a href="./algorithm/search.html">
+      <h3>🔍 查找算法</h3>
+      <p>二分查找、哈希查找</p>
+    </a>
+  </div>
+  
+  <div class="course-item">
+    <a href="./algorithm/dp.html">
+      <h3>⚡ 动态规划</h3>
+      <p>状态转移方程和优化问题</p>
+    </a>
+  </div>
+  
+  <div class="course-item">
+    <a href="./algorithm/greedy.html">
+      <h3>🎯 贪心算法</h3>
+      <p>局部最优选择解决问题</p>
+    </a>
+  </div>
+</div>
+
+## 💡 学习建议
+
+1. **理解原理**：先理解数据结构的原理，再学习如何实现
+2. **多做练习**：在实践中加深理解，提高编程能力
+3. **复杂度分析**：注重算法的时间和空间复杂度分析
+4. **刷题巩固**：参加 LeetCode、牛客网等平台的算法练习
+5. **总结规律**：总结常见的算法模板和解题技巧
+
+## 📚 推荐资源
+
+- [数据结构与算法分析（第3版）](https://book.douban.com/subject/26745780/)
+- [算法导论（第3版）](https://book.douban.com/subject/20432061/)
+- [LeetCode](https://leetcode.cn/) - 算法练习平台
+- [牛客网](https://www.nowcoder.com/) - 编程面试练习
+
+---
+
+<div style="text-align: center; margin-top: 40px;">
+  <p>🎓 开始你的算法学习之旅吧！</p>
+</div>
 
 <style scoped>
-.tutorial-intro {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-  border: 2px solid var(--border-color, #eaecef);
-  border-radius: 16px;
-  padding: 30px;
+.course-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
   margin: 30px 0;
 }
 
-.tutorial-intro h2 {
-  color: var(--text-color, #2c3e50);
-  font-size: 1.8em;
-  margin-bottom: 20px;
-  border: none;
-}
-
-.tutorial-intro ul {
-  list-style: none;
-  padding: 0;
-}
-
-.tutorial-intro li {
-  padding: 8px 0;
-  color: var(--text-color-secondary, #6a737d);
-  line-height: 1.8;
-}
-
-.tutorial-intro li strong {
-  color: var(--text-color, #2c3e50);
-  font-weight: 600;
-}
-
-.goals-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
-  margin: 20px 0;
-}
-
-.goal-item {
-  background: #f5f7fa;
-  padding: 15px 20px;
-  border-radius: 12px;
-  border-left: 4px solid #667eea;
+.course-item {
+  background: var(--bg-color-secondary, #f6f8fa);
+  border: 1px solid var(--border-color, #eaecef);
+  border-radius: 10px;
+  padding: 20px;
   transition: all 0.3s ease;
 }
 
-.goal-item:hover {
-  transform: translateX(5px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+.course-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-color, #3eaf7c);
 }
 
-.practice-tips {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border-radius: 16px;
-  padding: 30px;
-  margin: 30px 0;
+.course-item a {
+  text-decoration: none;
+  color: inherit;
 }
 
-.practice-tips h3 {
-  color: white;
-  font-size: 1.5em;
-  margin-bottom: 15px;
+.course-item h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--text-color, #2c3e50);
   border: none;
 }
 
-.practice-tips ul {
-  list-style: none;
-  padding: 0;
+.course-item p {
   margin: 0;
-}
-
-.practice-tips li {
-  padding: 8px 0;
-  line-height: 1.8;
-}
-
-.practice-tips li::before {
-  content: "💡 ";
-  margin-right: 8px;
-}
-
-[data-theme="dark"] .tutorial-intro {
-  background: rgba(102, 126, 234, 0.1);
-  border-color: rgba(102, 126, 234, 0.3);
-}
-
-[data-theme="dark"] .goal-item {
-  background: #2a2a2a;
-  border-left-color: #8b5cf6;
+  color: var(--text-color-secondary, #6a737d);
+  font-size: 0.9em;
 }
 </style>
-
-<div class="tutorial-intro">
-  <p style="font-size: 1.1em; line-height: 1.8; margin-bottom: 20px;">
-    💡 <strong>温馨提示：</strong>教程内容正在持续更新中，敬请期待！
-  </p>
-  <p style="color: var(--text-color-secondary, #6a737d); line-height: 1.6;">
-    本教程将通过大量示例和练习题，帮助你系统掌握数据结构与算法，提升编程能力。
-  </p>
-</div>
-
-<div class="practice-tips">
-  <h3>🎯 学习建议</h3>
-  <ul>
-    <li>先理解数据结构的原理，再学习如何实现</li>
-    <li>多做练习题，在实践中加深理解</li>
-    <li>注重算法的时间和空间复杂度分析</li>
-    <li>参加 LeetCode、牛客网等平台的算法练习</li>
-  </ul>
-</div>
 

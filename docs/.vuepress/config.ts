@@ -19,6 +19,7 @@ export default defineUserConfig({
         ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }],
         ['meta', { name: 'keywords', content: '懿轩,YiXuan,博客,技术博客,Java,Python,前端开发' }],
         ['meta', { name: 'author', content: '懿轩' }],
+        ['meta', { name: 'algolia-site-verification', content: 'C0FA520F857130E0' }],
         ['link', { rel: 'icon', href: '/favicon.ico' }],
     ],
 
@@ -95,6 +96,53 @@ export default defineUserConfig({
                 {
                     text: 'NoSQL',
                     children: ['nosql/mongodb', 'nosql/redis']
+                }
+            ],
+            '/tutorials/network/': [
+                {
+                    text: '计算机网络教程',
+                    children: [
+                        '计算机网络第1章（概述）',
+                        '计算机网络第2章（物理层）',
+                        '计算机网络第3章（数据链路层）',
+                        '计算机网络第4章（网络层）',
+                        '计算机网络第5章（运输层）',
+                        '计算机网络第6章（应用层）'
+                    ]
+                }
+            ],
+            '/tutorials/operating-system/': [
+                {
+                    text: '基础篇',
+                    children: ['basic/introduction', 'basic/process']
+                },
+                {
+                    text: '核心篇',
+                    children: ['core/sync', 'core/memory', 'core/filesystem', 'core/device']
+                }
+            ],
+            '/tutorials/computer-organization/': [
+                {
+                    text: '基础篇',
+                    children: ['basic/introduction', 'basic/data']
+                },
+                {
+                    text: '核心篇',
+                    children: ['core/memory', 'core/instruction', 'core/cpu', 'core/io']
+                }
+            ],
+            '/tutorials/data-structures/': [
+                {
+                    text: '基础篇',
+                    children: ['basic/array', 'basic/stack-queue', 'basic/hash']
+                },
+                {
+                    text: '树与图',
+                    children: ['tree/binary-tree', 'tree/balanced-tree', 'graph/graph']
+                },
+                {
+                    text: '算法进阶',
+                    children: ['algorithm/sort', 'algorithm/search', 'algorithm/dp', 'algorithm/greedy']
                 }
             ]
         },
