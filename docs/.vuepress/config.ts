@@ -7,8 +7,10 @@ export default defineUserConfig({
     title: '懿轩的博客',
     description: '分享技术、记录生活 | YiXuan\'s Blog',
     
-    // GitHub Pages 部署路径配置
-    base: '/YIXUAN-Blog/',
+    // 根据部署环境设置 base 路径
+    // Vercel: 使用根路径 /
+    // GitHub Pages: 使用 /YIXUAN-Blog/
+    base: process.env.VERCEL ? '/' : '/YIXUAN-Blog/',
 
     // 使用 Vite 打包工具
     bundler: viteBundler(),

@@ -960,6 +960,7 @@ onMounted(() => {
   position: relative;
   display: inline-block;
   margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 /* 卡片图标 */
@@ -982,7 +983,7 @@ onMounted(() => {
 }
 
 .tutorial-card:hover .card-icon {
-  transform: scale(1.2) rotate(5deg);
+  transform: scale(1.15) rotate(5deg);
   animation-play-state: paused;
 }
 
@@ -1022,12 +1023,14 @@ onMounted(() => {
 
 /* 标题 */
 .tutorial-card h3 {
-  margin: 15px 0 10px;
+  margin: 25px 0 10px;
   color: var(--text-color, #2c3e50);
   font-size: 1.5em;
   font-weight: 600;
   border: none;
   transition: color 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .tutorial-card:hover h3 {

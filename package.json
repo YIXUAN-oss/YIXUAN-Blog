@@ -1,5 +1,5 @@
 {
-    "name": "yixuan-blog",
+  "name": "yixuan-blog",
   "version": "1.0.0",
   "description": "懿轩的个人博客 - YiXuan's Personal Blog",
   "scripts": {
@@ -19,7 +19,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://lgithub.xyz/YIXUAN-oss/YIXUAN-Blog.git"
+    "url": "https://github.com/YIXUAN-oss/YIXUAN-Blog.git"
   },
   "devDependencies": {
     "vuepress": "2.0.0-rc.19",
