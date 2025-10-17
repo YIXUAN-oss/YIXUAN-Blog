@@ -1,6 +1,7 @@
 import { defineUserConfig } from 'vuepress'
 import { viteBundler } from '@vuepress/bundler-vite'
 import { recoTheme } from 'vuepress-theme-reco'
+import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 
 export default defineUserConfig({
     lang: 'zh-CN',
@@ -46,12 +47,12 @@ export default defineUserConfig({
 
         // 导航栏配置
         navbar: [
-            { text: '🏠 首页', link: '/' },
-            { text: '📚 教程中心', link: '/tutorials/' },
-            { text: '📝 技术文章', link: '/articles/' },
-            { text: '🎁 资源分享', link: '/resources/' },
-            { text: '✍️ 日常随笔', link: '/diary/' },
-            { text: '👤 关于', link: '/about/' },
+            { text: '首页', link: '/', icon: 'IconHome' },
+            { text: '教程中心', link: '/tutorials/', icon: 'IconBook' },
+            { text: '技术文章', link: '/posts.html', icon: 'IconArticle' },
+            { text: '友情链接', link: '/friendship/', icon: 'IconGift' },
+            { text: '日常随笔', link: '/diary/', icon: 'IconPen' },
+            { text: '关于', link: '/about/', icon: 'IconUser' },
         ],
 
         // 系列配置
@@ -98,6 +99,17 @@ export default defineUserConfig({
             ]
         },
 
+        // 搜索配置 - 使用内置搜索
+        // 如果需要使用 Algolia，请取消注释下面的配置并填入你的信息
+        // algolia: {
+        //   appId: 'xxx',
+        //   apiKey: 'xxx',
+        //   indexName: 'xxx',
+        //   inputSelector: '### REPLACE ME ####',
+        //   algoliaOptions: { 'facetFilters': ["lang:$LANG"] },
+        //   debug: false
+        // },
+
         // 博客配置
         blog: {
             socialLinks: [
@@ -105,6 +117,9 @@ export default defineUserConfig({
                 { icon: 'Mail', link: 'mailto:byyi.xuan@outlook.com' },
             ]
         },
+
+        // 友情链接配置（已改用自定义组件 FriendshipLinks.vue）
+        // 自定义组件支持分类显示，数据在组件内部维护
 
         // 评论配置（可选）
         // commentConfig: {
@@ -117,6 +132,63 @@ export default defineUserConfig({
         //   },
         // },
     }),
+
+    // 插件配置
+    // 注释说明：DocSearch 需要真实的 Algolia 配置信息才能工作
+    // 在获取配置信息之前，暂时使用主题内置搜索
+    // 获取配置后，取消下面的注释并填入真实信息
+    /*
+    plugins: [
+        docsearchPlugin({
+            appId: 'YOUR_APP_ID',
+            apiKey: 'YOUR_API_KEY',
+            indexName: 'YOUR_INDEX_NAME',
+            locales: {
+                '/': {
+                    placeholder: '搜索文档',
+                    translations: {
+                        button: {
+                            buttonText: '搜索',
+                            buttonAriaLabel: '搜索'
+                        },
+                        modal: {
+                            searchBox: {
+                                resetButtonTitle: '清除查询条件',
+                                resetButtonAriaLabel: '清除查询条件',
+                                cancelButtonText: '取消',
+                                cancelButtonAriaLabel: '取消'
+                            },
+                            startScreen: {
+                                recentSearchesTitle: '搜索历史',
+                                noRecentSearchesText: '没有搜索历史',
+                                saveRecentSearchButtonTitle: '保存至搜索历史',
+                                removeRecentSearchButtonTitle: '从搜索历史中移除',
+                                favoriteSearchesTitle: '收藏',
+                                removeFavoriteSearchButtonTitle: '从收藏中移除'
+                            },
+                            errorScreen: {
+                                titleText: '无法获取结果',
+                                helpText: '你可能需要检查你的网络连接'
+                            },
+                            footer: {
+                                selectText: '选择',
+                                navigateText: '切换',
+                                closeText: '关闭',
+                                searchByText: '搜索提供者'
+                            },
+                            noResultsScreen: {
+                                noResultsText: '无法找到相关结果',
+                                suggestedQueryText: '你可以尝试查询',
+                                reportMissingResultsText: '你认为该查询应该有结果？',
+                                reportMissingResultsLinkText: '点击反馈'
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    ],
+    */
 
     // 多语言支持
     locales: {

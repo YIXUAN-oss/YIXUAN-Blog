@@ -1000,6 +1000,7 @@ onMounted(() => {
   cursor: pointer;
   overflow: hidden;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .magic-card::before {
@@ -1342,6 +1343,7 @@ onMounted(() => {
   background: rgb(28, 28, 30) !important;
   backdrop-filter: none;
   border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="dark"] .magic-card:hover {

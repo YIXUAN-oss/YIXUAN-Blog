@@ -1,7 +1,23 @@
 import { defineClientConfig } from '@vuepress/client'
+import IconHome from './components/IconHome.vue'
+import IconBook from './components/IconBook.vue'
+import IconArticle from './components/IconArticle.vue'
+import IconGift from './components/IconGift.vue'
+import IconPen from './components/IconPen.vue'
+import IconUser from './components/IconUser.vue'
+import FriendshipLinks from './components/FriendshipLinks.vue'
 
 export default defineClientConfig({
     enhance({ app, router, siteData }) {
+        // 注册图标组件
+        app.component('IconHome', IconHome)
+        app.component('IconBook', IconBook)
+        app.component('IconArticle', IconArticle)
+        app.component('IconGift', IconGift)
+        app.component('IconPen', IconPen)
+        app.component('IconUser', IconUser)
+        // 注册友情链接组件
+        app.component('FriendshipLinks', FriendshipLinks)
         // 添加搜索框快捷键提示
         if (typeof window !== 'undefined') {
             const addSearchShortcut = () => {
@@ -136,8 +152,6 @@ export default defineClientConfig({
             updateProgress();
 
             // 个人信息卡片交互
-            let isProfileCardInitialized = false;
-
             const initProfileCard = () => {
                 const trigger = document.getElementById('profileTrigger');
                 const card = document.getElementById('profileCard');
@@ -145,46 +159,51 @@ export default defineClientConfig({
 
                 if (!trigger || !card) {
                     // 如果元素还没有加载，稍后再试
-                    setTimeout(initProfileCard, 200);
                     return;
                 }
 
-                // 避免重复初始化
-                if (isProfileCardInitialized) return;
-                isProfileCardInitialized = true;
+                console.log('Profile card found, initializing...');
 
-                console.log('Profile card initialized');
+                // 移除可能存在的旧事件监听器（通过克隆节点）
+                const newTrigger = trigger.cloneNode(true) as HTMLElement;
+                trigger.parentNode?.replaceChild(newTrigger, trigger);
 
                 // 切换卡片显示状态
-                const toggleCard = (e?: Event) => {
-                    if (e) e.stopPropagation();
+                const toggleCard = (e: Event) => {
+                    e.stopPropagation();
+                    console.log('Toggle card clicked');
 
                     if (card.classList.contains('active')) {
                         card.classList.remove('active');
-                        trigger.classList.remove('active');
+                        newTrigger.classList.remove('active');
                     } else {
                         card.classList.add('active');
-                        trigger.classList.add('active');
+                        newTrigger.classList.add('active');
                     }
                 };
 
                 // 点击触发按钮
-                trigger.addEventListener('click', toggleCard);
+                newTrigger.addEventListener('click', toggleCard);
 
                 // 点击关闭按钮
                 if (closeBtn) {
-                    closeBtn.addEventListener('click', toggleCard);
+                    closeBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        card.classList.remove('active');
+                        newTrigger.classList.remove('active');
+                    });
                 }
 
                 // 点击卡片外部关闭
-                document.addEventListener('click', (e) => {
+                const closeOnClickOutside = (e: MouseEvent) => {
                     if (card.classList.contains('active') &&
                         !card.contains(e.target as Node) &&
-                        !trigger.contains(e.target as Node)) {
+                        !newTrigger.contains(e.target as Node)) {
                         card.classList.remove('active');
-                        trigger.classList.remove('active');
+                        newTrigger.classList.remove('active');
                     }
-                });
+                };
+                document.addEventListener('click', closeOnClickOutside);
 
                 // 阻止卡片内部点击事件冒泡（但不阻止链接点击）
                 card.addEventListener('click', (e) => {
@@ -197,13 +216,14 @@ export default defineClientConfig({
                 });
             };
 
-            // 延迟初始化以确保DOM已加载
+            // 多次尝试初始化以确保成功
+            setTimeout(initProfileCard, 500);
             setTimeout(initProfileCard, 1000);
+            setTimeout(initProfileCard, 2000);
 
             // 路由变化后重新初始化
             if (typeof window !== 'undefined' && (window as any).__VUEPRESS_ROUTER__) {
                 (window as any).__VUEPRESS_ROUTER__.afterEach(() => {
-                    isProfileCardInitialized = false;
                     setTimeout(initProfileCard, 1000);
                     
                     // 路由变化后重新添加搜索快捷键
