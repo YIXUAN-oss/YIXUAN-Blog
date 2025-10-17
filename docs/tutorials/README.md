@@ -9,209 +9,296 @@ article: false
 <p style="text-align: center; font-size: 1.2em; color: #6a737d; margin: 20px 0;">系统化学习路径，从入门到精通</p>
 
 <style>
+/* 教程卡片容器 */
 .tutorial-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
   margin: 40px 0;
 }
 
 /* Magic Card 样式 */
 .magic-card {
   position: relative;
-  border-radius: 20px;
-  padding: 30px;
-  color: inherit;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 30px 24px 28px;
   cursor: pointer;
-  display: block;
   overflow: hidden;
-  border: 2px solid var(--border-color, #eaecef);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s ease;
 }
 
+.magic-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.magic-card:hover::before {
+  opacity: 1;
+}
+
+/* Magic Card 背景光效 */
 .magic-card__bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-  transition: all 0.4s ease;
+  inset: 0;
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    600px circle at var(--x, 50%) var(--y, 50%),
+    rgba(102, 126, 234, 0.15),
+    transparent 40%
+  );
+  pointer-events: none;
   z-index: 0;
 }
 
 .magic-card:hover .magic-card__bg {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+  opacity: 0;
 }
 
-.magic-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-}
-
+/* 卡片头部 */
 .card-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  height: 56px;
 }
 
+/* 卡片图标 */
 .card-icon {
-  font-size: 64px;
+  font-size: 48px;
+  transition: transform 0.3s ease;
   line-height: 1;
-  animation: icon-float 3s ease-in-out infinite;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-}
-
-@keyframes icon-float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
 }
 
 .magic-card:hover .card-icon {
-  animation-play-state: paused;
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.1) rotate(-5deg);
 }
 
+/* 卡片徽章 */
 .card-badge {
-  padding: 5px 12px;
-  border-radius: 20px;
+  padding: 4px 12px;
+  border-radius: 12px;
   font-size: 0.75em;
-  font-weight: bold;
+  font-weight: 600;
   color: white;
-  position: relative;
-  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .badge-hot {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  box-shadow: 0 2px 8px rgba(245, 87, 108, 0.3);
 }
 
 .badge-recommend {
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  box-shadow: 0 2px 8px rgba(79, 172, 254, 0.3);
-}
-
-.badge-essential {
-  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-  box-shadow: 0 2px 8px rgba(250, 112, 154, 0.3);
 }
 
 .badge-frontend {
   background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-  box-shadow: 0 2px 8px rgba(67, 233, 123, 0.3);
 }
 
+.badge-must, .badge-essential {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+/* 卡片内容 */
 .card-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-content h3 {
-  font-size: 1.6em;
-  margin: 15px 0 10px;
+  margin: 0 0 12px 0;
+  font-size: 1.5em;
+  font-weight: 600;
   color: var(--text-color, #2c3e50);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 3;
   border: none !important;
-  padding-bottom: 0 !important;
+  padding: 0 !important;
+  line-height: 1.4;
+  height: 42px;
+  display: flex;
+  align-items: center;
 }
 
-.magic-card:hover h3 {
-  color: #667eea;
+.magic-card:hover .card-content h3 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: translateX(4px);
 }
 
 .card-desc {
   color: var(--text-color-secondary, #6a737d);
+  font-size: 0.95em;
   line-height: 1.6;
-  margin-bottom: 15px;
+  margin: 0 0 12px 0;
+  position: relative;
+  z-index: 2;
+  height: 48px;
+  display: flex;
+  align-items: center;
 }
 
+/* 卡片标签 */
 .card-tags {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 15px;
+  flex-wrap: nowrap;
+  gap: 6px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  height: 56px;
+  align-items: flex-start;
 }
 
 .card-tag {
-  background: var(--bg-color-secondary, #f8f9fa);
-  color: var(--text-color-secondary, #6a737d);
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 0.85em;
+  padding: 4px 8px;
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  border-radius: 8px;
+  font-size: 0.7em;
+  font-weight: 500;
   transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .magic-card:hover .card-tag {
-  background: rgba(102, 126, 234, 0.1);
-  color: #667eea;
+  background: rgba(102, 126, 234, 0.2);
+  transform: translateY(-2px);
 }
 
+/* 卡片底部 */
 .card-footer {
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px solid var(--border-color, #eaecef);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .footer-text {
   color: #667eea;
   font-weight: 600;
-  transition: transform 0.3s ease;
-  display: inline-block;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
 }
 
 .magic-card:hover .footer-text {
-  transform: translateX(5px);
+  transform: translateX(4px);
 }
 
-/* 暗黑模式 */
-[data-theme="dark"] .magic-card {
-  border-color: rgba(255, 255, 255, 0.1);
+/* 悬停效果 */
+.magic-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2);
 }
 
-[data-theme="dark"] .magic-card__bg {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+/* 响应式设计 */
+@media (min-width: 1201px) {
+  .tutorial-cards {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
 }
 
-[data-theme="dark"] .magic-card:hover .magic-card__bg {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+@media (max-width: 1200px) and (min-width: 769px) {
+  .tutorial-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
 }
 
-[data-theme="dark"] .magic-card:hover {
-  border-color: rgba(139, 92, 246, 0.5);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
-
-[data-theme="dark"] .card-tag {
-  background: rgba(139, 92, 246, 0.2);
-  color: #c4b5fd;
-  border: 1px solid rgba(139, 92, 246, 0.3);
-}
-
-[data-theme="dark"] .magic-card:hover .card-tag {
-  background: rgba(139, 92, 246, 0.3);
-}
-
-/* 响应式 */
 @media (max-width: 768px) {
   .tutorial-cards {
     grid-template-columns: 1fr;
     gap: 20px;
   }
   
-  .card-icon {
-    font-size: 52px;
+  .card-header {
+    height: auto;
   }
+  
+  .card-icon {
+    font-size: 40px;
+  }
+  
+  .card-content h3 {
+    font-size: 1.3em;
+    height: auto;
+  }
+  
+  .card-desc {
+    height: auto;
+  }
+  
+  .card-tags {
+    flex-wrap: wrap;
+    gap: 6px;
+    height: auto;
+  }
+  
+  .card-tag {
+    font-size: 0.75em;
+    padding: 3px 8px;
+  }
+}
+
+/* 暗黑模式适配 */
+[data-theme="dark"] .magic-card {
+  background: rgb(28, 28, 30) !important;
+  backdrop-filter: none;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .magic-card:hover {
+  background: rgb(38, 38, 40) !important;
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+}
+
+[data-theme="dark"] .card-content h3 {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] .card-desc {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="dark"] .card-tag {
+  background: rgba(102, 126, 234, 0.2);
+  color: #8b9eff;
+}
+
+[data-theme="dark"] .card-footer {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .footer-text {
+  color: #8b9eff;
 }
 </style>
 
@@ -248,7 +335,7 @@ export default {
 
 <div class="tutorial-cards">
 
-<div class="magic-card" data-href="/tutorials/java/">
+<div class="magic-card" data-href="java/">
   <span class="magic-card__bg"></span>
   <div class="card-header">
     <div class="card-icon">☕</div>
@@ -268,7 +355,7 @@ export default {
   </div>
 </div>
 
-<div class="magic-card" data-href="/tutorials/python/">
+<div class="magic-card" data-href="python/">
   <span class="magic-card__bg"></span>
   <div class="card-header">
     <div class="card-icon">🐍</div>
@@ -288,7 +375,7 @@ export default {
   </div>
 </div>
 
-<div class="magic-card" data-href="/tutorials/database/">
+<div class="magic-card" data-href="database/">
   <span class="magic-card__bg"></span>
   <div class="card-header">
     <div class="card-icon">💾</div>
@@ -308,7 +395,7 @@ export default {
   </div>
 </div>
 
-<div class="magic-card" data-href="/tutorials/javascript/">
+<div class="magic-card" data-href="javascript/">
   <span class="magic-card__bg"></span>
   <div class="card-header">
     <div class="card-icon">📜</div>
@@ -328,7 +415,7 @@ export default {
   </div>
 </div>
 
-<div class="magic-card" data-href="/tutorials/network/">
+<div class="magic-card" data-href="network/">
   <span class="magic-card__bg"></span>
   <div class="card-header">
     <div class="card-icon">🌐</div>
@@ -348,7 +435,7 @@ export default {
   </div>
 </div>
 
-<div class="magic-card" data-href="/tutorials/computer-organization/">
+<div class="magic-card" data-href="computer-organization/">
   <span class="magic-card__bg"></span>
   <div class="card-header">
     <div class="card-icon">🖥️</div>
@@ -368,7 +455,7 @@ export default {
   </div>
 </div>
 
-<div class="magic-card" data-href="/tutorials/operating-system/">
+<div class="magic-card" data-href="operating-system/">
   <span class="magic-card__bg"></span>
   <div class="card-header">
     <div class="card-icon">⚙️</div>
@@ -388,7 +475,7 @@ export default {
   </div>
 </div>
 
-<div class="magic-card" data-href="/tutorials/data-structures/">
+<div class="magic-card" data-href="data-structures/">
   <span class="magic-card__bg"></span>
   <div class="card-header">
     <div class="card-icon">📊</div>
