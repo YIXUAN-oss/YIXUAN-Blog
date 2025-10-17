@@ -8,7 +8,8 @@ sidebar: false
 
 <div class="profile-header">
   <div class="avatar-section">
-    <div class="avatar">YX</div>
+    <p class="welcome-text">👋 Welcome</p>
+    <img src="/logo.png" class="avatar" alt="Logo" />
     <h2>懿轩 (YiXuan)</h2>
     <p class="tagline">代码诗人 | 终身学习者 | 开源爱好者</p>
   </div>
@@ -179,8 +180,8 @@ sidebar: false
     <a href="mailto:byyi.xuan@outlook.com" style="
       display: inline-block;
       padding: 12px 30px;
-      background: var(--accent-color, #3eaf7c);
-      color: white;
+      background: #5B8FF9;
+      color: white !important;
       border-radius: 25px;
       text-decoration: none;
       font-weight: bold;
@@ -206,13 +207,9 @@ sidebar: false
   height: 120px;
   margin: 0 auto 20px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 48px;
-  font-weight: bold;
   border: 4px solid white;
+  object-fit: cover;
+  display: block;
 }
 
 .avatar-section h2 {
@@ -224,6 +221,14 @@ sidebar: false
 .tagline {
   font-size: 1.1em;
   opacity: 0.9;
+}
+
+.welcome-text {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 0 0 20px;
+  opacity: 0.95;
+  letter-spacing: 1px;
 }
 
 .skill-tags {
@@ -246,7 +251,7 @@ sidebar: false
 .skill-tag:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: var(--accent-color, #3eaf7c);
+  border-color: #5B8FF9;
 }
 
 .philosophy-box {
@@ -268,7 +273,7 @@ sidebar: false
 .philosophy-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  border-color: var(--accent-color, #3eaf7c);
+  border-color: #5B8FF9;
 }
 
 .philosophy-item h3 {
@@ -318,7 +323,7 @@ sidebar: false
 .contact-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  border-color: var(--accent-color, #3eaf7c);
+  border-color: #5B8FF9;
 }
 
 .contact-icon {
@@ -332,7 +337,7 @@ sidebar: false
 }
 
 .contact-card a {
-  color: var(--accent-color, #3eaf7c);
+  color: #5B8FF9;
   text-decoration: none;
   font-weight: bold;
 }
@@ -343,25 +348,26 @@ sidebar: false
 
 .motto-box {
   background: var(--bg-color-secondary, #f6f8fa);
-  border-left: 4px solid var(--accent-color, #3eaf7c);
-  padding: 30px;
-  margin: 30px 0;
+  border-left: 4px solid #5B8FF9;
+  padding: 20px 25px;
+  margin: 20px 0;
   border-radius: 8px;
 }
 
 .motto-box blockquote {
   font-style: italic;
-  font-size: 1.1em;
-  line-height: 1.8;
+  font-size: 1em;
+  line-height: 1.6;
   margin: 0;
   border: none;
 }
 
 .motto-author {
   text-align: right;
-  margin-top: 15px;
+  margin-top: 10px;
   color: var(--text-color-secondary, #6a737d);
   font-weight: bold;
+  font-size: 0.9em;
 }
 </style>
 

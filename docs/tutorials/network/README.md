@@ -34,6 +34,9 @@ tags:
 
 ## 📖 教程列表
 
+- [计算机网络第1章（概述）](./计算机网络第1章（概述）.md)
+- [计算机网络第2章（物理层）](./计算机网络第2章（物理层）.md)
+
 <style scoped>
 .tutorial-intro {
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);

@@ -123,7 +123,7 @@ sidebar: false
 
 .diary-item {
   background: var(--bg-color-secondary, #f6f8fa);
-  border-left: 4px solid var(--accent-color, #3eaf7c);
+  border-left: 4px solid #5B8FF9;
   border-radius: 8px;
   padding: 25px;
   margin-bottom: 30px;
@@ -136,7 +136,7 @@ sidebar: false
 }
 
 .diary-date {
-  color: var(--accent-color, #3eaf7c);
+  color: #5B8FF9;
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -157,7 +157,7 @@ sidebar: false
 
 .quote-box {
   background: var(--bg-color-secondary, #f6f8fa);
-  border-left: 4px solid var(--accent-color, #3eaf7c);
+  border-left: 4px solid #5B8FF9;
   padding: 30px;
   margin: 40px 0;
   border-radius: 8px;
@@ -188,7 +188,7 @@ sidebar: false
 
 .tag {
   display: inline-block;
-  background: var(--accent-color, #3eaf7c);
+  background: #5B8FF9;
   color: white;
   padding: 8px 16px;
   border-radius: 20px;
@@ -199,7 +199,7 @@ sidebar: false
 
 .tag:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(62, 175, 124, 0.4);
+  box-shadow: 0 4px 12px rgba(91, 143, 249, 0.4);
 }
 </style>
 
