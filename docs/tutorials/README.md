@@ -12,7 +12,7 @@ article: false
 /* 教程卡片容器 */
 .tutorial-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin: 40px 0;
 }
@@ -113,7 +113,11 @@ article: false
   background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
 }
 
-.badge-must, .badge-essential {
+.badge-essential {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.badge-must {
   background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 }
 
@@ -223,7 +227,7 @@ article: false
 /* 响应式设计 */
 @media (min-width: 1201px) {
   .tutorial-cards {
-    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 }
 
@@ -501,62 +505,17 @@ export default {
 
 ---
 
-## 🗺️ 推荐学习路线
+## 🗺️ 学习路线
 
-<div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin: 40px 0;">
-
-<div style="flex: 1; min-width: 250px; max-width: 300px; background: #f5f7fa; border: 2px solid #eaecef; border-radius: 16px; padding: 30px 25px; text-align: center; transition: all 0.3s ease;">
-  <div style="width: 50px; height: 50px; margin: 0 auto 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 1.5em; font-weight: bold; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);">1</div>
-  <h3 style="font-size: 1.3em; margin: 15px 0 10px; color: #2c3e50;">编程基础</h3>
-  <p style="color: #6a737d; line-height: 1.6; margin: 0;">选择一门语言（Python/Java）开始学习编程基础知识</p>
-</div>
-
-<div style="font-size: 2em; color: #667eea; font-weight: bold;">→</div>
-
-<div style="flex: 1; min-width: 250px; max-width: 300px; background: #f5f7fa; border: 2px solid #eaecef; border-radius: 16px; padding: 30px 25px; text-align: center; transition: all 0.3s ease;">
-  <div style="width: 50px; height: 50px; margin: 0 auto 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 1.5em; font-weight: bold; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);">2</div>
-  <h3 style="font-size: 1.3em; margin: 15px 0 10px; color: #2c3e50;">深入进阶</h3>
-  <p style="color: #6a737d; line-height: 1.6; margin: 0;">掌握面向对象、数据结构与算法等进阶知识</p>
-</div>
-
-<div style="font-size: 2em; color: #667eea; font-weight: bold;">→</div>
-
-<div style="flex: 1; min-width: 250px; max-width: 300px; background: #f5f7fa; border: 2px solid #eaecef; border-radius: 16px; padding: 30px 25px; text-align: center; transition: all 0.3s ease;">
-  <div style="width: 50px; height: 50px; margin: 0 auto 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 1.5em; font-weight: bold; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);">3</div>
-  <h3 style="font-size: 1.3em; margin: 15px 0 10px; color: #2c3e50;">项目实战</h3>
-  <p style="color: #6a737d; line-height: 1.6; margin: 0;">通过实际项目巩固所学，积累开发经验</p>
-</div>
-
-</div>
+1. **编程基础** - 选择一门语言（Python/Java）开始学习编程基础知识
+2. **深入进阶** - 掌握面向对象、数据结构与算法等进阶知识
+3. **项目实战** - 通过实际项目巩固所学，积累开发经验
 
 ---
 
 ## 💡 学习建议
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin: 30px 0;">
-
-<div style="background: #f5f7fa; border: 2px solid #eaecef; border-radius: 16px; padding: 30px; text-align: center; transition: all 0.3s ease;">
-  <div style="font-size: 48px; margin-bottom: 15px;">📖</div>
-  <h3 style="font-size: 1.2em; margin: 15px 0 10px; color: #2c3e50;">循序渐进</h3>
-  <p style="color: #6a737d; line-height: 1.6; margin: 0;">从基础开始，逐步深入，不要急于求成</p>
-</div>
-
-<div style="background: #f5f7fa; border: 2px solid #eaecef; border-radius: 16px; padding: 30px; text-align: center; transition: all 0.3s ease;">
-  <div style="font-size: 48px; margin-bottom: 15px;">💻</div>
-  <h3 style="font-size: 1.2em; margin: 15px 0 10px; color: #2c3e50;">多动手练习</h3>
-  <p style="color: #6a737d; line-height: 1.6; margin: 0;">理论结合实践，通过编写代码加深理解</p>
-</div>
-
-<div style="background: #f5f7fa; border: 2px solid #eaecef; border-radius: 16px; padding: 30px; text-align: center; transition: all 0.3s ease;">
-  <div style="font-size: 48px; margin-bottom: 15px;">🤝</div>
-  <h3 style="font-size: 1.2em; margin: 15px 0 10px; color: #2c3e50;">交流分享</h3>
-  <p style="color: #6a737d; line-height: 1.6; margin: 0;">与他人交流学习心得，共同进步成长</p>
-</div>
-
-<div style="background: #f5f7fa; border: 2px solid #eaecef; border-radius: 16px; padding: 30px; text-align: center; transition: all 0.3s ease;">
-  <div style="font-size: 48px; margin-bottom: 15px;">🎯</div>
-  <h3 style="font-size: 1.2em; margin: 15px 0 10px; color: #2c3e50;">坚持不懈</h3>
-  <p style="color: #6a737d; line-height: 1.6; margin: 0;">保持学习热情，每天进步一点点</p>
-</div>
-
-</div>
+- **循序渐进** - 从基础开始，逐步深入，不要急于求成
+- **多动手练习** - 理论结合实践，通过编写代码加深理解
+- **交流分享** - 与他人交流学习心得，共同进步成长
+- **坚持不懈** - 保持学习热情，每天进步一点点

@@ -181,16 +181,12 @@ export default defineUserConfig({
         // },
     }),
 
-    // 插件配置
-    // 注释说明：DocSearch 需要真实的 Algolia 配置信息才能工作
-    // 在获取配置信息之前，暂时使用主题内置搜索
-    // 获取配置后，取消下面的注释并填入真实信息
-    /*
+    // 插件配置 - Algolia DocSearch
     plugins: [
         docsearchPlugin({
-            appId: 'YOUR_APP_ID',
-            apiKey: 'YOUR_API_KEY',
-            indexName: 'YOUR_INDEX_NAME',
+            appId: 'MLKOH1MKDT',
+            apiKey: '5af2979d2d290ce4e9247d7f89549455',
+            indexName: 'yixuan_blog_vercel_app_mlkoh1mkdt_pages',
             locales: {
                 '/': {
                     placeholder: '搜索文档',
@@ -236,7 +232,6 @@ export default defineUserConfig({
             }
         })
     ],
-    */
 
     // 多语言支持
     locales: {
