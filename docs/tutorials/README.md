@@ -381,19 +381,19 @@ export default {
   </div>
 </div>
 
-<div class="magic-card" data-href="database/">
+<div class="magic-card" data-href="mysql/">
   <span class="magic-card__bg"></span>
   <div class="card-header">
     <div class="card-icon">💾</div>
     <span class="card-badge badge-essential">必学</span>
   </div>
   <div class="card-content">
-    <h3>数据库教程</h3>
-    <p class="card-desc">SQL 和 NoSQL 数据库实战</p>
+    <h3>MySQL 教程</h3>
+    <p class="card-desc">从基础到高级的 MySQL 完整教程</p>
     <div class="card-tags">
-      <span class="card-tag">MySQL</span>
-      <span class="card-tag">MongoDB</span>
-      <span class="card-tag">Redis</span>
+      <span class="card-tag">SQL语法</span>
+      <span class="card-tag">索引优化</span>
+      <span class="card-tag">性能调优</span>
     </div>
     <div class="card-footer">
       <span class="footer-text">开始学习 →</span>

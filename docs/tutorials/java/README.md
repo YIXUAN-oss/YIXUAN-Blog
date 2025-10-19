@@ -1,139 +1,226 @@
----
-title: Java 教程
-sidebar: false
-article: false
-categories:
-  - 教程
-tags:
-  - Java
+# Java 学习教程大纲
+
+> 📚 **系统化Java学习路线** | 涵盖基础到进阶 | 包含面试高频考点
+> 
+> 💡 **使用建议**：按章节顺序学习，每章配有代码示例和面试题
+
 ---
 
-# ☕ Java 教程
+## 📖 教程结构
 
-欢迎来到 Java 教程中心！这里将带你从零基础开始，系统学习 Java 编程语言。
+### 第一章：Java 基础入门
+> 适合零基础学习者，掌握Java开发环境和基本语法
 
-## 📖 教程目录
+| 序号 | 章节 | 核心内容 | 面试频率 |
+|------|------|----------|----------|
+| 01 | [开发环境与工具](第01章-基础入门/01-开发环境与工具.md) | IDEA使用、输入输出、常用方法 | ⭐⭐ |
+| 02 | [变量与数据类型](第01章-基础入门/02-变量与数据类型.md) | 八大基本类型、类型转换 | ⭐⭐⭐⭐ |
+| 03 | [运算符](第01章-基础入门/03-运算符.md) | 算术、关系、逻辑、位运算 | ⭐⭐⭐ |
+| 04 | [数组](第01章-基础入门/04-数组.md) | 一维数组、二维数组、数组操作 | ⭐⭐⭐⭐ |
 
-### 🌟 基础篇
+**学习目标：**
+- ✅ 搭建Java开发环境
+- ✅ 掌握基本语法和数据类型
+- ✅ 理解内存模型和数据传递
 
-掌握 Java 编程的基础知识，为后续学习打下坚实基础。
+---
 
-<div class="course-list">
-  <div class="course-item">
-    <a href="./basic/introduction.html">
-      <h3>📘 Java 简介</h3>
-      <p>了解 Java 的历史、特点和应用领域</p>
-    </a>
-  </div>
-  
-  <div class="course-item">
-    <a href="./basic/install.html">
-      <h3>🛠️ 环境搭建</h3>
-      <p>JDK 安装与开发环境配置</p>
-    </a>
-  </div>
-  
-  <div class="course-item">
-    <a href="./basic/syntax.html">
-      <h3>📝 基础语法</h3>
-      <p>变量、数据类型、运算符和控制流程</p>
-    </a>
-  </div>
-  
-  <div class="course-item">
-    <a href="./basic/oop.html">
-      <h3>🎯 面向对象</h3>
-      <p>类、对象、继承、多态和封装</p>
-    </a>
-  </div>
-</div>
+### 第二章：面向对象编程（核心）
+> Java的核心思想，必须深入理解
 
-### 🚀 进阶篇
+| 序号 | 章节 | 核心内容 | 面试频率 |
+|------|------|----------|----------|
+| 01 | [面向对象初级](第02章-核心编程/01-面向对象初级.md) | 类与对象、方法、构造器、this关键字 | ⭐⭐⭐⭐⭐ |
+| 02 | [面向对象中级](第02章-核心编程/02-面向对象中级.md) | 封装、继承、多态、包管理 | ⭐⭐⭐⭐⭐ |
+| 03 | [面向对象高级](第02章-核心编程/03-面向对象高级.md) | 抽象类、接口、内部类、单例模式 | ⭐⭐⭐⭐⭐ |
 
-深入学习 Java 的高级特性和常用框架。
+**学习目标：**
+- ✅ 掌握面向对象三大特性
+- ✅ 理解类与对象的关系
+- ✅ 学会使用接口和抽象类
 
-<div class="course-list">
-  <div class="course-item">
-    <a href="./advanced/collection.html">
-      <h3>📦 集合框架</h3>
-      <p>List、Set、Map 等常用集合类</p>
-    </a>
-  </div>
-  
-  <div class="course-item">
-    <a href="./advanced/io.html">
-      <h3>📂 IO 流</h3>
-      <p>文件读写、字节流和字符流</p>
-    </a>
-  </div>
-  
-  <div class="course-item">
-    <a href="./advanced/multithreading.html">
-      <h3>⚡ 多线程</h3>
-      <p>线程创建、同步和并发编程</p>
-    </a>
-  </div>
-</div>
+**重点面试题：**
+- 封装、继承、多态的理解
+- 重载与重写的区别
+- 抽象类与接口的区别
+- static、final关键字
+
+---
+
+### 第三章：Java 进阶编程
+> 提升Java编程能力，掌握高级特性
+
+| 序号 | 章节 | 核心内容 | 面试频率 |
+|------|------|----------|----------|
+| 01 | [枚举与注解](第03章-进阶编程/01-枚举与注解.md) | enum、@Override、@Deprecated | ⭐⭐⭐⭐ |
+| 02 | [异常处理](第03章-进阶编程/02-异常处理.md) | try-catch、自定义异常 | ⭐⭐⭐⭐⭐ |
+| 03 | [常用类](第03章-进阶编程/03-常用类.md) | String、StringBuilder、Math、日期类 | ⭐⭐⭐⭐⭐ |
+| 04 | [集合框架](第03章-进阶编程/04-集合类.md) | List、Set、Map、Collection | ⭐⭐⭐⭐⭐ |
+| 05 | [泛型](第03章-进阶编程/05-泛型.md) | 泛型类、泛型方法、通配符 | ⭐⭐⭐⭐ |
+| 06 | [多线程](第03章-进阶编程/06-多线程.md) | Thread、Runnable、线程同步 | ⭐⭐⭐⭐⭐ |
+| 07 | [IO流](第03章-进阶编程/07-IO流文件操作.md) | 字节流、字符流、文件操作 | ⭐⭐⭐⭐ |
+| 08 | [网络编程](第03章-进阶编程/08-网络编程.md) | Socket、TCP/UDP | ⭐⭐⭐ |
+| 09 | [反射](第03章-进阶编程/09-反射.md) | Class类、动态代理 | ⭐⭐⭐⭐⭐ |
+| 10 | [正则表达式](第03章-进阶编程/10-正则表达式.md) | 模式匹配、字符串处理 | ⭐⭐⭐ |
+
+**学习目标：**
+- ✅ 掌握Java核心API
+- ✅ 理解集合框架的使用
+- ✅ 掌握多线程编程
+- ✅ 了解反射机制
+
+**重点面试题：**
+- String、StringBuilder、StringBuffer区别
+- ArrayList与LinkedList区别
+- HashMap原理（JDK 7 vs JDK 8）
+- 线程创建方式、线程安全
+- 反射的应用场景
+
+---
+
+### 第四章：数据结构与算法（待补充）
+> 提升算法能力，为面试和竞赛做准备
+
+**学习目标：**
+- ✅ 掌握常见数据结构
+- ✅ 熟悉经典算法
+- ✅ 提升算法思维能力
+
+---
+
+## 🎯 学习路线建议
+
+### 🔰 初学者路线（0-3个月）
+```mermaid
+graph LR
+    A[第一章：基础入门] --> B[第二章：面向对象]
+    B --> C[第三章：常用类+集合]
+    C --> D[练习小项目]
+```
+
+**推荐学习顺序：**
+1. 第一章全部内容（1周）
+2. 第二章全部内容（2周）
+3. 第三章：01-05（3周）
+4. 完成综合练习项目
+
+---
+
+### 🚀 进阶路线（3-6个月）
+```mermaid
+graph LR
+    A[第三章：多线程+IO] --> B[第三章：反射]
+    B --> C[第四章：数据结构]
+    C --> D[实战项目]
+```
+
+**推荐学习顺序：**
+1. 第三章：06-10（4周）
+2. 第四章全部内容（4周）
+3. 学习框架（Spring、MyBatis等）
+4. 参与实战项目
+
+---
+
+## 📝 面试高频考点汇总
+
+### ⭐⭐⭐⭐⭐ 必考考点
+1. **面向对象三大特性**（封装、继承、多态）
+2. **重载与重写的区别**
+3. **String 相关**（String、StringBuilder、StringBuffer）
+4. **集合框架**（ArrayList、LinkedList、HashMap、HashSet）
+5. **多线程**（线程创建、线程安全、synchronized）
+6. **异常处理**（try-catch-finally、自定义异常）
+7. **反射机制**（Class类、动态代理）
+8. **值传递与引用传递**
+
+### ⭐⭐⭐⭐ 常考考点
+1. **static、final 关键字**
+2. **抽象类与接口的区别**
+3. **枚举的使用**
+4. **泛型**（泛型类、泛型方法）
+5. **IO流**（字节流、字符流）
+6. **equals() 和 hashCode()**
+7. **注解**（@Override、@Deprecated）
+
+### ⭐⭐⭐ 了解即可
+1. **网络编程**（Socket、TCP/UDP）
+2. **正则表达式**
+3. **序列化与反序列化**
+
+---
+
+## 🛠️ 配套资源
+
+### 开发工具
+- **IDE**: IntelliJ IDEA（推荐）/ Eclipse
+- **JDK版本**: JDK 8 / JDK 11 / JDK 17
+
+### 推荐书籍
+1. 《Java核心技术 卷I》- 基础入门
+2. 《Java编程思想》- 深入理解
+3. 《Effective Java》- 最佳实践
+4. 《深入理解Java虚拟机》- JVM原理
+
+### 在线资源
+- [Oracle Java官方文档](https://docs.oracle.com/javase/8/docs/)
+- [LeetCode](https://leetcode.cn/) - 算法练习
+- [牛客网](https://www.nowcoder.com/) - 面试题库
+
+---
+
+## 📊 学习进度追踪
+
+### 基础阶段 ✅
+- [ ] 第一章：Java基础入门
+- [ ] 第二章：面向对象编程
+- [ ] 基础项目练习
+
+### 进阶阶段 🔄
+- [ ] 第三章：Java进阶编程
+- [ ] 第四章：数据结构与算法
+- [ ] 中级项目练习
+
+### 高级阶段 ⏳
+- [ ] 框架学习（Spring、MyBatis）
+- [ ] 微服务（Spring Cloud）
+- [ ] 实战项目
+
+---
 
 ## 💡 学习建议
 
-1. **循序渐进**：按照教程顺序学习，不要跳过基础部分
-2. **多动手**：每学完一个知识点，务必动手实践
-3. **做笔记**：记录重点知识和易错点
-4. **多思考**：理解原理比记住语法更重要
-5. **持之以恒**：编程学习需要时间和坚持
+### ✅ 推荐做法
+1. **循序渐进**：按章节顺序学习，不要跳过基础
+2. **动手实践**：每个知识点都要写代码验证
+3. **总结归纳**：每章学完后总结重点
+4. **刷题巩固**：在LeetCode上练习算法
+5. **项目实战**：学完基础后做实战项目
 
-## 📚 推荐资源
-
-- [Java 官方文档](https://docs.oracle.com/javase/)
-- [Java SE API 文档](https://docs.oracle.com/en/java/javase/)
-- [菜鸟教程 - Java](https://www.runoob.com/java/)
+### ❌ 避免误区
+1. ❌ 只看不练，缺乏实践
+2. ❌ 急于求成，基础不牢
+3. ❌ 死记硬背，不理解原理
+4. ❌ 孤立学习，缺乏总结
 
 ---
 
-<div style="text-align: center; margin-top: 40px;">
-  <p>🎓 开始你的 Java 学习之旅吧！</p>
-</div>
+## 🔗 相关教程
 
-<style scoped>
-.course-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-  margin: 30px 0;
-}
+- [MySQL数据库教程](../MySQL教程/README.md)
+- [SpringBoot框架](../10、Springboot/)
+- [Maven构建工具](../11、Maven/)
+- [Redis缓存](../13、Redis/)
+- [设计模式](../27、设计模式/)
 
-.course-item {
-  background: var(--bg-color-secondary, #f6f8fa);
-  border: 1px solid var(--border-color, #eaecef);
-  border-radius: 10px;
-  padding: 20px;
-  transition: all 0.3s ease;
-}
+---
 
-.course-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  border-color: var(--accent-color, #3eaf7c);
-}
+## 📮 反馈与建议
 
-.course-item a {
-  text-decoration: none;
-  color: inherit;
-}
+如果在学习过程中遇到问题或有改进建议，欢迎反馈！
 
-.course-item h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
-  color: var(--text-color, #2c3e50);
-  border: none;
-}
+**最后更新时间**: 2025年1月
 
-.course-item p {
-  margin: 0;
-  color: var(--text-color-secondary, #6a737d);
-  font-size: 0.9em;
-}
-</style>
+---
 
-
+**开始学习：** [第一章 - Java基础入门](第01章-基础入门/01-开发环境与工具.md) →
