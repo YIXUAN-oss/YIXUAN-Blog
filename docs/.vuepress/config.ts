@@ -9,9 +9,10 @@ export default defineUserConfig({
     description: '分享技术、记录生活 | YiXuan\'s Blog',
     
     // 根据部署环境设置 base 路径
+    // 本地开发: 使用根路径 /
     // Vercel: 使用根路径 /
     // GitHub Pages: 使用 /YIXUAN-Blog/
-    base: process.env.VERCEL ? '/' : '/YIXUAN-Blog/',
+    base: process.env.VERCEL || process.env.NODE_ENV === 'development' ? '/' : '/YIXUAN-Blog/',
 
     // 使用 Vite 打包工具
     bundler: viteBundler(),
@@ -186,7 +187,7 @@ export default defineUserConfig({
         docsearchPlugin({
             appId: 'MLKOH1MKDT',
             apiKey: '5af2979d2d290ce4e9247d7f89549455',
-            indexName: 'yixuan_blog_vercel_app_mlkoh1mkdt_pages',
+            indexName: '懿轩的博客_pages',
             locales: {
                 '/': {
                     placeholder: '搜索文档',

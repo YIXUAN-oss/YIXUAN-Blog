@@ -2,6 +2,7 @@
 home: true
 modules:
   - BannerBrand
+  - Blog
   - MdContent
   - Footer
 bannerBrand:
@@ -12,7 +13,7 @@ bannerBrand:
   description: 分享技术知识，记录成长历程
   tagline: 用代码改变世界，用文字记录生活
   buttons:
-    - { text: 开始阅读, link: '/articles/' }
+    - { text: 开始阅读, link: '/posts.html' }
     - { text: 教程中心, link: '/tutorials/', type: 'plain' }
   socialLinks:
     - { icon: 'BrandGithub', link: 'https://github.com/YIXUAN-oss' }
@@ -844,7 +845,7 @@ onMounted(() => {
 </div>
 
 <div class="tutorial-cards">
-<div class="magic-card" data-href="tutorials/java/">
+<div class="magic-card" data-href="/tutorials/java/">
 <span class="magic-card__bg"></span>
 <div class="card-header">
 <div class="card-icon">☕</div>
@@ -863,7 +864,7 @@ onMounted(() => {
 </div>
 </div>
 </div>
-<div class="magic-card" data-href="tutorials/python/">
+<div class="magic-card" data-href="/tutorials/python/">
 <span class="magic-card__bg"></span>
 <div class="card-header">
 <div class="card-icon">🐍</div>
@@ -882,7 +883,7 @@ onMounted(() => {
 </div>
 </div>
 </div>
-<div class="magic-card" data-href="tutorials/javascript/">
+<div class="magic-card" data-href="/tutorials/javascript/">
 <span class="magic-card__bg"></span>
 <div class="card-header">
 <div class="card-icon">📜</div>
@@ -901,11 +902,11 @@ onMounted(() => {
 </div>
 </div>
 </div>
-<div class="magic-card" data-href="tutorials/database/">
+<div class="magic-card" data-href="/tutorials/database/">
 <span class="magic-card__bg"></span>
 <div class="card-header">
 <div class="card-icon">💾</div>
-<span class="card-badge badge-must">必学</span>
+<span class="card-badge badge-essential">必学</span>
 </div>
 <div class="card-content">
 <h3>数据库教程</h3>
@@ -920,10 +921,48 @@ onMounted(() => {
 </div>
 </div>
 </div>
+<div class="magic-card" data-href="/tutorials/network/">
+<span class="magic-card__bg"></span>
+<div class="card-header">
+<div class="card-icon">🌐</div>
+<span class="card-badge badge-essential">必学</span>
+</div>
+<div class="card-content">
+<h3>计算机网络</h3>
+<p class="card-desc">深入理解网络协议与通信原理</p>
+<div class="card-tags">
+<span class="card-tag">TCP/IP</span>
+<span class="card-tag">HTTP/HTTPS</span>
+<span class="card-tag">网络安全</span>
+</div>
+<div class="card-footer">
+<span class="footer-text">开始学习 →</span>
+</div>
+</div>
+</div>
+<div class="magic-card" data-href="/tutorials/data-structures/">
+<span class="magic-card__bg"></span>
+<div class="card-header">
+<div class="card-icon">📊</div>
+<span class="card-badge badge-hot">热门</span>
+</div>
+<div class="card-content">
+<h3>数据结构与算法</h3>
+<p class="card-desc">算法思维与编程能力提升</p>
+<div class="card-tags">
+<span class="card-tag">数据结构</span>
+<span class="card-tag">算法设计</span>
+<span class="card-tag">LeetCode</span>
+</div>
+<div class="card-footer">
+<span class="footer-text">开始学习 →</span>
+</div>
+</div>
+</div>
 </div>
 
 <div class="tutorial-more-btn-wrapper">
-<a href="tutorials/" class="tutorial-more-btn">
+<a href="/tutorials/" class="tutorial-more-btn">
 <span class="more-btn-icon">📚</span>
 <span class="more-btn-text">了解更多教程</span>
 <span class="more-btn-arrow">→</span>
@@ -984,7 +1023,7 @@ onMounted(() => {
 /* 教程卡片容器 */
 .tutorial-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin: 40px 0;
 }
@@ -1086,6 +1125,10 @@ onMounted(() => {
 }
 
 .badge-must {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.badge-essential {
   background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 }
 
@@ -1195,7 +1238,7 @@ onMounted(() => {
 /* 响应式设计 */
 @media (min-width: 1201px) {
   .tutorial-cards {
-    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 }
 
