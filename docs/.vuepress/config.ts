@@ -211,6 +211,16 @@ export default defineUserConfig({
                         '第04章-实践练习/7.数据库的备份与恢复'
                     ]
                 }
+            ],
+            '/tutorials/git/': [
+                {
+                    text: 'Git 版本控制教程',
+                    children: [
+                        '1.Git基础入门',
+                        '2.Git进阶技巧',
+                        '3.Git实战场景'
+                    ]
+                }
             ]
         },
 

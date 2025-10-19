@@ -501,6 +501,26 @@ export default {
   </div>
 </div>
 
+<div class="magic-card" data-href="git/">
+  <span class="magic-card__bg"></span>
+  <div class="card-header">
+    <div class="card-icon">🔧</div>
+    <span class="card-badge badge-essential">必学</span>
+  </div>
+  <div class="card-content">
+    <h3>Git 版本控制</h3>
+    <p class="card-desc">掌握 Git 版本控制系统的使用</p>
+    <div class="card-tags">
+      <span class="card-tag">版本管理</span>
+      <span class="card-tag">团队协作</span>
+      <span class="card-tag">工作流</span>
+    </div>
+    <div class="card-footer">
+      <span class="footer-text">开始学习 →</span>
+    </div>
+  </div>
+</div>
+
 </div>
 
 ---
