@@ -9,6 +9,39 @@ article: false
 <p style="text-align: center; font-size: 1.2em; color: #6a737d; margin: 20px 0;">系统化学习路径，从入门到精通</p>
 
 <style>
+/* 分类标题样式 */
+.section-title {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  margin: 60px 0 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 1em;
+  color: var(--text-color-secondary, #6a737d);
+  margin: 20px 0 40px;
+  opacity: 0.8;
+}
+
 /* 教程卡片容器 */
 .tutorial-cards {
   display: grid;
@@ -18,20 +51,23 @@ article: false
 }
 
 /* Magic Card 样式 */
-.magic-card {
+.tutorial-cards .magic-card {
   position: relative;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
-  padding: 30px 24px 28px;
+  padding: 24px 20px 22px;
   cursor: pointer;
   overflow: hidden;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  min-height: 380px !important;
 }
 
-.magic-card::before {
+.tutorial-cards .magic-card::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -45,12 +81,12 @@ article: false
   transition: opacity 0.3s ease;
 }
 
-.magic-card:hover::before {
+.tutorial-cards .magic-card:hover::before {
   opacity: 1;
 }
 
 /* Magic Card 背景光效 */
-.magic-card__bg {
+.tutorial-cards .magic-card__bg {
   position: absolute;
   inset: 0;
   border-radius: 16px;
@@ -65,12 +101,12 @@ article: false
   z-index: 0;
 }
 
-.magic-card:hover .magic-card__bg {
+.tutorial-cards .magic-card:hover .magic-card__bg {
   opacity: 0;
 }
 
 /* 卡片头部 */
-.card-header {
+.tutorial-cards .card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -81,18 +117,18 @@ article: false
 }
 
 /* 卡片图标 */
-.card-icon {
+.tutorial-cards .card-icon {
   font-size: 48px;
   transition: transform 0.3s ease;
   line-height: 1;
 }
 
-.magic-card:hover .card-icon {
+.tutorial-cards .magic-card:hover .card-icon {
   transform: scale(1.1) rotate(-5deg);
 }
 
 /* 卡片徽章 */
-.card-badge {
+.tutorial-cards .card-badge {
   padding: 4px 12px;
   border-radius: 12px;
   font-size: 0.75em;
@@ -101,36 +137,37 @@ article: false
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.badge-hot {
+.tutorial-cards .badge-hot {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 }
 
-.badge-recommend {
+.tutorial-cards .badge-recommend {
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
 
-.badge-frontend {
+.tutorial-cards .badge-frontend {
   background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
 }
 
-.badge-essential {
+.tutorial-cards .badge-essential {
   background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 }
 
-.badge-must {
+.tutorial-cards .badge-must {
   background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 }
 
 /* 卡片内容 */
-.card-content {
+.tutorial-cards .card-content {
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
-.card-content h3 {
-  margin: 0 0 12px 0;
+.tutorial-cards .magic-card .card-content h3 {
+  margin: 0 0 10px 0;
   font-size: 1.5em;
   font-weight: 600;
   color: var(--text-color, #2c3e50);
@@ -145,7 +182,7 @@ article: false
   align-items: center;
 }
 
-.magic-card:hover .card-content h3 {
+.tutorial-cards .magic-card:hover .card-content h3 {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -153,7 +190,7 @@ article: false
   transform: translateX(4px);
 }
 
-.card-desc {
+.tutorial-cards .card-desc {
   color: var(--text-color-secondary, #6a737d);
   font-size: 0.95em;
   line-height: 1.6;
@@ -166,7 +203,7 @@ article: false
 }
 
 /* 卡片标签 */
-.card-tags {
+.tutorial-cards .card-tags {
   display: flex;
   flex-wrap: nowrap;
   gap: 6px;
@@ -190,13 +227,77 @@ article: false
   flex-shrink: 0;
 }
 
-.magic-card:hover .card-tag {
+.tutorial-cards .magic-card:hover .card-tag {
   background: rgba(102, 126, 234, 0.2);
   transform: translateY(-2px);
 }
 
+/* 模块列表区域 */
+.tutorial-cards .card-modules {
+  margin: 16px 0 20px 0;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.tutorial-cards .module-title {
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--text-color, #2c3e50);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+.tutorial-cards .module-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.tutorial-cards .module-item {
+  font-size: 0.85em;
+  color: var(--text-color-secondary, #6a737d);
+  padding: 6px 12px;
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tutorial-cards .module-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.tutorial-cards .magic-card:hover .module-item {
+  background: rgba(102, 126, 234, 0.08);
+  transform: translateX(4px);
+  border-left-color: rgba(102, 126, 234, 0.5);
+}
+
+.tutorial-cards .magic-card:hover .module-item::before {
+  transform: scaleY(1);
+}
+
 /* 卡片底部 */
-.card-footer {
+.tutorial-cards .card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -205,21 +306,22 @@ article: false
   border-top: 1px solid rgba(0, 0, 0, 0.06);
   position: relative;
   z-index: 2;
+  flex-shrink: 0;
 }
 
-.footer-text {
+.tutorial-cards .footer-text {
   color: #667eea;
   font-weight: 600;
   font-size: 0.9em;
   transition: all 0.3s ease;
 }
 
-.magic-card:hover .footer-text {
+.tutorial-cards .magic-card:hover .footer-text {
   transform: translateX(4px);
 }
 
 /* 悬停效果 */
-.magic-card:hover {
+.tutorial-cards .magic-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2);
 }
@@ -244,67 +346,101 @@ article: false
     gap: 20px;
   }
   
-  .card-header {
+  .tutorial-cards .magic-card {
+    min-height: auto;
+  }
+  
+  .tutorial-cards .card-header {
     height: auto;
   }
   
-  .card-icon {
+  .tutorial-cards .card-icon {
     font-size: 40px;
   }
   
-  .card-content h3 {
+  .tutorial-cards .magic-card .card-content h3 {
     font-size: 1.3em;
     height: auto;
   }
   
-  .card-desc {
+  .tutorial-cards .card-desc {
     height: auto;
   }
   
-  .card-tags {
+  .tutorial-cards .card-tags {
     flex-wrap: wrap;
     gap: 6px;
     height: auto;
   }
   
-  .card-tag {
+  .tutorial-cards .card-tag {
     font-size: 0.75em;
     padding: 3px 8px;
+  }
+  
+  .tutorial-cards .module-item {
+    font-size: 0.8em;
+    padding: 5px 10px;
+  }
+  
+  .tutorial-cards .module-title {
+    font-size: 0.8em;
   }
 }
 
 /* 暗黑模式适配 */
-[data-theme="dark"] .magic-card {
+[data-theme="dark"] .tutorial-cards .magic-card {
   background: rgb(28, 28, 30) !important;
   backdrop-filter: none;
   border-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-[data-theme="dark"] .magic-card:hover {
+[data-theme="dark"] .tutorial-cards .magic-card:hover {
   background: rgb(38, 38, 40) !important;
   box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
 }
 
-[data-theme="dark"] .card-content h3 {
+[data-theme="dark"] .tutorial-cards .magic-card .card-content h3 {
   color: rgba(255, 255, 255, 0.9);
 }
 
-[data-theme="dark"] .card-desc {
+[data-theme="dark"] .tutorial-cards .card-desc {
   color: rgba(255, 255, 255, 0.6);
 }
 
-[data-theme="dark"] .card-tag {
+[data-theme="dark"] .tutorial-cards .card-tag {
   background: rgba(102, 126, 234, 0.2);
   color: #8b9eff;
 }
 
-[data-theme="dark"] .card-footer {
+[data-theme="dark"] .tutorial-cards .card-footer {
   border-top-color: rgba(255, 255, 255, 0.1);
 }
 
-[data-theme="dark"] .footer-text {
+[data-theme="dark"] .tutorial-cards .footer-text {
   color: #8b9eff;
+}
+
+/* 暗黑模式 - 模块列表 */
+[data-theme="dark"] .tutorial-cards .module-title {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] .tutorial-cards .module-item {
+  background: rgba(102, 126, 234, 0.15);
+  border-left-color: rgba(102, 126, 234, 0.5);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] .tutorial-cards .magic-card:hover .module-item {
+  background: rgba(102, 126, 234, 0.25);
+  border-left-color: rgba(102, 126, 234, 0.7);
+}
+
+/* 暗黑模式 - 分类标题 */
+[data-theme="dark"] .section-subtitle {
+  color: rgba(255, 255, 255, 0.6);
 }
 </style>
 
@@ -341,19 +477,26 @@ export default {
 
 <div class="tutorial-cards">
 
-<div class="magic-card" data-href="java/">
+<!-- Java后端开发 -->
+<div class="magic-card" data-href="java-backend/">
   <span class="magic-card__bg"></span>
   <div class="card-header">
     <div class="card-icon">☕</div>
     <span class="card-badge badge-hot">热门</span>
   </div>
   <div class="card-content">
-    <h3>Java 教程</h3>
-    <p class="card-desc">从基础到进阶，全面掌握 Java 开发</p>
-    <div class="card-tags">
-      <span class="card-tag">后端开发</span>
-      <span class="card-tag">面向对象</span>
-      <span class="card-tag">企业级</span>
+    <h3>Java后端开发工程师</h3>
+    <p class="card-desc">Java开发完整技术栈</p>
+    <div class="card-modules">
+      <div class="module-title">📑 包含模块：</div>
+      <div class="module-list">
+        <div class="module-item">☕ Java编程基础</div>
+        <div class="module-item">📦 Maven构建工具</div>
+        <div class="module-item">💾 MyBatis / MyBatis-Plus</div>
+        <div class="module-item">🍃 Spring / Spring MVC</div>
+        <div class="module-item">⚡ Spring Boot</div>
+        <div class="module-item">☁️ Spring Cloud微服务</div>
+      </div>
     </div>
     <div class="card-footer">
       <span class="footer-text">开始学习 →</span>
@@ -361,19 +504,24 @@ export default {
   </div>
 </div>
 
-<div class="magic-card" data-href="python/">
+<!-- Python人工智能工程师 -->
+<div class="magic-card" data-href="python-ai/">
   <span class="magic-card__bg"></span>
   <div class="card-header">
-    <div class="card-icon">🐍</div>
-    <span class="card-badge badge-recommend">推荐</span>
+    <div class="card-icon">🤖</div>
+    <span class="card-badge badge-recommend">前沿</span>
   </div>
   <div class="card-content">
-    <h3>Python 教程</h3>
-    <p class="card-desc">简洁优雅的 Python 编程之道</p>
-    <div class="card-tags">
-      <span class="card-tag">数据科学</span>
-      <span class="card-tag">人工智能</span>
-      <span class="card-tag">自动化</span>
+    <h3>Python人工智能工程师</h3>
+    <p class="card-desc">Python与AI技术学习路径</p>
+    <div class="card-modules">
+      <div class="module-title">📑 包含模块：</div>
+      <div class="module-list">
+        <div class="module-item">🐍 Python基础</div>
+        <div class="module-item">📊 数据分析</div>
+        <div class="module-item">🤖 机器学习</div>
+        <div class="module-item">🧠 深度学习</div>
+      </div>
     </div>
     <div class="card-footer">
       <span class="footer-text">开始学习 →</span>
@@ -381,19 +529,24 @@ export default {
   </div>
 </div>
 
-<div class="magic-card" data-href="mysql/">
+<!-- DevOps运维工程师 -->
+<div class="magic-card" data-href="devops-engineer/">
   <span class="magic-card__bg"></span>
   <div class="card-header">
-    <div class="card-icon">💾</div>
-    <span class="card-badge badge-essential">必学</span>
+    <div class="card-icon">🚀</div>
+    <span class="card-badge badge-recommend">运维</span>
   </div>
   <div class="card-content">
-    <h3>MySQL 教程</h3>
-    <p class="card-desc">从基础到高级的 MySQL 完整教程</p>
-    <div class="card-tags">
-      <span class="card-tag">SQL语法</span>
-      <span class="card-tag">索引优化</span>
-      <span class="card-tag">性能调优</span>
+    <h3>DevOps运维工程师</h3>
+    <p class="card-desc">容器化与自动化运维技术</p>
+    <div class="card-modules">
+      <div class="module-title">📑 包含模块：</div>
+      <div class="module-list">
+        <div class="module-item">🐳 Docker容器</div>
+        <div class="module-item">☸️ Kubernetes</div>
+        <div class="module-item">🔄 CI/CD</div>
+        <div class="module-item">🐧 Linux运维</div>
+      </div>
     </div>
     <div class="card-footer">
       <span class="footer-text">开始学习 →</span>
@@ -401,99 +554,25 @@ export default {
   </div>
 </div>
 
-<div class="magic-card" data-href="javascript/">
+<!-- 前端开发工程师 -->
+<div class="magic-card" data-href="frontend-dev/">
   <span class="magic-card__bg"></span>
   <div class="card-header">
-    <div class="card-icon">📜</div>
-    <span class="card-badge badge-frontend">前端</span>
-  </div>
-  <div class="card-content">
-    <h3>前端教程</h3>
-    <p class="card-desc">现代前端开发完整指南</p>
-    <div class="card-tags">
-      <span class="card-tag">HTML/CSS</span>
-      <span class="card-tag">JavaScript</span>
-      <span class="card-tag">Vue/React</span>
-    </div>
-    <div class="card-footer">
-      <span class="footer-text">开始学习 →</span>
-    </div>
-  </div>
-</div>
-
-<div class="magic-card" data-href="network/">
-  <span class="magic-card__bg"></span>
-  <div class="card-header">
-    <div class="card-icon">🌐</div>
-    <span class="card-badge badge-essential">必学</span>
-  </div>
-  <div class="card-content">
-    <h3>计算机网络</h3>
-    <p class="card-desc">深入理解网络协议与通信原理</p>
-    <div class="card-tags">
-      <span class="card-tag">TCP/IP</span>
-      <span class="card-tag">HTTP/HTTPS</span>
-      <span class="card-tag">网络安全</span>
-    </div>
-    <div class="card-footer">
-      <span class="footer-text">开始学习 →</span>
-    </div>
-  </div>
-</div>
-
-<div class="magic-card" data-href="computer-organization/">
-  <span class="magic-card__bg"></span>
-  <div class="card-header">
-    <div class="card-icon">🖥️</div>
-    <span class="card-badge badge-essential">基础</span>
-  </div>
-  <div class="card-content">
-    <h3>计算机组成原理</h3>
-    <p class="card-desc">探索计算机硬件的工作原理</p>
-    <div class="card-tags">
-      <span class="card-tag">CPU</span>
-      <span class="card-tag">存储器</span>
-      <span class="card-tag">指令系统</span>
-    </div>
-    <div class="card-footer">
-      <span class="footer-text">开始学习 →</span>
-    </div>
-  </div>
-</div>
-
-<div class="magic-card" data-href="operating-system/">
-  <span class="magic-card__bg"></span>
-  <div class="card-header">
-    <div class="card-icon">⚙️</div>
-    <span class="card-badge badge-essential">必学</span>
-  </div>
-  <div class="card-content">
-    <h3>计算机操作系统</h3>
-    <p class="card-desc">掌握操作系统核心原理</p>
-    <div class="card-tags">
-      <span class="card-tag">进程管理</span>
-      <span class="card-tag">内存管理</span>
-      <span class="card-tag">文件系统</span>
-    </div>
-    <div class="card-footer">
-      <span class="footer-text">开始学习 →</span>
-    </div>
-  </div>
-</div>
-
-<div class="magic-card" data-href="data-structures/">
-  <span class="magic-card__bg"></span>
-  <div class="card-header">
-    <div class="card-icon">📊</div>
+    <div class="card-icon">🎨</div>
     <span class="card-badge badge-hot">热门</span>
   </div>
   <div class="card-content">
-    <h3>数据结构与算法</h3>
-    <p class="card-desc">算法思维与编程能力提升</p>
-    <div class="card-tags">
-      <span class="card-tag">数据结构</span>
-      <span class="card-tag">算法设计</span>
-      <span class="card-tag">LeetCode</span>
+    <h3>前端开发工程师</h3>
+    <p class="card-desc">用户界面开发与交互体验设计</p>
+    <div class="card-modules">
+      <div class="module-title">📑 包含模块：</div>
+      <div class="module-list">
+        <div class="module-item">📄 HTML5 + CSS3</div>
+        <div class="module-item">📜 JavaScript核心</div>
+        <div class="module-item">⚛️ Vue / React框架</div>
+        <div class="module-item">📦 前端工程化</div>
+        <div class="module-item">🎯 项目实战</div>
+      </div>
     </div>
     <div class="card-footer">
       <span class="footer-text">开始学习 →</span>
@@ -501,19 +580,123 @@ export default {
   </div>
 </div>
 
-<div class="magic-card" data-href="git/">
+<!-- 大数据开发工程师 -->
+<div class="magic-card" data-href="big-data/">
   <span class="magic-card__bg"></span>
   <div class="card-header">
-    <div class="card-icon">🔧</div>
+    <div class="card-icon">📊</div>
+    <span class="card-badge badge-recommend">进阶</span>
+  </div>
+  <div class="card-content">
+    <h3>大数据开发工程师</h3>
+    <p class="card-desc">大数据处理与分布式计算</p>
+    <div class="card-modules">
+      <div class="module-title">📑 包含模块：</div>
+      <div class="module-list">
+        <div class="module-item">🐘 Hadoop生态</div>
+        <div class="module-item">⚡ Spark数据处理</div>
+        <div class="module-item">🌊 Flink实时计算</div>
+        <div class="module-item">📈 数据仓库</div>
+        <div class="module-item">🔍 数据分析</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="footer-text">开始学习 →</span>
+    </div>
+  </div>
+</div>
+
+<!-- 算法工程师 -->
+<div class="magic-card" data-href="algorithm-engineer/">
+  <span class="magic-card__bg"></span>
+  <div class="card-header">
+    <div class="card-icon">🧮</div>
+    <span class="card-badge badge-essential">核心</span>
+  </div>
+  <div class="card-content">
+    <h3>算法工程师</h3>
+    <p class="card-desc">算法竞赛与大厂面试必备</p>
+    <div class="card-modules">
+      <div class="module-title">📑 包含模块：</div>
+      <div class="module-list">
+        <div class="module-item">📚 数据结构基础</div>
+        <div class="module-item">🧩 常用算法模板</div>
+        <div class="module-item">💻 LeetCode刷题</div>
+        <div class="module-item">🏆 算法竞赛</div>
+        <div class="module-item">🎯 面试真题</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="footer-text">开始学习 →</span>
+    </div>
+  </div>
+</div>
+
+<!-- 计算机基础 -->
+<div class="magic-card" data-href="computer-basics/">
+  <span class="magic-card__bg"></span>
+  <div class="card-header">
+    <div class="card-icon">📚</div>
+    <span class="card-badge badge-essential">基础</span>
+  </div>
+  <div class="card-content">
+    <h3>计算机基础</h3>
+    <p class="card-desc">夯实计算机基础，理解底层原理</p>
+    <div class="card-modules">
+      <div class="module-title">📑 包含模块：</div>
+      <div class="module-list">
+        <div class="module-item">🖥️ 计算机组成原理</div>
+        <div class="module-item">📊 数据结构与算法</div>
+        <div class="module-item">🌐 计算机网络</div>
+        <div class="module-item">⚙️ 操作系统</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="footer-text">开始学习 →</span>
+    </div>
+  </div>
+</div>
+
+<!-- 数据库技术 -->
+<div class="magic-card" data-href="database/">
+  <span class="magic-card__bg"></span>
+  <div class="card-header">
+    <div class="card-icon">🗄️</div>
     <span class="card-badge badge-essential">必学</span>
   </div>
   <div class="card-content">
-    <h3>Git 版本控制</h3>
-    <p class="card-desc">掌握 Git 版本控制系统的使用</p>
-    <div class="card-tags">
-      <span class="card-tag">版本管理</span>
-      <span class="card-tag">团队协作</span>
-      <span class="card-tag">工作流</span>
+    <h3>数据库技术</h3>
+    <p class="card-desc">掌握数据存储与管理核心技术</p>
+    <div class="card-modules">
+      <div class="module-title">📑 包含模块：</div>
+      <div class="module-list">
+        <div class="module-item">💾 MySQL数据库</div>
+        <div class="module-item">⚡ Redis缓存</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="footer-text">开始学习 →</span>
+    </div>
+  </div>
+</div>
+
+<!-- 开发工具 -->
+<div class="magic-card" data-href="development-tools/">
+  <span class="magic-card__bg"></span>
+  <div class="card-header">
+    <div class="card-icon">🛠️</div>
+    <span class="card-badge badge-essential">必备</span>
+  </div>
+  <div class="card-content">
+    <h3>开发工具</h3>
+    <p class="card-desc">工欲善其事，必先利其器</p>
+    <div class="card-modules">
+      <div class="module-title">📑 包含模块：</div>
+      <div class="module-list">
+        <div class="module-item">🔧 Git版本控制</div>
+        <div class="module-item">📦 Maven / Gradle</div>
+        <div class="module-item">💡 IDEA / VS Code</div>
+      </div>
     </div>
     <div class="card-footer">
       <span class="footer-text">开始学习 →</span>
@@ -523,19 +706,10 @@ export default {
 
 </div>
 
----
 
-## 🗺️ 学习路线
 
-1. **编程基础** - 选择一门语言（Python/Java）开始学习编程基础知识
-2. **深入进阶** - 掌握面向对象、数据结构与算法等进阶知识
-3. **项目实战** - 通过实际项目巩固所学，积累开发经验
-
----
-
-## 💡 学习建议
-
-- **循序渐进** - 从基础开始，逐步深入，不要急于求成
-- **多动手练习** - 理论结合实践，通过编写代码加深理解
-- **交流分享** - 与他人交流学习心得，共同进步成长
-- **坚持不懈** - 保持学习热情，每天进步一点点
+## 🎓 学习资源推荐
+- **在线学习** - B站、慕课网、极客时间
+- **刷题平台** - LeetCode、牛客网
+- **技术社区** - GitHub、掘金、CSDN
+- **官方文档** - 始终是最好的学习资料
