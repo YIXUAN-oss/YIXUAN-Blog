@@ -1,6 +1,10 @@
 {
-  "framework": null,
-  "rootDirectory": "./",
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "gh-pages": false
+    }
+  },
   "buildCommand": "npm run build",
   "outputDirectory": "docs/.vuepress/dist",
   "installCommand": "npm install --legacy-peer-deps",

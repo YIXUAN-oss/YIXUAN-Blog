@@ -147,9 +147,9 @@ onMounted(() => {
     };
   };
   
-  // Magic Card 初始化
+  // Magic Card 初始化 - 仅限教程卡片
   const initMagicCards = () => {
-    const magicCards = document.querySelectorAll('.magic-card');
+    const magicCards = document.querySelectorAll('.tutorial-cards .magic-card');
     
     magicCards.forEach(card => {
       const bg = card.querySelector('.magic-card__bg');
@@ -845,120 +845,84 @@ onMounted(() => {
 </div>
 
 <div class="tutorial-cards">
-<div class="magic-card" data-href="/tutorials/java/">
-<span class="magic-card__bg"></span>
-<div class="card-header">
-<div class="card-icon">☕</div>
-<span class="card-badge badge-hot">热门</span>
+
+<!-- Java后端开发工程师 -->
+<div class="magic-card" data-href="/tutorials/java-backend/">
+  <span class="magic-card__bg"></span>
+  <div class="card-header">
+    <div class="card-icon">☕</div>
+    <span class="card-badge badge-hot">热门</span>
+  </div>
+  <div class="card-content">
+    <h3>Java后端开发工程师</h3>
+    <p class="card-desc">Java开发完整技术栈</p>
+    <div class="card-modules">
+      <div class="module-title">📑 包含模块：</div>
+      <div class="module-list">
+        <div class="module-item">☕ Java编程基础</div>
+        <div class="module-item">📦 Maven构建工具</div>
+        <div class="module-item">💾 MyBatis / MyBatis-Plus</div>
+        <div class="module-item">🍃 Spring / Spring MVC</div>
+        <div class="module-item">⚡ Spring Boot</div>
+        <div class="module-item">☁️ Spring Cloud微服务</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="footer-text">开始学习 →</span>
+    </div>
+  </div>
 </div>
-<div class="card-content">
-<h3>Java 教程</h3>
-<p class="card-desc">从基础到进阶，全面掌握 Java 开发</p>
-<div class="card-tags">
-<span class="card-tag">后端开发</span>
-<span class="card-tag">面向对象</span>
-<span class="card-tag">企业级</span>
+
+<!-- Python人工智能工程师 -->
+<div class="magic-card" data-href="/tutorials/python-ai/">
+  <span class="magic-card__bg"></span>
+  <div class="card-header">
+    <div class="card-icon">🤖</div>
+    <span class="card-badge badge-recommend">前沿</span>
+  </div>
+  <div class="card-content">
+    <h3>Python人工智能工程师</h3>
+    <p class="card-desc">Python与AI技术学习路径</p>
+    <div class="card-modules">
+      <div class="module-title">📑 包含模块：</div>
+      <div class="module-list">
+        <div class="module-item">🐍 Python基础</div>
+        <div class="module-item">📊 数据分析</div>
+        <div class="module-item">🤖 机器学习</div>
+        <div class="module-item">🧠 深度学习</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="footer-text">开始学习 →</span>
+    </div>
+  </div>
 </div>
-<div class="card-footer">
-<span class="footer-text">开始学习 →</span>
+
+<!-- 计算机基础 -->
+<div class="magic-card" data-href="/tutorials/computer-basics/">
+  <span class="magic-card__bg"></span>
+  <div class="card-header">
+    <div class="card-icon">📚</div>
+    <span class="card-badge badge-essential">基础</span>
+  </div>
+  <div class="card-content">
+    <h3>计算机基础</h3>
+    <p class="card-desc">夯实计算机基础，理解底层原理</p>
+    <div class="card-modules">
+      <div class="module-title">📑 包含模块：</div>
+      <div class="module-list">
+        <div class="module-item">🖥️ 计算机组成原理</div>
+        <div class="module-item">📊 数据结构与算法</div>
+        <div class="module-item">🌐 计算机网络</div>
+        <div class="module-item">⚙️ 操作系统</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="footer-text">开始学习 →</span>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-<div class="magic-card" data-href="/tutorials/python/">
-<span class="magic-card__bg"></span>
-<div class="card-header">
-<div class="card-icon">🐍</div>
-<span class="card-badge badge-recommend">推荐</span>
-</div>
-<div class="card-content">
-<h3>Python 教程</h3>
-<p class="card-desc">简洁优雅的 Python 编程之道</p>
-<div class="card-tags">
-<span class="card-tag">数据科学</span>
-<span class="card-tag">人工智能</span>
-<span class="card-tag">自动化</span>
-</div>
-<div class="card-footer">
-<span class="footer-text">开始学习 →</span>
-</div>
-</div>
-</div>
-<div class="magic-card" data-href="/tutorials/javascript/">
-<span class="magic-card__bg"></span>
-<div class="card-header">
-<div class="card-icon">📜</div>
-<span class="card-badge badge-frontend">前端</span>
-</div>
-<div class="card-content">
-<h3>前端教程</h3>
-<p class="card-desc">现代前端开发完整指南</p>
-<div class="card-tags">
-<span class="card-tag">HTML/CSS</span>
-<span class="card-tag">JavaScript</span>
-<span class="card-tag">Vue/React</span>
-</div>
-<div class="card-footer">
-<span class="footer-text">开始学习 →</span>
-</div>
-</div>
-</div>
-<div class="magic-card" data-href="/tutorials/database/">
-<span class="magic-card__bg"></span>
-<div class="card-header">
-<div class="card-icon">💾</div>
-<span class="card-badge badge-essential">必学</span>
-</div>
-<div class="card-content">
-<h3>数据库教程</h3>
-<p class="card-desc">SQL 和 NoSQL 数据库实战</p>
-<div class="card-tags">
-<span class="card-tag">MySQL</span>
-<span class="card-tag">MongoDB</span>
-<span class="card-tag">Redis</span>
-</div>
-<div class="card-footer">
-<span class="footer-text">开始学习 →</span>
-</div>
-</div>
-</div>
-<div class="magic-card" data-href="/tutorials/network/">
-<span class="magic-card__bg"></span>
-<div class="card-header">
-<div class="card-icon">🌐</div>
-<span class="card-badge badge-essential">必学</span>
-</div>
-<div class="card-content">
-<h3>计算机网络</h3>
-<p class="card-desc">深入理解网络协议与通信原理</p>
-<div class="card-tags">
-<span class="card-tag">TCP/IP</span>
-<span class="card-tag">HTTP/HTTPS</span>
-<span class="card-tag">网络安全</span>
-</div>
-<div class="card-footer">
-<span class="footer-text">开始学习 →</span>
-</div>
-</div>
-</div>
-<div class="magic-card" data-href="/tutorials/data-structures/">
-<span class="magic-card__bg"></span>
-<div class="card-header">
-<div class="card-icon">📊</div>
-<span class="card-badge badge-hot">热门</span>
-</div>
-<div class="card-content">
-<h3>数据结构与算法</h3>
-<p class="card-desc">算法思维与编程能力提升</p>
-<div class="card-tags">
-<span class="card-tag">数据结构</span>
-<span class="card-tag">算法设计</span>
-<span class="card-tag">LeetCode</span>
-</div>
-<div class="card-footer">
-<span class="footer-text">开始学习 →</span>
-</div>
-</div>
-</div>
+
 </div>
 
 <div class="tutorial-more-btn-wrapper">
@@ -1028,21 +992,24 @@ onMounted(() => {
   margin: 40px 0;
 }
 
-/* Magic Card 样式 */
-.magic-card {
+/* Magic Card 样式 - 仅限教程卡片 */
+.tutorial-cards .magic-card {
   position: relative;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
-  padding: 30px 24px 28px;
+  padding: 24px 20px 22px;
   cursor: pointer;
   overflow: hidden;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 380px !important;
 }
 
-.magic-card::before {
+.tutorial-cards .magic-card::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -1056,12 +1023,12 @@ onMounted(() => {
   transition: opacity 0.3s ease;
 }
 
-.magic-card:hover::before {
+.tutorial-cards .magic-card:hover::before {
   opacity: 1;
 }
 
 /* Magic Card 背景光效 */
-.magic-card__bg {
+.tutorial-cards .magic-card__bg {
   position: absolute;
   inset: 0;
   border-radius: 16px;
@@ -1076,34 +1043,34 @@ onMounted(() => {
   z-index: 0;
 }
 
-.magic-card:hover .magic-card__bg {
+.tutorial-cards .magic-card:hover .magic-card__bg {
   opacity: 0;
 }
 
 /* 卡片头部 */
-.card-header {
+.tutorial-cards .card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   position: relative;
   z-index: 2;
-  height: 56px;
+  min-height: auto;
 }
 
 /* 卡片图标 */
-.card-icon {
-  font-size: 48px;
+.tutorial-cards .card-icon {
+  font-size: 42px;
   transition: transform 0.3s ease;
   line-height: 1;
 }
 
-.magic-card:hover .card-icon {
+.tutorial-cards .magic-card:hover .card-icon {
   transform: scale(1.1) rotate(-5deg);
 }
 
 /* 卡片徽章 */
-.card-badge {
+.tutorial-cards .card-badge {
   padding: 4px 12px;
   border-radius: 12px;
   font-size: 0.75em;
@@ -1112,37 +1079,38 @@ onMounted(() => {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.badge-hot {
+.tutorial-cards .badge-hot {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 }
 
-.badge-recommend {
+.tutorial-cards .badge-recommend {
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
 
-.badge-frontend {
+.tutorial-cards .badge-frontend {
   background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
 }
 
-.badge-must {
+.tutorial-cards .badge-must {
   background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 }
 
-.badge-essential {
+.tutorial-cards .badge-essential {
   background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 }
 
 /* 卡片内容 */
-.card-content {
+.tutorial-cards .card-content {
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
-.card-content h3 {
-  margin: 0 0 12px 0;
-  font-size: 1.5em;
+.tutorial-cards .magic-card .card-content h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.35em;
   font-weight: 600;
   color: var(--text-color, #2c3e50);
   transition: all 0.3s ease;
@@ -1150,13 +1118,11 @@ onMounted(() => {
   z-index: 3;
   border: none !important;
   padding: 0 !important;
-  line-height: 1.4;
-  height: 42px;
-  display: flex;
-  align-items: center;
+  line-height: 1.3;
+  min-height: auto;
 }
 
-.magic-card:hover .card-content h3 {
+.tutorial-cards .magic-card:hover .card-content h3 {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1164,21 +1130,19 @@ onMounted(() => {
   transform: translateX(4px);
 }
 
-.card-desc {
+.tutorial-cards .card-desc {
   color: var(--text-color-secondary, #6a737d);
   font-size: 0.95em;
   line-height: 1.6;
   margin: 0 0 12px 0;
   position: relative;
   z-index: 2;
-  height: 48px;
-  display: flex;
-  align-items: center;
+  min-height: auto;
 }
 
 /* 卡片标签 */
-.card-tags {
-  display: flex;
+.tutorial-cards .card-tags {
+  display: none !important;
   flex-wrap: nowrap;
   gap: 6px;
   margin-bottom: 12px;
@@ -1189,7 +1153,7 @@ onMounted(() => {
   align-items: flex-start;
 }
 
-.card-tag {
+.tutorial-cards .card-tag {
   padding: 4px 8px;
   background: rgba(102, 126, 234, 0.1);
   color: #667eea;
@@ -1201,36 +1165,100 @@ onMounted(() => {
   flex-shrink: 0;
 }
 
-.magic-card:hover .card-tag {
+.tutorial-cards .magic-card:hover .card-tag {
   background: rgba(102, 126, 234, 0.2);
   transform: translateY(-2px);
 }
 
+/* 模块列表区域 */
+.tutorial-cards .card-modules {
+  margin: 16px 0 20px 0;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tutorial-cards .module-title {
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--text-color, #2c3e50);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+.tutorial-cards .module-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.tutorial-cards .module-item {
+  font-size: 0.85em;
+  color: var(--text-color-secondary, #6a737d);
+  padding: 6px 12px;
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tutorial-cards .module-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.tutorial-cards .magic-card:hover .module-item {
+  background: rgba(102, 126, 234, 0.08);
+  transform: translateX(4px);
+  border-left-color: rgba(102, 126, 234, 0.5);
+}
+
+.tutorial-cards .magic-card:hover .module-item::before {
+  transform: scaleY(1);
+}
+
 /* 卡片底部 */
-.card-footer {
+.tutorial-cards .card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
-  padding-top: 16px;
+  padding-top: 12px;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
   position: relative;
   z-index: 2;
+  flex-shrink: 0;
 }
 
-.footer-text {
+.tutorial-cards .footer-text {
   color: #667eea;
   font-weight: 600;
   font-size: 0.9em;
   transition: all 0.3s ease;
 }
 
-.magic-card:hover .footer-text {
+.tutorial-cards .magic-card:hover .footer-text {
   transform: translateX(4px);
 }
 
 /* 悬停效果 */
-.magic-card:hover {
+.tutorial-cards .magic-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2);
 }
@@ -1259,33 +1287,96 @@ onMounted(() => {
     font-size: 2em;
   }
   
-  .card-header {
+  .tutorial-cards .card-header {
     height: auto;
   }
   
-  .card-icon {
+  .tutorial-cards .card-icon {
     font-size: 40px;
   }
   
-  .card-content h3 {
+  .tutorial-cards .magic-card .card-content h3 {
     font-size: 1.3em;
     height: auto;
   }
   
-  .card-desc {
+  .tutorial-cards .card-desc {
     height: auto;
   }
   
-  .card-tags {
+  .tutorial-cards .card-tags {
     flex-wrap: wrap;
     gap: 6px;
     height: auto;
   }
   
-  .card-tag {
+  .tutorial-cards .card-tag {
     font-size: 0.75em;
     padding: 3px 8px;
   }
+  
+  .tutorial-cards .module-item {
+    font-size: 0.8em;
+    padding: 5px 10px;
+  }
+  
+  .tutorial-cards .module-title {
+    font-size: 0.8em;
+  }
+  
+  .tutorial-cards .magic-card {
+    min-height: auto;
+  }
+}
+
+/* 暗黑模式适配 */
+[data-theme="dark"] .tutorial-cards .magic-card {
+  background: rgb(28, 28, 30) !important;
+  backdrop-filter: none;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .tutorial-cards .magic-card:hover {
+  background: rgb(38, 38, 40) !important;
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+}
+
+[data-theme="dark"] .tutorial-cards .magic-card .card-content h3 {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] .tutorial-cards .card-desc {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="dark"] .tutorial-cards .card-tag {
+  background: rgba(102, 126, 234, 0.2);
+  color: #8b9eff;
+}
+
+[data-theme="dark"] .tutorial-cards .card-footer {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .tutorial-cards .footer-text {
+  color: #8b9eff;
+}
+
+/* 暗黑模式 - 模块列表 */
+[data-theme="dark"] .tutorial-cards .module-title {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] .tutorial-cards .module-item {
+  background: rgba(102, 126, 234, 0.15);
+  border-left-color: rgba(102, 126, 234, 0.5);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] .tutorial-cards .magic-card:hover .module-item {
+  background: rgba(102, 126, 234, 0.25);
+  border-left-color: rgba(102, 126, 234, 0.7);
 }
 
 /* 查看更多按钮 */
@@ -1381,39 +1472,6 @@ onMounted(() => {
   }
 }
 
-/* 暗黑模式适配 */
-[data-theme="dark"] .magic-card {
-  background: rgb(28, 28, 30) !important;
-  backdrop-filter: none;
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-[data-theme="dark"] .magic-card:hover {
-  background: rgb(38, 38, 40) !important;
-  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
-}
-
-[data-theme="dark"] .card-content h3 {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-[data-theme="dark"] .card-desc {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-[data-theme="dark"] .card-tag {
-  background: rgba(102, 126, 234, 0.2);
-  color: #8b9eff;
-}
-
-[data-theme="dark"] .card-footer {
-  border-top-color: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .footer-text {
-  color: #8b9eff;
-}
 </style>
 
 ## 🎯 关于本站
