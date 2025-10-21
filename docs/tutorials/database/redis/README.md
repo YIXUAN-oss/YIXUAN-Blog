@@ -199,14 +199,14 @@ TYPE key               # 查看类型
 ### 数据库操作
 ```bash
 SELECT index           # 切换数据库
-DBSIZE                 # 查看键数量
-FLUSHDB                # 清空当前数据库
-FLUSHALL               # 清空所有数据库
+DBSIZE                # 查看键数量
+FLUSHDB               # 清空当前数据库
+FLUSHALL              # 清空所有数据库
 ```
 
 ## 💡 Spring Boot 整合 Redis
 
-### 添加依赖
+### 1. 添加依赖
 
 ```xml
 <dependency>
@@ -220,7 +220,7 @@ FLUSHALL               # 清空所有数据库
 </dependency>
 ```
 
-### 配置文件
+### 2. 配置文件
 
 ```yaml
 spring:
@@ -238,7 +238,38 @@ spring:
         max-wait: -1ms     # 连接池最大阻塞等待时间
 ```
 
-### 使用示例
+### 3. 配置类
+
+```java
+@Configuration
+public class RedisConfig {
+    
+    @Bean
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
+        template.setConnectionFactory(factory);
+        
+        // 使用 Jackson2JsonRedisSerializer 来序列化和反序列化
+        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(Object.class);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        mapper.activateDefaultTyping(LazyLoadingJavaTypeValidator.instance, 
+                                     ObjectMapper.DefaultTyping.NON_FINAL);
+        serializer.setObjectMapper(mapper);
+        
+        // 设置 key 和 value 的序列化规则
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(serializer);
+        template.setHashKeySerializer(new StringRedisSerializer());
+        template.setHashValueSerializer(serializer);
+        template.afterPropertiesSet();
+        
+        return template;
+    }
+}
+```
+
+### 4. 使用示例
 
 ```java
 @Service
@@ -268,152 +299,77 @@ public class UserService {
 }
 ```
 
+### 5. 缓存注解
+
+```java
+@Service
+@CacheConfig(cacheNames = "users")
+public class UserService {
+    
+    @Cacheable(key = "#id")
+    public User getUserById(Long id) {
+        // 从数据库查询
+        return userRepository.findById(id);
+    }
+    
+    @CachePut(key = "#user.id")
+    public User updateUser(User user) {
+        // 更新数据库
+        return userRepository.save(user);
+    }
+    
+    @CacheEvict(key = "#id")
+    public void deleteUser(Long id) {
+        // 删除数据库记录
+        userRepository.deleteById(id);
+    }
+}
+```
+
 ## 🔥 常见应用场景
 
-1. **缓存系统** - 热点数据缓存，减轻数据库压力
-2. **Session 共享** - 分布式 Session 存储
-3. **分布式锁** - 保证分布式环境下的数据一致性
-4. **排行榜** - 使用 Zset 实现实时排行
-5. **消息队列** - List/Stream 实现简单消息队列
-6. **限流** - 实现令牌桶、滑动窗口限流算法
-7. **计数器** - 统计访问量、点赞数等
-8. **社交功能** - 好友关系、关注/粉丝列表
+1. **缓存** - 热点数据缓存
+2. **Session共享** - 分布式Session
+3. **分布式锁** - 保证原子性
+4. **排行榜** - Zset实现
+5. **消息队列** - List/Stream
+6. **限流** - 令牌桶算法
 
-## 📊 数据类型选择指南
+## 📊 数据类型选择
 
-| 场景 | 数据类型 | 说明 | 示例 |
-|------|----------|------|------|
-| 缓存对象 | String | JSON 序列化存储 | 用户信息、商品详情 |
-| 购物车 | Hash | 商品 ID 为 field | 商品 ID → 数量 |
-| 消息队列 | List | LPUSH/RPOP | 订单消息、通知 |
-| 点赞/关注 | Set | 去重、集合运算 | 点赞用户列表 |
-| 排行榜 | Zset | 自动按分数排序 | 游戏排行、热度榜 |
-| 计数器 | String | INCR/DECR | 访问量、库存 |
-| 分布式锁 | String | SETNX + 过期时间 | 订单锁、库存锁 |
+| 场景 | 数据类型 | 说明 |
+|------|----------|------|
+| 缓存对象 | String | 序列化存储 |
+| 购物车 | Hash | 商品ID为field |
+| 消息队列 | List | LPUSH/RPOP |
+| 点赞/关注 | Set | 去重 |
+| 排行榜 | Zset | 自动排序 |
 
-## 💡 Redis 最佳实践
+## 💡 最佳实践
 
-### 性能优化
-1. **合理设置过期时间** - 避免内存溢出，防止缓存雪崩
-2. **避免大 Key** - 单个 Key 不超过 10KB，大对象拆分存储
-3. **使用 Pipeline** - 批量操作减少网络往返
-4. **选择合适的数据类型** - 根据场景选择最优数据结构
-5. **开启持久化** - 根据业务选择 RDB 或 AOF
+1. **合理设置过期时间** - 避免内存溢出
+2. **避免大key** - 拆分为多个小key
+3. **使用Pipeline** - 批量操作减少网络开销
+4. **选择合适的数据类型** - 提升性能
+5. **监控Redis状态** - 及时发现问题
 
-### 安全建议
-1. **设置强密码** - requirepass 配置复杂密码
-2. **禁用危险命令** - rename-command FLUSHALL ""
-3. **绑定内网 IP** - bind 127.0.0.1
-4. **开启防火墙** - 限制 6379 端口访问
-5. **使用 SSL/TLS** - 加密传输
+## 🔥 面试重点
 
-### 运维监控
-1. **监控内存使用** - INFO memory
-2. **监控命令执行** - MONITOR（慎用）
-3. **慢查询日志** - SLOWLOG GET
-4. **定期备份** - RDB/AOF 文件备份
-5. **设置最大内存** - maxmemory 配置
-
-## 🔥 Redis 高频面试题
-
-1. **Redis 为什么这么快？**
-   - 纯内存操作
-   - 单线程避免上下文切换
-   - IO 多路复用
-   - 高效的数据结构
-
-2. **Redis 的数据类型及应用场景？**
-   - String：缓存、计数器、分布式锁
-   - Hash：对象存储、购物车
-   - List：消息队列、时间轴
-   - Set：去重、共同好友
-   - Zset：排行榜、延时队列
-
-3. **Redis 持久化机制对比？**
-   - RDB：快照，恢复快，数据可能丢失
-   - AOF：日志，数据完整，文件大
-   - 混合：结合两者优点
-
-4. **如何解决缓存穿透、击穿、雪崩？**
-   - 穿透：布隆过滤器、空值缓存
-   - 击穿：互斥锁、热点数据不过期
-   - 雪崩：随机过期时间、多级缓存
-
-5. **Redis 如何实现分布式锁？**
-   - 使用 SET NX EX 命令
-   - 设置唯一标识防止误删
-   - 设置过期时间防止死锁
-
-6. **Redis 主从复制原理？**
-   - 全量同步：RDB + 复制缓冲区
-   - 增量同步：复制积压缓冲区
-   - 心跳检测：REPLCONF ACK
-
-7. **Redis 集群方案对比？**
-   - 主从复制：读写分离，手动故障转移
-   - 哨兵模式：自动故障转移，无法横向扩展
-   - Redis Cluster：分布式集群，自动分片
-
-## 🎯 学习路线图
-
-```
-第 1 周：Redis 基础
-├─ 安装与配置
-├─ 五大数据类型
-├─ 常用命令
-└─ 客户端使用
-
-第 2 周：持久化与配置
-├─ RDB 持久化
-├─ AOF 持久化
-├─ 配置优化
-└─ 性能调优
-
-第 3 周：Spring Boot 整合
-├─ RedisTemplate
-├─ 缓存注解
-├─ 序列化配置
-└─ 实战项目
-
-第 4 周：高级特性
-├─ 缓存问题解决
-├─ 分布式锁
-├─ 集群部署
-└─ 高可用方案
-```
+1. Redis为什么这么快？
+2. Redis的数据类型及应用场景
+3. Redis持久化机制对比
+4. 缓存穿透、击穿、雪崩的解决方案
+5. Redis如何实现分布式锁？
+6. Redis主从复制原理
+7. Redis集群方案对比
 
 ## 📚 推荐资源
 
-### 官方文档
-- [Redis 官方网站](https://redis.io/)
-- [Redis 官方文档](https://redis.io/documentation)
-- [Redis 命令参考](http://redisdoc.com/)
-
-### 推荐书籍
-- 《Redis 设计与实现》- 深入理解 Redis 内部机制
-- 《Redis 实战》- 实战案例与最佳实践
-- 《Redis 深度历险》- 进阶必读
-
-### 推荐工具
-- **Redis Desktop Manager** - 图形化管理工具
-- **RedisInsight** - 官方可视化工具
-- **redis-cli** - 命令行工具
-
-## ⚠️ 注意事项
-
-1. **生产环境配置** - 设置密码、绑定IP、禁用危险命令
-2. **内存管理** - 设置 maxmemory 和淘汰策略
-3. **持久化选择** - 根据数据重要性选择合适的持久化方案
-4. **慢查询监控** - 定期检查慢查询日志
-5. **集群规划** - 根据业务量选择合适的集群方案
-6. **备份策略** - 定期备份 RDB/AOF 文件
-
-## 📄 版权说明
-
-本教程仅供学习使用，欢迎分享传播。
+- 《Redis设计与实现》
+- 《Redis实战》
+- [Redis官方文档](https://redis.io/documentation)
+- [Redis命令参考](http://redisdoc.com/)
 
 ---
 
-**准备好了吗？让我们开始 Redis 学习之旅！🚀**
-
-**建议从 [第一章：Redis 基础](01-Redis基础.md) 开始学习**
+**开始学习** → [01-Redis基础](01-Redis基础.md)
