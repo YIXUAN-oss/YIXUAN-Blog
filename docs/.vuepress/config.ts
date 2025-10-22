@@ -196,7 +196,7 @@ export default defineUserConfig({
                     }
                 }
             },
-            debug: false // 调试时可设置为 true
+            debug: true // 调试时可设置为 true
         },
 
         // 博客配置
