@@ -15,7 +15,7 @@ bannerBrand:
   tagline: Code changes the world, words record life
   buttons:
     - { text: Start Reading, link: '/posts.html' }
-    - { text: Tutorials, link: '/en/tutorials/java/', type: 'plain' }
+    - { text: Tutorials, link: '/tutorials/', type: 'plain' }
   socialLinks:
     - { icon: 'BrandGithub', link: 'https://github.com/YIXUAN-oss' }
     - { icon: 'Mail', link: 'mailto:byyi.xuan@outlook.com' }
@@ -23,6 +23,9 @@ blog:
   socialLinks:
     - { icon: 'BrandGithub', link: 'https://github.com/YIXUAN-oss' }
     - { icon: 'Mail', link: 'mailto:byyi.xuan@outlook.com' }
+isShowTitleInHome: true
+actionText: About
+actionLink: /views/other/about
 features:
   - title: 🎨 Beautiful Theme
     details: Card layout, smooth animations, perfect responsive design
@@ -45,6 +48,8 @@ features:
 footer:
   record: MIT License
   recordLink: 'https://github.com/YIXUAN-oss/YIXUAN-Blog'
+  cyberSecurityRecord: YiXuan's Blog
+  cyberSecurityLink: 'https://github.com/YIXUAN-oss'
   startYear: 2025
 ---
 
@@ -97,7 +102,7 @@ footer:
 </div>
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, onBeforeUnmount } from 'vue';
 
 onMounted(() => {
   const initProfile = () => {
@@ -116,15 +121,15 @@ onMounted(() => {
       trigger.classList.toggle('active');
     };
     
-    // Click avatar
+    // 点击头像
     trigger.onclick = toggleCard;
     
-    // Click close button
+    // 点击关闭按钮
     if (closeBtn) {
       closeBtn.onclick = toggleCard;
     }
     
-    // Click outside to close
+    // 点击外部关闭
     const handleClickOutside = (e) => {
       if (card.classList.contains('active') &&
           !card.contains(e.target) &&
@@ -136,31 +141,64 @@ onMounted(() => {
     
     document.addEventListener('click', handleClickOutside);
     
-    // Prevent card internal click bubbling
+    // 阻止卡片内部点击冒泡
     card.onclick = (e) => {
       if (e.target.tagName === 'A' || e.target.closest('a')) return;
       e.stopPropagation();
     };
   };
   
+  // Magic Card 初始化 - 仅限教程卡片
+  const initMagicCards = () => {
+    const magicCards = document.querySelectorAll('.tutorial-cards .magic-card');
+    
+    magicCards.forEach(card => {
+      const bg = card.querySelector('.magic-card__bg');
+      
+      // 鼠标移动跟踪光效
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        
+        if (bg) {
+          bg.style.setProperty('--x', `${x}%`);
+          bg.style.setProperty('--y', `${y}%`);
+        }
+      });
+      
+      // 点击跳转
+      card.addEventListener('click', (e) => {
+        const href = card.getAttribute('data-href');
+        if (href) {
+          window.location.href = href;
+        }
+      });
+      
+      // 添加悬停样式
+      card.style.cursor = 'pointer';
+    });
+  };
+  
   setTimeout(initProfile, 500);
+  setTimeout(initMagicCards, 600);
 });
 </script>
 
 <style>
-/* Geometric background wrapper - only displayed in top Banner area */
+/* 几何背景包装器 - 只在顶部 Banner 区域显示 */
 .geometric-background-wrapper {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 1000px; /* Limit height, only cover Banner area */
+  height: 1000px; /* 限制高度，只覆盖 Banner 区域 */
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
 }
 
-/* Geometric background decoration style */
+/* 几何背景装饰样式 */
 .geometric-background {
   position: absolute;
   top: 0;
@@ -177,13 +215,13 @@ onMounted(() => {
   transition: all 0.3s ease;
 }
 
-/* Circle */
+/* 圆形 */
 .shape-circle {
   border-radius: 50%;
   animation: float 20s ease-in-out infinite;
 }
 
-/* Triangle */
+/* 三角形 */
 .shape-triangle {
   width: 0;
   height: 0;
@@ -193,19 +231,19 @@ onMounted(() => {
   animation: float 25s ease-in-out infinite, rotate 30s linear infinite;
 }
 
-/* Rounded rectangle */
+/* 圆角矩形 */
 .shape-rounded {
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   animation: float 22s ease-in-out infinite, morph 15s ease-in-out infinite;
 }
 
-/* Square */
+/* 正方形 */
 .shape-square {
   border-radius: 20px;
   animation: float 18s ease-in-out infinite, rotate 25s linear infinite;
 }
 
-/* Color styles */
+/* 颜色样式 */
 .shape-blue {
   background: #667eea;
   width: 180px;
@@ -257,7 +295,7 @@ onMounted(() => {
   animation-delay: -12s;
 }
 
-/* Float animation */
+/* 浮动动画 */
 @keyframes float {
   0%, 100% {
     transform: translateY(0) translateX(0);
@@ -273,7 +311,7 @@ onMounted(() => {
   }
 }
 
-/* Rotate animation */
+/* 旋转动画 */
 @keyframes rotate {
   from {
     transform: rotate(0deg);
@@ -283,7 +321,7 @@ onMounted(() => {
   }
 }
 
-/* Morph animation */
+/* 形变动画 */
 @keyframes morph {
   0%, 100% {
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
@@ -299,14 +337,14 @@ onMounted(() => {
   }
 }
 
-/* Responsive - Mobile adjustment */
+/* 响应式 - 移动端调整 */
 @media (max-width: 768px) {
-  /* Wrapper height adjustment */
+  /* 包装器高度调整 */
   .geometric-background-wrapper {
     height: 500px;
   }
   
-  /* Hide some shapes */
+  /* 隐藏部分形状 */
   .shape-purple,
   .shape-pink {
     display: none;
@@ -338,7 +376,7 @@ onMounted(() => {
   }
 }
 
-/* Dark mode adaptation */
+/* 暗黑模式适配 */
 [data-theme="dark"] .geometric-background {
   opacity: 0.3;
 }
@@ -348,16 +386,16 @@ onMounted(() => {
 }
 
 /* ============================================ */
-/* Page background and content area styles */
+/* 页面背景和内容区域样式 */
 /* ============================================ */
 
-/* Home container positioning */
+/* 首页容器定位 */
 .home-blog,
 .page {
   position: relative;
 }
 
-/* Content area - solid background, starting from tutorial center */
+/* 内容区域 - 纯色背景，从教程中心开始 */
 .section-header,
 .tutorial-cards,
 .tutorial-more-btn-wrapper,
@@ -367,7 +405,7 @@ onMounted(() => {
   z-index: 1;
 }
 
-/* Add background mask before tutorial center */
+/* 在教程中心之前添加背景遮罩 */
 .section-header:first-of-type::before {
   content: '';
   position: absolute;
@@ -381,12 +419,12 @@ onMounted(() => {
   margin-left: -50vw;
 }
 
-/* Dark mode content background */
+/* 深色模式下的内容背景 */
 [data-theme="dark"] .section-header:first-of-type::before {
   background: #1a1a1a;
 }
 
-/* Personal info component style */
+/* 个人信息组件样式 */
 .profile-widget {
   position: fixed;
   bottom: 150px;
@@ -394,7 +432,7 @@ onMounted(() => {
   z-index: 1000;
 }
 
-/* Bottom right trigger button */
+/* 右下角触发按钮 */
 .profile-trigger {
   width: 60px;
   height: 60px;
@@ -423,7 +461,7 @@ onMounted(() => {
   transform: scale(0.95);
 }
 
-/* Pulse ring effect */
+/* 脉冲环效果 */
 .pulse-ring {
   position: absolute;
   top: -5px;
@@ -447,7 +485,7 @@ onMounted(() => {
   }
 }
 
-/* Personal info card wrapper */
+/* 个人信息卡片容器 */
 .profile-card-wrapper {
   position: fixed;
   bottom: 210px;
@@ -465,7 +503,7 @@ onMounted(() => {
   transform: translateY(0) scale(1);
 }
 
-/* Personal info card */
+/* 个人信息卡片 */
 .profile-card {
   background: var(--bg-color, #ffffff);
   border: 2px solid var(--border-color, #eaecef);
@@ -479,13 +517,13 @@ onMounted(() => {
   position: relative;
 }
 
-/* Card header */
+/* 卡片头部 */
 .profile-header {
   position: relative;
   margin-bottom: 15px;
 }
 
-/* Close button */
+/* 关闭按钮 */
 .close-btn {
   position: absolute;
   top: -10px;
@@ -580,7 +618,47 @@ onMounted(() => {
   background-clip: text;
 }
 
-/* Social links area */
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  margin: 8px 0;
+  background: var(--bg-color-secondary, #f8f9fa);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.profile-section:hover {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  transform: translateX(5px);
+}
+
+.section-icon {
+  font-size: 1.1em;
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.section-title {
+  font-size: 0.9em;
+  font-weight: 500;
+  color: var(--text-color-secondary, #6a737d);
+  flex: 1;
+  text-align: left;
+}
+
+/* 社交链接区域 */
 .profile-social {
   display: flex;
   justify-content: center;
@@ -635,7 +713,20 @@ onMounted(() => {
   color: var(--text-color, #2c3e50);
 }
 
-/* Dark mode adaptation */
+/* 分隔线 */
+.profile-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border-color, #eaecef) 20%,
+    var(--border-color, #eaecef) 80%,
+    transparent
+  );
+  margin: 15px 0;
+}
+
+/* 暗黑模式适配 */
 [data-theme="dark"] .profile-trigger {
   border-color: rgba(102, 126, 234, 0.6);
   background: rgba(26, 26, 26, 0.9);
@@ -646,6 +737,10 @@ onMounted(() => {
   border-color: rgba(102, 126, 234, 0.3);
 }
 
+[data-theme="dark"] .profile-section {
+  background: rgba(255, 255, 255, 0.05);
+}
+
 [data-theme="dark"] .social-link {
   background: rgba(255, 255, 255, 0.05);
 }
@@ -654,12 +749,22 @@ onMounted(() => {
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
 }
 
+[data-theme="dark"] .profile-divider {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(102, 126, 234, 0.3) 20%,
+    rgba(102, 126, 234, 0.3) 80%,
+    transparent
+  );
+}
+
 [data-theme="dark"] .close-btn {
   background: rgba(26, 26, 26, 0.95);
   border-color: rgba(102, 126, 234, 0.3);
 }
 
-/* Responsive design */
+/* 响应式设计 */
 @media (max-width: 768px) {
   .profile-widget {
     bottom: 90px;
@@ -690,6 +795,18 @@ onMounted(() => {
     font-size: 1.1em;
   }
   
+  .profile-section {
+    padding: 8px 10px;
+  }
+  
+  .section-icon {
+    font-size: 1em;
+  }
+  
+  .section-title {
+    font-size: 0.85em;
+  }
+  
   .profile-social {
     gap: 8px;
     margin: 12px 0;
@@ -714,7 +831,7 @@ onMounted(() => {
   }
 }
 
-/* Print - hide */
+/* 打印时隐藏 */
 @media print {
   .profile-widget {
     display: none;
@@ -722,178 +839,103 @@ onMounted(() => {
 }
 </style>
 
+<!-- ## 📚 精选内容 -->
 <div class="section-header fade-in-up">
   <h2 class="gradient-text">✨ Tutorial Center</h2>
   <p class="section-subtitle">Systematic learning, from beginner to expert</p>
 </div>
 
 <div class="tutorial-cards">
-<div class="magic-card" data-href="/en/tutorials/java/">
-<span class="magic-card__bg"></span>
-<div class="card-header">
-<div class="card-icon">☕</div>
-<span class="card-badge badge-hot">Hot</span>
+
+<!-- Java Backend Engineer -->
+<div class="magic-card" data-href="/tutorials/java-backend/">
+  <span class="magic-card__bg"></span>
+  <div class="card-header">
+    <div class="card-icon">☕</div>
+    <span class="card-badge badge-hot">Hot</span>
+  </div>
+  <div class="card-content">
+    <h3>Java Backend Engineer</h3>
+    <p class="card-desc">Complete Java development tech stack</p>
+    <div class="card-modules">
+      <div class="module-title">📑 Includes:</div>
+      <div class="module-list">
+        <div class="module-item">☕ Java Programming Basics</div>
+        <div class="module-item">📦 Maven Build Tool</div>
+        <div class="module-item">💾 MyBatis / MyBatis-Plus</div>
+        <div class="module-item">🍃 Spring / Spring MVC</div>
+        <div class="module-item">⚡ Spring Boot</div>
+        <div class="module-item">☁️ Spring Cloud Microservices</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="footer-text">Start Learning →</span>
+    </div>
+  </div>
 </div>
-<div class="card-content">
-<h3>Java Tutorial</h3>
-<p class="card-desc">From basics to advanced, master Java development</p>
-<div class="card-tags">
-<span class="card-tag">Backend</span>
-<span class="card-tag">OOP</span>
-<span class="card-tag">Enterprise</span>
+
+<!-- Python AI Engineer -->
+<div class="magic-card" data-href="/tutorials/python-ai/">
+  <span class="magic-card__bg"></span>
+  <div class="card-header">
+    <div class="card-icon">🤖</div>
+    <span class="card-badge badge-recommend">Trending</span>
+  </div>
+  <div class="card-content">
+    <h3>Python AI Engineer</h3>
+    <p class="card-desc">Python & AI technology learning path</p>
+    <div class="card-modules">
+      <div class="module-title">📑 Includes:</div>
+      <div class="module-list">
+        <div class="module-item">🐍 Python Basics</div>
+        <div class="module-item">📊 Data Analysis</div>
+        <div class="module-item">🤖 Machine Learning</div>
+        <div class="module-item">🧠 Deep Learning</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="footer-text">Start Learning →</span>
+    </div>
+  </div>
 </div>
-<div class="card-footer">
-<span class="footer-text">Start Learning →</span>
+
+<!-- Computer Fundamentals -->
+<div class="magic-card" data-href="/tutorials/computer-basics/">
+  <span class="magic-card__bg"></span>
+  <div class="card-header">
+    <div class="card-icon">📚</div>
+    <span class="card-badge badge-essential">Essential</span>
+  </div>
+  <div class="card-content">
+    <h3>Computer Fundamentals</h3>
+    <p class="card-desc">Solid CS foundation, understand core principles</p>
+    <div class="card-modules">
+      <div class="module-title">📑 Includes:</div>
+      <div class="module-list">
+        <div class="module-item">🖥️ Computer Organization</div>
+        <div class="module-item">📊 Data Structures & Algorithms</div>
+        <div class="module-item">🌐 Computer Networks</div>
+        <div class="module-item">⚙️ Operating Systems</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="footer-text">Start Learning →</span>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-<div class="magic-card" data-href="/en/tutorials/python/">
-<span class="magic-card__bg"></span>
-<div class="card-header">
-<div class="card-icon">🐍</div>
-<span class="card-badge badge-recommend">Recommend</span>
-</div>
-<div class="card-content">
-<h3>Python Tutorial</h3>
-<p class="card-desc">The elegant way of Python programming</p>
-<div class="card-tags">
-<span class="card-tag">Data Science</span>
-<span class="card-tag">AI</span>
-<span class="card-tag">Automation</span>
-</div>
-<div class="card-footer">
-<span class="footer-text">Start Learning →</span>
-</div>
-</div>
-</div>
-<div class="magic-card" data-href="/en/tutorials/javascript/">
-<span class="magic-card__bg"></span>
-<div class="card-header">
-<div class="card-icon">📜</div>
-<span class="card-badge badge-frontend">Frontend</span>
-</div>
-<div class="card-content">
-<h3>Frontend Tutorial</h3>
-<p class="card-desc">Modern frontend development guide</p>
-<div class="card-tags">
-<span class="card-tag">HTML/CSS</span>
-<span class="card-tag">JavaScript</span>
-<span class="card-tag">Vue/React</span>
-</div>
-<div class="card-footer">
-<span class="footer-text">Start Learning →</span>
-</div>
-</div>
-</div>
-<div class="magic-card" data-href="/en/tutorials/database/">
-<span class="magic-card__bg"></span>
-<div class="card-header">
-<div class="card-icon">💾</div>
-<span class="card-badge badge-essential">Essential</span>
-</div>
-<div class="card-content">
-<h3>Database Tutorial</h3>
-<p class="card-desc">SQL and NoSQL database practice</p>
-<div class="card-tags">
-<span class="card-tag">MySQL</span>
-<span class="card-tag">MongoDB</span>
-<span class="card-tag">Redis</span>
-</div>
-<div class="card-footer">
-<span class="footer-text">Start Learning →</span>
-</div>
-</div>
-</div>
-<div class="magic-card" data-href="/en/tutorials/network/">
-<span class="magic-card__bg"></span>
-<div class="card-header">
-<div class="card-icon">🌐</div>
-<span class="card-badge badge-essential">Essential</span>
-</div>
-<div class="card-content">
-<h3>Computer Network</h3>
-<p class="card-desc">Deep understanding of network protocols</p>
-<div class="card-tags">
-<span class="card-tag">TCP/IP</span>
-<span class="card-tag">HTTP/HTTPS</span>
-<span class="card-tag">Security</span>
-</div>
-<div class="card-footer">
-<span class="footer-text">Start Learning →</span>
-</div>
-</div>
-</div>
-<div class="magic-card" data-href="/en/tutorials/data-structures/">
-<span class="magic-card__bg"></span>
-<div class="card-header">
-<div class="card-icon">📊</div>
-<span class="card-badge badge-hot">Hot</span>
-</div>
-<div class="card-content">
-<h3>Data Structures & Algorithms</h3>
-<p class="card-desc">Algorithm thinking and programming skills</p>
-<div class="card-tags">
-<span class="card-tag">Data Structure</span>
-<span class="card-tag">Algorithm</span>
-<span class="card-tag">LeetCode</span>
-</div>
-<div class="card-footer">
-<span class="footer-text">Start Learning →</span>
-</div>
-</div>
-</div>
+
 </div>
 
 <div class="tutorial-more-btn-wrapper">
-<a href="/en/tutorials/" class="tutorial-more-btn">
+<a href="/tutorials/" class="tutorial-more-btn">
 <span class="more-btn-icon">📚</span>
 <span class="more-btn-text">View More Tutorials</span>
 <span class="more-btn-arrow">→</span>
 </a>
 </div>
 
-<script setup>
-import { onMounted } from 'vue';
-
-onMounted(() => {
-  // Magic Card initialization
-  const initMagicCards = () => {
-    const magicCards = document.querySelectorAll('.magic-card');
-    
-    magicCards.forEach(card => {
-      const bg = card.querySelector('.magic-card__bg');
-      
-      // Mouse move tracking for light effect
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        
-        if (bg) {
-          bg.style.setProperty('--x', `${x}%`);
-          bg.style.setProperty('--y', `${y}%`);
-        }
-      });
-      
-      // Click to navigate
-      card.addEventListener('click', (e) => {
-        const href = card.getAttribute('data-href');
-        if (href) {
-          window.location.href = href;
-        }
-      });
-      
-      // Add hover style
-      card.style.cursor = 'pointer';
-    });
-  };
-  
-  setTimeout(initMagicCards, 600);
-});
-</script>
-
 <style>
-/* Gradient text effect */
+/* 渐变文字效果 */
 .gradient-text {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
@@ -914,7 +956,7 @@ onMounted(() => {
   }
 }
 
-/* Section header */
+/* 章节头部 */
 .section-header {
   text-align: center;
   margin: 60px 0 40px;
@@ -927,7 +969,7 @@ onMounted(() => {
   opacity: 0.8;
 }
 
-/* Fade in up animation */
+/* 淡入向上动画 */
 .fade-in-up {
   animation: fadeInUp 0.8s ease-out;
 }
@@ -943,7 +985,7 @@ onMounted(() => {
   }
 }
 
-/* Tutorial cards container */
+/* 教程卡片容器 */
 .tutorial-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -951,21 +993,24 @@ onMounted(() => {
   margin: 40px 0;
 }
 
-/* Magic Card style */
-.magic-card {
+/* Magic Card 样式 - 仅限教程卡片 */
+.tutorial-cards .magic-card {
   position: relative;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
-  padding: 30px 24px 28px;
+  padding: 24px 20px 22px;
   cursor: pointer;
   overflow: hidden;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 380px !important;
 }
 
-.magic-card::before {
+.tutorial-cards .magic-card::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -979,12 +1024,12 @@ onMounted(() => {
   transition: opacity 0.3s ease;
 }
 
-.magic-card:hover::before {
+.tutorial-cards .magic-card:hover::before {
   opacity: 1;
 }
 
-/* Magic Card background light effect */
-.magic-card__bg {
+/* Magic Card 背景光效 */
+.tutorial-cards .magic-card__bg {
   position: absolute;
   inset: 0;
   border-radius: 16px;
@@ -999,34 +1044,34 @@ onMounted(() => {
   z-index: 0;
 }
 
-.magic-card:hover .magic-card__bg {
+.tutorial-cards .magic-card:hover .magic-card__bg {
   opacity: 0;
 }
 
-/* Card header */
-.card-header {
+/* 卡片头部 */
+.tutorial-cards .card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   position: relative;
   z-index: 2;
-  height: 56px;
+  min-height: auto;
 }
 
-/* Card icon */
-.card-icon {
-  font-size: 48px;
+/* 卡片图标 */
+.tutorial-cards .card-icon {
+  font-size: 42px;
   transition: transform 0.3s ease;
   line-height: 1;
 }
 
-.magic-card:hover .card-icon {
+.tutorial-cards .magic-card:hover .card-icon {
   transform: scale(1.1) rotate(-5deg);
 }
 
-/* Card badge */
-.card-badge {
+/* 卡片徽章 */
+.tutorial-cards .card-badge {
   padding: 4px 12px;
   border-radius: 12px;
   font-size: 0.75em;
@@ -1035,33 +1080,38 @@ onMounted(() => {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.badge-hot {
+.tutorial-cards .badge-hot {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 }
 
-.badge-recommend {
+.tutorial-cards .badge-recommend {
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
 
-.badge-frontend {
+.tutorial-cards .badge-frontend {
   background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
 }
 
-.badge-essential {
+.tutorial-cards .badge-must {
   background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 }
 
-/* Card content */
-.card-content {
+.tutorial-cards .badge-essential {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+/* 卡片内容 */
+.tutorial-cards .card-content {
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
-.card-content h3 {
-  margin: 0 0 12px 0;
-  font-size: 1.5em;
+.tutorial-cards .magic-card .card-content h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.35em;
   font-weight: 600;
   color: var(--text-color, #2c3e50);
   transition: all 0.3s ease;
@@ -1069,13 +1119,11 @@ onMounted(() => {
   z-index: 3;
   border: none !important;
   padding: 0 !important;
-  line-height: 1.4;
-  height: 42px;
-  display: flex;
-  align-items: center;
+  line-height: 1.3;
+  min-height: auto;
 }
 
-.magic-card:hover .card-content h3 {
+.tutorial-cards .magic-card:hover .card-content h3 {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1083,21 +1131,19 @@ onMounted(() => {
   transform: translateX(4px);
 }
 
-.card-desc {
+.tutorial-cards .card-desc {
   color: var(--text-color-secondary, #6a737d);
   font-size: 0.95em;
   line-height: 1.6;
   margin: 0 0 12px 0;
   position: relative;
   z-index: 2;
-  height: 48px;
-  display: flex;
-  align-items: center;
+  min-height: auto;
 }
 
-/* Card tags */
-.card-tags {
-  display: flex;
+/* 卡片标签 */
+.tutorial-cards .card-tags {
+  display: none !important;
   flex-wrap: nowrap;
   gap: 6px;
   margin-bottom: 12px;
@@ -1108,7 +1154,7 @@ onMounted(() => {
   align-items: flex-start;
 }
 
-.card-tag {
+.tutorial-cards .card-tag {
   padding: 4px 8px;
   background: rgba(102, 126, 234, 0.1);
   color: #667eea;
@@ -1120,41 +1166,105 @@ onMounted(() => {
   flex-shrink: 0;
 }
 
-.magic-card:hover .card-tag {
+.tutorial-cards .magic-card:hover .card-tag {
   background: rgba(102, 126, 234, 0.2);
   transform: translateY(-2px);
 }
 
-/* Card footer */
-.card-footer {
+/* 模块列表区域 */
+.tutorial-cards .card-modules {
+  margin: 16px 0 20px 0;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tutorial-cards .module-title {
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--text-color, #2c3e50);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+.tutorial-cards .module-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.tutorial-cards .module-item {
+  font-size: 0.85em;
+  color: var(--text-color-secondary, #6a737d);
+  padding: 6px 12px;
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tutorial-cards .module-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.tutorial-cards .magic-card:hover .module-item {
+  background: rgba(102, 126, 234, 0.08);
+  transform: translateX(4px);
+  border-left-color: rgba(102, 126, 234, 0.5);
+}
+
+.tutorial-cards .magic-card:hover .module-item::before {
+  transform: scaleY(1);
+}
+
+/* 卡片底部 */
+.tutorial-cards .card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
-  padding-top: 16px;
+  padding-top: 12px;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
   position: relative;
   z-index: 2;
+  flex-shrink: 0;
 }
 
-.footer-text {
+.tutorial-cards .footer-text {
   color: #667eea;
   font-weight: 600;
   font-size: 0.9em;
   transition: all 0.3s ease;
 }
 
-.magic-card:hover .footer-text {
+.tutorial-cards .magic-card:hover .footer-text {
   transform: translateX(4px);
 }
 
-/* Hover effect */
-.magic-card:hover {
+/* 悬停效果 */
+.tutorial-cards .magic-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2);
 }
 
-/* Responsive design */
+/* 响应式设计 */
 @media (min-width: 1201px) {
   .tutorial-cards {
     grid-template-columns: repeat(3, 1fr) !important;
@@ -1178,36 +1288,99 @@ onMounted(() => {
     font-size: 2em;
   }
   
-  .card-header {
+  .tutorial-cards .card-header {
     height: auto;
   }
   
-  .card-icon {
+  .tutorial-cards .card-icon {
     font-size: 40px;
   }
   
-  .card-content h3 {
+  .tutorial-cards .magic-card .card-content h3 {
     font-size: 1.3em;
     height: auto;
   }
   
-  .card-desc {
+  .tutorial-cards .card-desc {
     height: auto;
   }
   
-  .card-tags {
+  .tutorial-cards .card-tags {
     flex-wrap: wrap;
     gap: 6px;
     height: auto;
   }
   
-  .card-tag {
+  .tutorial-cards .card-tag {
     font-size: 0.75em;
     padding: 3px 8px;
   }
+  
+  .tutorial-cards .module-item {
+    font-size: 0.8em;
+    padding: 5px 10px;
+  }
+  
+  .tutorial-cards .module-title {
+    font-size: 0.8em;
+  }
+  
+  .tutorial-cards .magic-card {
+    min-height: auto;
+  }
 }
 
-/* View more button */
+/* 暗黑模式适配 */
+[data-theme="dark"] .tutorial-cards .magic-card {
+  background: rgb(28, 28, 30) !important;
+  backdrop-filter: none;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .tutorial-cards .magic-card:hover {
+  background: rgb(38, 38, 40) !important;
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+}
+
+[data-theme="dark"] .tutorial-cards .magic-card .card-content h3 {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] .tutorial-cards .card-desc {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="dark"] .tutorial-cards .card-tag {
+  background: rgba(102, 126, 234, 0.2);
+  color: #8b9eff;
+}
+
+[data-theme="dark"] .tutorial-cards .card-footer {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .tutorial-cards .footer-text {
+  color: #8b9eff;
+}
+
+/* 暗黑模式 - 模块列表 */
+[data-theme="dark"] .tutorial-cards .module-title {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] .tutorial-cards .module-item {
+  background: rgba(102, 126, 234, 0.15);
+  border-left-color: rgba(102, 126, 234, 0.5);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] .tutorial-cards .magic-card:hover .module-item {
+  background: rgba(102, 126, 234, 0.25);
+  border-left-color: rgba(102, 126, 234, 0.7);
+}
+
+/* 查看更多按钮 */
 .tutorial-more-btn-wrapper {
   text-align: center;
   margin: 40px 0 20px;
@@ -1287,7 +1460,7 @@ onMounted(() => {
   transform: translateX(5px);
 }
 
-/* Responsive */
+/* 响应式 */
 @media (max-width: 768px) {
   .tutorial-more-btn {
     padding: 14px 30px;
@@ -1300,59 +1473,498 @@ onMounted(() => {
   }
 }
 
-/* Dark mode adaptation */
-[data-theme="dark"] .magic-card {
-  background: rgb(28, 28, 30) !important;
-  backdrop-filter: none;
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-[data-theme="dark"] .magic-card:hover {
-  background: rgb(38, 38, 40) !important;
-  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
-}
-
-[data-theme="dark"] .card-content h3 {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-[data-theme="dark"] .card-desc {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-[data-theme="dark"] .card-tag {
-  background: rgba(102, 126, 234, 0.2);
-  color: #8b9eff;
-}
-
-[data-theme="dark"] .card-footer {
-  border-top-color: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .footer-text {
-  color: #8b9eff;
-}
 </style>
 
 ## 🎯 About This Site
 
-Welcome to my personal blog! This is where I share technical knowledge, record learning experiences, and document life moments.
-
-- 💻 **Tech Stack**: Java, Python, JavaScript, Database, etc.
-- 📖 **Content**: Programming tutorials, technical articles, resource sharing, life essays
-- 🎓 **Writing Philosophy**: Record with heart, share knowledge, grow together
-
-### Contact
-
-- 📧 Email: [byyi.xuan@outlook.com](mailto:byyi.xuan@outlook.com)
-- 🐙 GitHub: [@YIXUAN-oss](https://github.com/YIXUAN-oss)
-
----
-
-<div style="text-align: center; margin-top: 40px; color: var(--text-color-secondary, #6a737d);">
-  <p>⭐ If you find the content helpful, welcome to Star!</p>
-  <p>💬 If you have any questions, feel free to contact me via email or GitHub!</p>
+<ClientOnly>
+<div class="about-section">
+<div class="about-card">
+<div class="about-header">
+<div class="avatar-wrapper">
+<div class="avatar-ring"></div>
+<div class="avatar-img">👨‍💻</div>
 </div>
+<h3>Welcome to My Personal Blog!</h3>
+<p class="about-intro">This is where I share tech knowledge, document learning journey, and record life moments.</p>
+</div>
+<div class="about-content">
+<div class="info-grid">
+<div class="info-item">
+<div class="info-icon">💻</div>
+<div class="info-text">
+<strong>Tech Stack</strong>
+<span>Java, Python, JavaScript, Databases, etc.</span>
+</div>
+</div>
+<div class="info-item">
+<div class="info-icon">📖</div>
+<div class="info-text">
+<strong>Content Focus</strong>
+<span>Coding tutorials, tech articles, resource sharing, life notes</span>
+</div>
+</div>
+<div class="info-item">
+<div class="info-icon">🎓</div>
+<div class="info-text">
+<strong>Writing Philosophy</strong>
+<span>Document with care, share knowledge, grow together</span>
+</div>
+</div>
+</div>
+</div>
+<div class="contact-section">
+<h4>📬 Contact Me</h4>
+<div class="contact-links">
+<a href="mailto:byyi.xuan@outlook.com" class="contact-btn">
+<span class="btn-icon">📧</span>
+<span class="btn-text">Email</span>
+</a>
+<a href="https://github.com/YIXUAN-oss" target="_blank" class="contact-btn">
+<span class="btn-icon">🐙</span>
+<span class="btn-text">GitHub</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</ClientOnly>
+
+<ClientOnly>
+<div class="cta-section">
+<div class="cta-content">
+<div class="cta-icon">✨</div>
+<h3>Like This Blog?</h3>
+<p>If you find the content helpful, please give it a Star! Feel free to reach out via email or GitHub for any questions!</p>
+<div class="cta-buttons">
+<a href="https://github.com/YIXUAN-oss/YIXUAN-Blog" target="_blank" class="cta-btn primary">⭐ Star Support</a>
+<a href="about/" class="cta-btn secondary">👤 Learn More</a>
+</div>
+</div>
+</div>
+</ClientOnly>
+
+<style>
+/* About section */
+.about-section {
+  margin: 60px 0;
+}
+
+.about-card {
+  background: linear-gradient(135deg, 
+    rgba(102, 126, 234, 0.05) 0%, 
+    rgba(118, 75, 162, 0.05) 100%);
+  border: 2px solid var(--border-color, #eaecef);
+  border-radius: 24px;
+  padding: 50px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.about-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, 
+    rgba(102, 126, 234, 0.1) 0%, 
+    transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Avatar section */
+.about-header {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.avatar-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.avatar-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  position: relative;
+  z-index: 2;
+  animation: avatar-float 3s ease-in-out infinite;
+}
+
+@keyframes avatar-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.avatar-ring {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 3px solid transparent;
+  border-top-color: #667eea;
+  border-right-color: #764ba2;
+  border-radius: 50%;
+  animation: ring-spin 3s linear infinite;
+  z-index: 1;
+}
+
+@keyframes ring-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.about-header h3 {
+  font-size: 2em;
+  margin: 20px 0 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  border: none;
+  line-height: 1.4;
+  padding: 5px 0;
+}
+
+.about-intro {
+  font-size: 1.1em;
+  color: var(--text-color-secondary, #6a737d);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Info grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin: 30px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 20px;
+  background: #f5f7fa;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.info-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-color, #3eaf7c);
+}
+
+.info-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+  animation: icon-bounce 2s ease-in-out infinite;
+}
+
+@keyframes icon-bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.info-text strong {
+  color: var(--text-color, #2c3e50);
+  font-size: 1.1em;
+}
+
+.info-text span {
+  color: var(--text-color-secondary, #6a737d);
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+/* Contact section */
+.contact-section {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 2px dashed var(--border-color, #eaecef);
+  position: relative;
+  z-index: 1;
+}
+
+.contact-section h4 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: var(--text-color, #2c3e50);
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white !important;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.contact-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  color: white !important;
+}
+
+.btn-icon {
+  font-size: 1.2em;
+  color: white;
+}
+
+.btn-text {
+  color: white;
+}
+
+/* CTA section */
+.cta-section {
+  margin: 60px 0;
+}
+
+.cta-content {
+  text-align: center;
+  padding: 60px 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 24px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+  animation: cta-pulse 4s ease-in-out infinite;
+}
+
+@keyframes cta-pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.cta-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+  }
+}
+
+.cta-content h3 {
+  font-size: 2em;
+  margin: 20px 0;
+  border: none;
+  color: white;
+}
+
+.cta-content p {
+  font-size: 1.1em;
+  margin: 20px 0 30px;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-btn {
+  padding: 15px 35px;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 1.1em;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.cta-btn.primary {
+  background: white;
+  color: #667eea;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cta-btn.primary:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.cta-btn.secondary {
+  background: rgba(255, 255, 255, 0.2);
+  color: white !important;
+  border: 2px solid white;
+  backdrop-filter: blur(10px);
+}
+
+.cta-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: white !important;
+  transform: translateY(-3px);
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .about-card {
+    padding: 40px 25px;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-links {
+    flex-direction: column;
+  }
+  
+  .contact-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .cta-content {
+    padding: 40px 25px;
+  }
+  
+  .cta-content h3 {
+    font-size: 1.5em;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+  }
+  
+  .cta-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Dark mode */
+[data-theme="dark"] .info-item {
+  background: #2a2a2a;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .info-item:hover {
+  background: #303030;
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+[data-theme="dark"] .about-card {
+  border-color: rgba(102, 126, 234, 0.3);
+}
+</style>
+
+<script>
+// 卡片点击跳转功能
+export default {
+  mounted() {
+    this.initCardClick();
+  },
+  updated() {
+    this.initCardClick();
+  },
+  methods: {
+    initCardClick() {
+      this.$nextTick(() => {
+        const cards = document.querySelectorAll('.tutorial-card[data-href]');
+        cards.forEach((card) => {
+          // 移除旧的事件监听器（如果存在）
+          card.onclick = null;
+          // 添加新的点击事件
+          card.onclick = (e) => {
+            e.preventDefault();
+            const href = card.getAttribute('data-href');
+            if (href) {
+              this.$router.push(href);
+            }
+          };
+        });
+      });
+    }
+  }
+}
+</script>
 
 
