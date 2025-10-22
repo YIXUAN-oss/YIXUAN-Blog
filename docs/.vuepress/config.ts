@@ -20,8 +20,8 @@ export default defineUserConfig({
         ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }],
         ['meta', { name: 'keywords', content: '懿轩,YiXuan,博客,技术博客,Java,Python,前端开发' }],
         ['meta', { name: 'author', content: '懿轩' }],
-        ['meta', { name: 'algolia-site-verification', content: 'C0FA520F857130E0' }],
-        ['link', { rel: 'icon', href: '/favicon.ico' }],
+        ['meta', { name: 'algolia-site-verification', content: '965773E690A426DF' }],
+        ['link', { rel: 'icon', href: '/favicon.png' }],
         
         // Umami 统计分析
         ['script', {
@@ -143,17 +143,17 @@ export default defineUserConfig({
             '/tutorials/database/redis/': []
         },
 
-        // 搜索配置 - 使用内置搜索（已禁用 Algolia）
-        // algolia: {
-        //     appId: 'MLKOH1MKDT',
-        //     apiKey: '5af2979d2d290ce4e9247d7f89549455',
-        //     indexName: '懿轩的博客_pages',
-        //     // 可选：高级配置
-        //     algoliaOptions: { 
-        //         'facetFilters': ["lang:zh-CN"] 
-        //     },
-        //     debug: false // 调试时可设置为 true
-        // },
+        // Algolia 搜索配置
+        algolia: {
+            appId: 'MLKOH1MKDT',
+            apiKey: '5af2979d2d290ce4e9247d7f89549455',
+            indexName: '懿轩的博客_pages',
+            // 可选：高级配置
+            algoliaOptions: { 
+                'facetFilters': ["lang:zh-CN"] 
+            },
+            debug: false // 调试时可设置为 true
+        },
 
         // 博客配置
         blog: {
