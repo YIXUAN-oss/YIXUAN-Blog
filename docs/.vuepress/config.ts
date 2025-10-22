@@ -148,10 +148,10 @@ export default defineUserConfig({
             appId: 'A01JZWTX9N',
             apiKey: 'ef32d4c85b32a7195475277bdab96c61',
             indexName: 'www_yixuan_cyou_a01jzwtx9n_pages',
-            // 可选：高级配置
-            algoliaOptions: { 
-                'facetFilters': ["lang:zh-CN"] 
-            },
+            // 可选：高级配置（如果搜索不到结果，可以先注释掉 facetFilters）
+            // algoliaOptions: { 
+            //     'facetFilters': ["lang:zh-CN"] 
+            // },
             // 中文本地化
             locales: {
                 '/': {
