@@ -504,6 +504,33 @@ export default {
   </div>
 </div>
 
+<!-- Java转大模型开发 -->
+<div class="magic-card" data-href="java-to-llm/">
+  <span class="magic-card__bg"></span>
+  <div class="card-header">
+    <div class="card-icon">🚀</div>
+    <span class="card-badge badge-hot">火爆</span>
+  </div>
+  <div class="card-content">
+    <h3>Java 转大模型开发</h3>
+    <p class="card-desc">Java开发者的LLM转型路径</p>
+    <div class="card-modules">
+      <div class="module-title">📑 包含模块：</div>
+      <div class="module-list">
+        <div class="module-item">🧠 大模型理论基础</div>
+        <div class="module-item">💬 Prompt Engineering</div>
+        <div class="module-item">🍃 Spring AI 框架</div>
+        <div class="module-item">🔍 RAG 应用开发</div>
+        <div class="module-item">🤖 Agent 智能体</div>
+        <div class="module-item">🏢 企业级实践</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="footer-text">开始学习 →</span>
+    </div>
+  </div>
+</div>
+
 <!-- Python人工智能工程师 -->
 <div class="magic-card" data-href="python-ai/">
   <span class="magic-card__bg"></span>
@@ -572,6 +599,32 @@ export default {
         <div class="module-item">⚛️ Vue / React框架</div>
         <div class="module-item">📦 前端工程化</div>
         <div class="module-item">🎯 项目实战</div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="footer-text">开始学习 →</span>
+    </div>
+  </div>
+</div>
+
+<!-- HarmonyOS 开发工程师 -->
+<div class="magic-card" data-href="harmonyos-dev/">
+  <span class="magic-card__bg"></span>
+  <div class="card-header">
+    <div class="card-icon">📱</div>
+    <span class="card-badge badge-recommend">前沿</span>
+  </div>
+  <div class="card-content">
+    <h3>HarmonyOS 开发工程师</h3>
+    <p class="card-desc">华为鸿蒙生态应用开发</p>
+    <div class="card-modules">
+      <div class="module-title">📑 包含模块：</div>
+      <div class="module-list">
+        <div class="module-item">📝 ArkTS 语言</div>
+        <div class="module-item">🎨 ArkUI 框架</div>
+        <div class="module-item">🔄 分布式能力</div>
+        <div class="module-item">📱 多设备开发</div>
+        <div class="module-item">🚀 项目实战</div>
       </div>
     </div>
     <div class="card-footer">

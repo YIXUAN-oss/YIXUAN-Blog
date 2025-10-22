@@ -111,22 +111,42 @@ export default defineUserConfig({
             // DevOps
             '/tutorials/devops-engineer/docker/': [],
             
+            // HarmonyOS 开发
+            '/tutorials/harmonyos-dev/': [],
+            '/tutorials/harmonyos-dev/01-harmonyos-next-intro/': [],
+            '/tutorials/harmonyos-dev/02-arkts-advanced/': [],
+            '/tutorials/harmonyos-dev/03-arkui-next/': [],
+            '/tutorials/harmonyos-dev/04-state-management-next/': [],
+            '/tutorials/harmonyos-dev/05-ability-framework/': [],
+            '/tutorials/harmonyos-dev/06-navigation-router/': [],
+            '/tutorials/harmonyos-dev/07-data-management/': [],
+            '/tutorials/harmonyos-dev/08-network-connect/': [],
+            '/tutorials/harmonyos-dev/09-ai-native/': [],
+            '/tutorials/harmonyos-dev/10-distributed-next/': [],
+            '/tutorials/harmonyos-dev/11-graphics-animation/': [],
+            '/tutorials/harmonyos-dev/12-multimedia-next/': [],
+            '/tutorials/harmonyos-dev/13-service-card-next/': [],
+            '/tutorials/harmonyos-dev/14-security-privacy/': [],
+            '/tutorials/harmonyos-dev/15-performance-optimization/': [],
+            '/tutorials/harmonyos-dev/16-testing-devops/': [],
+            '/tutorials/harmonyos-dev/17-harmony-ecology/': [],
+            
             // 数据库
             '/tutorials/database/mysql/': [],
             '/tutorials/database/redis/': []
         },
 
-        // 搜索配置 - 使用主题内置 Algolia
-        algolia: {
-            appId: 'MLKOH1MKDT',
-            apiKey: '5af2979d2d290ce4e9247d7f89549455',
-            indexName: '懿轩的博客_pages',
-            // 可选：高级配置
-            algoliaOptions: { 
-                'facetFilters': ["lang:zh-CN"] 
-            },
-            debug: false // 调试时可设置为 true
-        },
+        // 搜索配置 - 使用内置搜索（已禁用 Algolia）
+        // algolia: {
+        //     appId: 'MLKOH1MKDT',
+        //     apiKey: '5af2979d2d290ce4e9247d7f89549455',
+        //     indexName: '懿轩的博客_pages',
+        //     // 可选：高级配置
+        //     algoliaOptions: { 
+        //         'facetFilters': ["lang:zh-CN"] 
+        //     },
+        //     debug: false // 调试时可设置为 true
+        // },
 
         // 博客配置
         blog: {
