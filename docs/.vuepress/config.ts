@@ -23,6 +23,15 @@ export default defineUserConfig({
         ['meta', { name: 'algolia-site-verification', content: '965773E690A426DF' }],
         ['link', { rel: 'icon', href: '/favicon.png' }],
         
+        // 自定义搜索框样式
+        ['style', {}, `
+            .search-box { width: 280px !important; min-width: 280px !important; max-width: 280px !important; }
+            .search-box input { width: 100% !important; }
+            @media (max-width: 768px) {
+                .search-box { width: 200px !important; min-width: 200px !important; max-width: 200px !important; }
+            }
+        `],
+        
         // Umami 统计分析
         ['script', {
             defer: true,
@@ -143,61 +152,17 @@ export default defineUserConfig({
             '/tutorials/database/redis/': []
         },
 
-        // Algolia 搜索配置
-        algolia: {
-            appId: 'A01JZWTX9N',
-            apiKey: 'ef32d4c85b32a7195475277bdab96c61',
-            indexName: 'www_yixuan_cyou_a01jzwtx9n_pages',
-            // 可选：高级配置（如果搜索不到结果，可以先注释掉 facetFilters）
-            // algoliaOptions: { 
-            //     'facetFilters': ["lang:zh-CN"] 
-            // },
-            // 中文本地化
-            locales: {
-                '/': {
-                    placeholder: '搜索文档',
-                    translations: {
-                        button: {
-                            buttonText: '搜索',
-                            buttonAriaLabel: '搜索'
-                        },
-                        modal: {
-                            searchBox: {
-                                resetButtonTitle: '清除查询条件',
-                                resetButtonAriaLabel: '清除查询条件',
-                                cancelButtonText: '取消',
-                                cancelButtonAriaLabel: '取消'
-                            },
-                            startScreen: {
-                                recentSearchesTitle: '搜索历史',
-                                noRecentSearchesText: '没有搜索历史',
-                                saveRecentSearchButtonTitle: '保存至搜索历史',
-                                removeRecentSearchButtonTitle: '从搜索历史中移除',
-                                favoriteSearchesTitle: '收藏',
-                                removeFavoriteSearchButtonTitle: '从收藏中移除'
-                            },
-                            errorScreen: {
-                                titleText: '无法获取结果',
-                                helpText: '你可能需要检查你的网络连接'
-                            },
-                            footer: {
-                                selectText: '选择',
-                                navigateText: '切换',
-                                closeText: '关闭',
-                                searchByText: '搜索提供者'
-                            },
-                            noResultsScreen: {
-                                noResultsText: '无法找到相关结果',
-                                suggestedQueryText: '你可以尝试查询',
-                                reportMissingResultsText: '你认为该查询应该有结果？',
-                                reportMissingResultsLinkText: '点击反馈'
-                            }
-                        }
-                    }
-                }
-            },
-            debug: false // 调试时可设置为 true
-        },
+        // Algolia 搜索配置（已禁用，使用主题内置搜索）
+        // algolia: {
+        //     appId: 'MLKOH1MKDT',
+        //     apiKey: '5af2979d2d290ce4e9247d7f89549455',
+        //     indexName: '懿轩的博客_pages',
+        //     // 可选：高级配置
+        //     algoliaOptions: { 
+        //         'facetFilters': ["lang:zh-CN"] 
+        //     },
+        //     debug: false // 调试时可设置为 true
+        // },
 
         // 博客配置
         blog: {

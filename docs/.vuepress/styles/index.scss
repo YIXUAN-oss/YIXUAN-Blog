@@ -1,11 +1,39 @@
-// 搜索框快捷键显示
+// 搜索框样式优化 - 使用更高优先级的选择器
+body .navbar-container .search-box,
+body .search-box,
+.navbar-container .search-box,
+.search-box {
+  position: relative !important;
+  width: 400px !important; // 增加搜索框宽度
+  display: inline-block !important;
+  min-width: 400px !important;
+  max-width: 400px !important;
+
+  input {
+    width: 100% !important; // 输入框占满搜索框
+    min-width: 100% !important;
+    max-width: 100% !important;
+    padding-right: 80px !important;
+  }
+}
+
+// 额外的搜索框输入框样式
+.search-box input[type="search"] {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+}
+
+// 搜索框快捷键显示（如果主题没有内置）
 .navbar-search {
   position: relative;
 
   .search-box {
     position: relative;
+    width: 100% !important;
 
     input {
+      width: 100% !important;
       padding-right: 80px !important;
     }
 
@@ -89,6 +117,17 @@
 
 // 移动端优化
 @media (max-width: 768px) {
+  .navbar-container .search-box,
+  .search-box {
+    width: 200px !important; // 移动端使用较小宽度
+    min-width: 200px !important;
+    max-width: 200px !important;
+  }
+  
+  .navbar-search {
+    width: 200px !important;
+  }
+  
   .navbar-search .search-box::after {
     font-size: 10px;
     padding: 3px 6px;
