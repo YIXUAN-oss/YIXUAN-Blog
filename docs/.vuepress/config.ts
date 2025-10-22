@@ -77,6 +77,27 @@ export default defineUserConfig({
             
             // Python人工智能
             '/tutorials/python-ai/python/': [],
+            '/tutorials/python-ai/numpy/': [],
+            '/tutorials/python-ai/pandas/': [],
+            '/tutorials/python-ai/matplotlib/': [],
+            '/tutorials/python-ai/scikitlearn/': [],
+            '/tutorials/python-ai/tensorflow/': [],
+            '/tutorials/python-ai/pytorch/': [],
+            '/tutorials/python-ai/nlp/': [],
+            '/tutorials/python-ai/cv/': [],
+            
+            // Java 转大模型开发
+            '/tutorials/java-to-llm/01-prerequisites/': [],
+            '/tutorials/java-to-llm/02-llm-fundamentals/': [],
+            '/tutorials/java-to-llm/03-prompt-engineering/': [],
+            '/tutorials/java-to-llm/04-api-integration/': [],
+            '/tutorials/java-to-llm/05-spring-ai/': [],
+            '/tutorials/java-to-llm/06-vector-databases/': [],
+            '/tutorials/java-to-llm/07-rag-applications/': [],
+            '/tutorials/java-to-llm/08-agent-development/': [],
+            '/tutorials/java-to-llm/09-fine-tuning/': [],
+            '/tutorials/java-to-llm/10-enterprise-practices/': [],
+            '/tutorials/java-to-llm/11-projects/': [],
             
             // 计算机基础
             '/tutorials/computer-basics/network/': [],
@@ -130,58 +151,7 @@ export default defineUserConfig({
         // },
     }),
 
-    // 插件配置 - 已改用主题内置 Algolia 搜索
-    // plugins: [
-    //     docsearchPlugin({
-    //         appId: 'MLKOH1MKDT',
-    //         apiKey: '5af2979d2d290ce4e9247d7f89549455',
-    //         indexName: '懿轩的博客_pages',
-    //         locales: {
-    //             '/': {
-    //                 placeholder: '搜索文档',
-    //                 translations: {
-    //                     button: {
-    //                         buttonText: '搜索',
-    //                         buttonAriaLabel: '搜索'
-    //                     },
-    //                     modal: {
-    //                         searchBox: {
-    //                             resetButtonTitle: '清除查询条件',
-    //                             resetButtonAriaLabel: '清除查询条件',
-    //                             cancelButtonText: '取消',
-    //                             cancelButtonAriaLabel: '取消'
-    //                         },
-    //                         startScreen: {
-    //                             recentSearchesTitle: '搜索历史',
-    //                             noRecentSearchesText: '没有搜索历史',
-    //                             saveRecentSearchButtonTitle: '保存至搜索历史',
-    //                             removeRecentSearchButtonTitle: '从搜索历史中移除',
-    //                             favoriteSearchesTitle: '收藏',
-    //                             removeFavoriteSearchButtonTitle: '从收藏中移除'
-    //                         },
-    //                         errorScreen: {
-    //                             titleText: '无法获取结果',
-    //                             helpText: '你可能需要检查你的网络连接'
-    //                         },
-    //                         footer: {
-    //                             selectText: '选择',
-    //                             navigateText: '切换',
-    //                             closeText: '关闭',
-    //                             searchByText: '搜索提供者'
-    //                         },
-    //                         noResultsScreen: {
-    //                             noResultsText: '无法找到相关结果',
-    //                             suggestedQueryText: '你可以尝试查询',
-    //                             reportMissingResultsText: '你认为该查询应该有结果？',
-    //                             reportMissingResultsLinkText: '点击反馈'
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     })
-    // ],
-
+    
     // 多语言支持
     locales: {
         '/': {
