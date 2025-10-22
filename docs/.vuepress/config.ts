@@ -22,6 +22,13 @@ export default defineUserConfig({
         ['meta', { name: 'author', content: '懿轩' }],
         ['meta', { name: 'algolia-site-verification', content: 'C0FA520F857130E0' }],
         ['link', { rel: 'icon', href: '/favicon.ico' }],
+        
+        // Umami 统计分析
+        ['script', {
+            defer: true,
+            src: 'https://cloud.umami.is/script.js',
+            'data-website-id': '5842114b-aed4-4e47-b3a6-777e091ef357'
+        }],
     ],
 
     theme: recoTheme({
