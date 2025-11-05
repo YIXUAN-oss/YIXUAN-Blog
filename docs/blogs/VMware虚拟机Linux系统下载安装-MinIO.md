@@ -81,7 +81,7 @@ minio --version
 
 [MinIO Download Server](https://dl.min.io/server/minio/release/linux-arm64/)
 
-<img src="attachments/image-20251105153019968.png" alt="image-20251105153019968" style="zoom: 33%;" />
+<img src="./attachments/image-20251105153019968.png" alt="image-20251105153019968" style="zoom: 33%;" />
 
 移动到目录：
 
@@ -95,7 +95,7 @@ minio --version
 cd /usr/local/src/
 ```
 
-<img src="attachments/image-20251105154257101.png" alt="image-20251105154257101" style="zoom:50%;" />
+<img src="./attachments/image-20251105154257101.png" alt="image-20251105154257101" style="zoom:50%;" />
 
 解压：
 
@@ -103,7 +103,7 @@ cd /usr/local/src/
 rpm -ivh minio-20230809233022.0.0.x86_64.rpm
 ```
 
-<img src="attachments/image-20251105154634333.png" alt="image-20251105154634333" style="zoom:50%;" />
+<img src="./attachments/image-20251105154634333.png" alt="image-20251105154634333" style="zoom:50%;" />
 
 验证安装：
 
@@ -111,7 +111,7 @@ rpm -ivh minio-20230809233022.0.0.x86_64.rpm
 minio --version
 ```
 
-<img src="attachments/image-20251105154711973.png" alt="image-20251105154711973" style="zoom:50%;" />
+<img src="./attachments/image-20251105154711973.png" alt="image-20251105154711973" style="zoom:50%;" />
 
 #### 1.2.2 下载MinIO Client(可选)
 
