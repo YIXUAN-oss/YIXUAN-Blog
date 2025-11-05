@@ -21,7 +21,7 @@ author: 懿轩
 
 此处选择的Linux版本为CentOS 7.
 
-Redis的官方网站地址：https://redis.io/
+Redis的官方网站地址：[https://redis.io/](https://redis.io/)
 
 ## 一、单机安装Redis
 
@@ -405,13 +405,13 @@ redis-cli [options] [commonds]
 
 ### 2.2 图形化桌面客户端
 
-GitHub上的大神编写了Redis的图形化桌面客户端，地址：https://github.com/uglide/RedisDesktopManager
+GitHub上的大神编写了Redis的图形化桌面客户端，地址：[https://github.com/uglide/RedisDesktopManager](https://github.com/uglide/RedisDesktopManager)
 
 不过该仓库提供的是RedisDesktopManager的源码，并未提供windows安装包。
 
 
 
-在下面这个仓库可以找到安装包：https://github.com/lework/RedisDesktopManager-Windows/releases
+在下面这个仓库可以找到安装包：[https://github.com/lework/RedisDesktopManager-Windows/releases](https://github.com/lework/RedisDesktopManager-Windows/releases)
 
 ![image-20211211111351885](./attachments/image-20211211111351885.png)
 
@@ -470,10 +470,10 @@ select 0
 
 | 工具名称                          | 主要特点                                                     | 官方网站                                             | 支持平台            | 安装方式概要                                                 |
 | --------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------- | ------------------- | ------------------------------------------------------------ |
-| **Another Redis Desktop Manager** | 开源免费、性能出色、支持集群/哨兵/SSL/SSH、暗黑模式、多种数据格式支持 | https://goanother.com/cn                             | Windows, Mac, Linux | 从官网、GitHub 或Gitee 下载安装包；或通过 Chocolatey (Windows) 、Snap (Linux) 、Homebrew (Mac) 安装 |
-| **RedisInsight**                  | Redis官方出品、功能强大、支持深色/浅色主题、多种数据类型管理、CLI功能 | https://redis.com/redis-enterprise/redis-insight/    | 桌面版及Web版       | 从官网下载对应操作系统的安装包                               |
-| **Tiny RDM**                      | 轻量级、现代化界面、深色/浅色主题、跨平台、完全开源          | https://redis.tinycraft.cc/zh/                       | Windows, Mac, Linux | 从官网下载安装包                                             |
-| **QuickRedis**                    | 永久免费、支持海量Key、直连/哨兵/集群模式、UI体验较好        | https://github.com/quick123official/quick_redis_blog | Windows, Mac, Linux | 需先安装 Node.js 和 Yarn，然后克隆项目、安装依赖并构建       |
+| **Another Redis Desktop Manager** | 开源免费、性能出色、支持集群/哨兵/SSL/SSH、暗黑模式、多种数据格式支持 | [goanother.com/cn](https://goanother.com/cn)                             | Windows, Mac, Linux | 从官网、GitHub 或Gitee 下载安装包；或通过 Chocolatey (Windows) 、Snap (Linux) 、Homebrew (Mac) 安装 |
+| **RedisInsight**                  | Redis官方出品、功能强大、支持深色/浅色主题、多种数据类型管理、CLI功能 | [redis.com/redis-enterprise/redis-insight](https://redis.com/redis-enterprise/redis-insight/)    | 桌面版及Web版       | 从官网下载对应操作系统的安装包                               |
+| **Tiny RDM**                      | 轻量级、现代化界面、深色/浅色主题、跨平台、完全开源          | [redis.tinycraft.cc/zh](https://redis.tinycraft.cc/zh/)                       | Windows, Mac, Linux | 从官网下载安装包                                             |
+| **QuickRedis**                    | 永久免费、支持海量Key、直连/哨兵/集群模式、UI体验较好        | [github.com/quick123official/quick_redis_blog](https://github.com/quick123official/quick_redis_blog) | Windows, Mac, Linux | 需先安装 Node.js 和 Yarn，然后克隆项目、安装依赖并构建       |
 
 ### 3.1 Another Redis Desktop Manager
 
@@ -490,7 +490,7 @@ select 0
 1. **下载**：
 
    *   访问官方网站 [https://goanother.com/cn](https://goanother.com/cn)，页面会自动检测你的操作系统并提供对应的下载链接（Windows: `.exe`， macOS: `.dmg`， Linux: `.AppImage`）。
-   *   你也可以在 **Gitee**（国内速度快）的发布页下载：`https://gitee.com/qishibo/AnotherRedisDesktopManager/releases`
+   *   你也可以在 **Gitee**（国内速度快）的发布页下载：[https://gitee.com/qishibo/AnotherRedisDesktopManager/releases](https://gitee.com/qishibo/AnotherRedisDesktopManager/releases)
 
 2. **安装**：
 
@@ -662,7 +662,7 @@ Redis官方出品的桌面客户端，功能权威且强大，尤其适合想使
    yarn start
    ```
 
-   *   执行 `yarn start` 后，会自动打开浏览器并访问 `http://localhost:8080`，这就是QuickRedis的界面。
+   *   执行 `yarn start` 后，会自动打开浏览器并访问 [http://localhost:8080](http://localhost:8080)，这就是QuickRedis的界面。
 
 #### **使用方法**
 

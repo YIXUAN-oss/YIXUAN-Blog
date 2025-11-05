@@ -27,11 +27,11 @@ VMware是业界最好用的虚拟机软件之一。
 
 windows版本的网站如下：
 
-https://www.vmware.com/cn/products/workstation-pro/workstation-pro-evaluation.html
+[https://www.vmware.com/cn/products/workstation-pro/workstation-pro-evaluation.html](https://www.vmware.com/cn/products/workstation-pro/workstation-pro-evaluation.html)
 
 Mac下也有对应版本，叫做VMware Fusion：
 
-https://www.vmware.com/cn/products/fusion.html
+[https://www.vmware.com/cn/products/fusion.html](https://www.vmware.com/cn/products/fusion.html)
 
 特别注意，Windows10以上版本操作系统需要下载安装VMware Workstation Pro16及以上版本，安装方式此处略。
 
@@ -97,7 +97,7 @@ https://www.vmware.com/cn/products/fusion.html
 
 这个是由于英特尔的虚拟化技术, 没有开启, 需要进入系统的BIOS界面 , 开启英特尔的虚拟化技术 ; 不同的电脑型号 , 进入BIOS界面的方式不同, 需要百度查询一下自己电脑的型号 , 如何进BIOS ;
 
-windows10系统可以参考: https://blog.csdn.net/biu_code/article/details/107504627
+windows10系统可以参考: [https://blog.csdn.net/biu_code/article/details/107504627](https://blog.csdn.net/biu_code/article/details/107504627)
 
 以ThinkPad为例，如图：
 
@@ -282,7 +282,7 @@ ping www.baidu.com
 
 这里我们会选择内存占用较低的MobarXterm作为SSH客户端，其官网地址：
 
-https://mobaxterm.mobatek.net/
+[https://mobaxterm.mobatek.net/](https://mobaxterm.mobatek.net/)
 
 安装完成后界面如图所示：
 

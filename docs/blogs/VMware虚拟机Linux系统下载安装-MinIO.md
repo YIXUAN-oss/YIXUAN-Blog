@@ -17,7 +17,7 @@ author: 懿轩
 
 MinIO是一个高性能的对象存储服务，兼容Amazon S3云存储服务接口。它非常适合于存储大容量非结构化的数据，例如图片、视频、日志文件、备份数据和容器/虚拟机镜像等。
 
-MinIO的官方网站地址：https://min.io/
+MinIO的官方网站地址：[https://min.io/](https://min.io/)
 
 本教程将基于CentOS 7系统在VMware虚拟机中安装MinIO。
 
@@ -683,11 +683,11 @@ MinIO会自动使用数据目录所在分区的空间。如果空间不足：
 
 | 渠道类型         | 网址                                                      | 说明                                                    |
 | ---------------- | --------------------------------------------------------- | ------------------------------------------------------- |
-| **主下载页面**   | https://min.io/download                                   | 官方的综合下载门户，可选择Server、Client及各种SDK        |
-| **直接下载链接** | https://dl.min.io/server/minio/release/                   | 用于直接获取特定版本和平台的服务器二进制文件            |
-| **中文文档站**   | https://www.minio.org.cn                                  | 提供中文文档和下载链接，方便中文用户阅读和操作           |
-| **官方文档**     | https://min.io/docs/minio/linux/index.html                | 官方英文文档                                            |
-| **GitHub仓库**   | https://github.com/minio/minio                            | MinIO开源代码仓库                                       |
+| **主下载页面**   | [min.io/download](https://min.io/download)                                   | 官方的综合下载门户，可选择Server、Client及各种SDK        |
+| **直接下载链接** | [dl.min.io/server/minio/release](https://dl.min.io/server/minio/release/)                   | 用于直接获取特定版本和平台的服务器二进制文件            |
+| **中文文档站**   | [minio.org.cn](https://www.minio.org.cn)                                  | 提供中文文档和下载链接，方便中文用户阅读和操作           |
+| **官方文档**     | [min.io/docs/minio/linux](https://min.io/docs/minio/linux/index.html)                | 官方英文文档                                            |
+| **GitHub仓库**   | [github.com/minio/minio](https://github.com/minio/minio)                            | MinIO开源代码仓库                                       |
 
 ---
 
