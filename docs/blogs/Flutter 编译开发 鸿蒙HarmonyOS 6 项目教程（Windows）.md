@@ -261,13 +261,13 @@ author: 懿轩
 
 **默认在Terminal中，默认不识别hdc命令，需要将hdc所在的路径添加到环境变量（根据自己的deveco studio安装的路径自行调整）**
 
-F:\Chengxusheji\HarmonyOS\DevEco Studio\sdk\default\openharmony\toolchains
+`F:\Chengxusheji\HarmonyOS\DevEco Studio\sdk\default\openharmony\toolchains`
 
-F:\Chengxusheji\HarmonyOS\DevEco Studio\tools\ohpm\bin
+`F:\Chengxusheji\HarmonyOS\DevEco Studio\tools\ohpm\bin`
 
-F:\Chengxusheji\HarmonyOS\DevEco Studio\tools\node
+`F:\Chengxusheji\HarmonyOS\DevEco Studio\tools\node`
 
-F:\Chengxusheji\HarmonyOS\DevEco Studio\tools\hvigor\bin
+`F:\Chengxusheji\HarmonyOS\DevEco Studio\tools\hvigor\bin`
 
  右键点击此电脑，点击属性，再点击高级系统设置，最后点击环境变量
 
