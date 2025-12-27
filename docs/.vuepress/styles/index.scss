@@ -154,13 +154,16 @@ body .search-box,
 
 // 图片优化样式
 img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  // 图片居中显示
-  margin: 0 auto;
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  // 图片居中显示并增加间距
+  margin: 2rem auto !important;
   // 防止图片加载时的布局偏移
   aspect-ratio: attr(width) / attr(height);
+  // 添加圆角和阴影
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   
   // 图片懒加载效果（优化版）
   &[loading="lazy"] {
@@ -188,16 +191,21 @@ img {
 }
 
 // 确保博客内容区域内的所有图片都居中，并增加图片间距
-.content__default,
-.page-content-wrapper,
-.theme-reco-content,
+// 使用更高优先级的选择器确保样式生效
+body .content__default,
+body .page-content-wrapper,
+body .theme-reco-content,
+body .page .theme-reco-content,
+body .markdown-body,
+.page .content__default,
+.page .page-content-wrapper,
 .page .theme-reco-content,
-.markdown-body {
+.theme-reco-content {
   img {
-    display: block;
-    margin: 2rem auto; // 增加上下间距，确保图片之间有足够的间隔
-    max-width: 100%;
-    height: auto;
+    display: block !important;
+    margin: 2rem auto !important; // 增加上下间距，确保图片之间有足够的间隔
+    max-width: 100% !important;
+    height: auto !important;
     border-radius: 8px; // 可选：添加圆角使图片更美观
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); // 可选：添加轻微阴影
   }
@@ -206,35 +214,55 @@ img {
   p img,
   figure img,
   .image-wrapper img {
-    display: block;
-    margin: 2rem auto; // 增加间距
+    display: block !important;
+    margin: 2rem auto !important; // 增加间距
   }
   
   // 图片链接也居中
   a img {
-    display: block;
-    margin: 2rem auto; // 增加间距
+    display: block !important;
+    margin: 2rem auto !important; // 增加间距
   }
   
   // 确保连续的图片之间有足够的间隔
   img + img {
-    margin-top: 2.5rem; // 连续图片之间的间距更大
+    margin-top: 2.5rem !important; // 连续图片之间的间距更大
   }
   
   // 段落中的图片也需要间距
   p:has(img) {
-    margin: 2rem 0;
+    margin: 2rem 0 !important;
     
     img {
-      margin: 0 auto;
+      margin: 0 auto !important;
     }
   }
   
   // 图片前后的段落也需要间距
   img + p,
   p + img {
-    margin-top: 2rem;
+    margin-top: 2rem !important;
   }
+}
+
+// 额外的全局图片样式，确保所有图片都居中并有间距
+body .page img,
+body .theme-reco-content img,
+body .content__default img {
+  display: block !important;
+  margin: 2rem auto !important;
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+// 处理段落中的图片
+body .page p img,
+body .theme-reco-content p img,
+body .content__default p img {
+  display: block !important;
+  margin: 2rem auto !important;
 }
 
 // 加载动画
