@@ -187,7 +187,7 @@ img {
   }
 }
 
-// 确保博客内容区域内的所有图片都居中
+// 确保博客内容区域内的所有图片都居中，并增加图片间距
 .content__default,
 .page-content-wrapper,
 .theme-reco-content,
@@ -195,9 +195,11 @@ img {
 .markdown-body {
   img {
     display: block;
-    margin: 1rem auto;
+    margin: 2rem auto; // 增加上下间距，确保图片之间有足够的间隔
     max-width: 100%;
     height: auto;
+    border-radius: 8px; // 可选：添加圆角使图片更美观
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); // 可选：添加轻微阴影
   }
   
   // 图片容器居中
@@ -205,13 +207,33 @@ img {
   figure img,
   .image-wrapper img {
     display: block;
-    margin: 1rem auto;
+    margin: 2rem auto; // 增加间距
   }
   
   // 图片链接也居中
   a img {
     display: block;
-    margin: 1rem auto;
+    margin: 2rem auto; // 增加间距
+  }
+  
+  // 确保连续的图片之间有足够的间隔
+  img + img {
+    margin-top: 2.5rem; // 连续图片之间的间距更大
+  }
+  
+  // 段落中的图片也需要间距
+  p:has(img) {
+    margin: 2rem 0;
+    
+    img {
+      margin: 0 auto;
+    }
+  }
+  
+  // 图片前后的段落也需要间距
+  img + p,
+  p + img {
+    margin-top: 2rem;
   }
 }
 
