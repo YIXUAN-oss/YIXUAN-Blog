@@ -1,8 +1,11 @@
 # 懿轩的个人博客 | YiXuan's Blog
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![VuePress](https://img.shields.io/badge/VuePress-2.x-green.svg)
-![Theme](https://img.shields.io/badge/theme-vuepress--reco-brightgreen.svg)
+<img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" style="border-radius: 8px;" />
+
+---
+
+<img src="https://img.shields.io/badge/VuePress-2.x-green.svg" alt="VuePress" style="border-radius: 8px;" />
+<img src="https://img.shields.io/badge/theme-vuepress--reco-brightgreen.svg" alt="Theme" style="border-radius: 8px;" />
 
 ## ✨ 特性
 

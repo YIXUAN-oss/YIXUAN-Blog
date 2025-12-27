@@ -70,7 +70,7 @@ footer:
 <div class="profile-widget">
 <!-- 右下角触发按钮 -->
 <div class="profile-trigger" id="profileTrigger">
-<img src="/avatar.png" alt="懿轩" />
+<img src="/avatar.png" alt="懿轩" / style="border-radius: 8px;">
 <div class="pulse-ring"></div>
 </div>
 
@@ -79,7 +79,7 @@ footer:
 <div class="profile-card">
 <div class="profile-header">
 <div class="profile-avatar">
-<img src="/avatar.png" alt="懿轩" />
+<img src="/avatar.png" alt="懿轩" / style="border-radius: 8px;">
 </div>
 <div class="profile-name">懿轩</div>
 <button class="close-btn" id="closeBtn">✕</button>
