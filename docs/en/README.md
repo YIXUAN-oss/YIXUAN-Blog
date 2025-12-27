@@ -71,7 +71,7 @@ footer:
 <div class="profile-widget">
 <!-- Bottom right trigger button -->
 <div class="profile-trigger" id="profileTrigger">
-<img src="/avatar.png" alt="YiXuan" / style="border-radius: 8px;">
+<img src="/avatar.png" alt="YiXuan" style="border-radius: 8px;" />
 <div class="pulse-ring"></div>
 </div>
 
@@ -80,7 +80,7 @@ footer:
 <div class="profile-card">
 <div class="profile-header">
 <div class="profile-avatar">
-<img src="/avatar.png" alt="YiXuan" / style="border-radius: 8px;">
+<img src="/avatar.png" alt="YiXuan" style="border-radius: 8px;" />
 </div>
 <div class="profile-name">YiXuan</div>
 <button class="close-btn" id="closeBtn">✕</button>
