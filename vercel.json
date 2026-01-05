@@ -12,7 +12,11 @@
   "framework": "vuepress",
   "rewrites": [
     {
-      "source": "/((?!api).*)",
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
+    },
+    {
+      "source": "/((?!api|assets|.*\\.(js|css|json|ico|png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf|eot|pdf|html|map)).*)",
       "destination": "/index.html"
     }
   ],
