@@ -52,9 +52,6 @@ export default defineUserConfig({
     ],
 
     theme: recoTheme({
-        // 主题样式
-        style: '@vuepress-reco/style-default',
-
         // Logo
         logo: '/logo.png',
 
@@ -81,6 +78,7 @@ export default defineUserConfig({
             { text: '技术文章', link: '/posts.html', icon: 'IconArticle' },
             { text: '友情链接', link: '/friendship/', icon: 'IconGift' },
             { text: '日常随笔', link: '/diary/', icon: 'IconPen' },
+            { text: '留言板', link: '/guestbook/', icon: 'IconMessageBoard' },
             { text: '关于', link: '/about/', icon: 'IconUser' },
         ],
 
@@ -175,14 +173,6 @@ export default defineUserConfig({
         //     debug: false // 调试时可设置为 true
         // },
 
-        // 博客配置
-        blog: {
-            socialLinks: [
-                { icon: 'BrandGithub', link: 'https://github.com/YIXUAN-oss' },
-                { icon: 'Mail', link: 'mailto:byyi.xuan@outlook.com' },
-            ]
-        },
-
         // 友情链接配置（已改用自定义组件 FriendshipLinks.vue）
         // 自定义组件支持分类显示，数据在组件内部维护
 
@@ -214,8 +204,8 @@ export default defineUserConfig({
               : 'https://waline-server-eight-psi.vercel.app', // 开发环境使用原始Waline服务
             visitor: true, // 启用浏览量统计（VuePress Reco 主题会自动在文章页面显示）
             dark: 'auto', // 自动切换暗色模式
-            // 强制要求登录后才能评论（需要服务端配置社交登录）
-            login: 'force', // 强制登录，隐藏用户信息输入框
+            // 不强制登录，允许匿名评论
+            // login: 'force', // 已移除强制登录
             // 表情配置（可选，需要服务端支持）
             // emoji: [
             //   'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',

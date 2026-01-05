@@ -636,28 +636,50 @@ a.tutorial-card:focus {
 }
 
 // ============================================
-// 隐藏博客卡片中的浏览量显示
+// 隐藏博客卡片中的浏览量显示（仅在博客列表页面）
+// VuePress Reco 主题默认只在文章详情页显示浏览量，博客列表不显示
 // ============================================
 
-// 隐藏博客列表页面中的所有浏览量相关元素
+// 最通用的选择器：隐藏所有博客卡片中的浏览量（无论在哪里）
 .reco-blog-item,
 .blog-item,
 .item-wrapper,
-.reco-wrapper-page .reco-blog-item,
-.reco-wrapper-page .reco-blog-item-wrapper,
-.posts-wrapper .reco-blog-item,
-.blog-list .reco-blog-item {
-  // 隐藏浏览量图标和数字
-  .visitor-count,
-  .waline-visitor-count,
-  [class*="visitor"],
-  [id*="visitor"],
+[class*="blog-item"] {
+  // 隐藏所有浏览量相关元素
+  [id*="waline-visitor"],
+  [id*="waline-visitor-count"],
+  [class*="waline-visitor"],
+  [class*="waline-visitor-count"],
   [data-waline-visitor],
-  .page-view,
-  .view-count,
-  .waline-pageview,
+  [class*="visitor-count"],
+  [class*="visitor"]:not([class*="visitor"]:not([class*="waline"])),
+  [class*="page-view"],
+  [class*="view-count"],
+  [class*="pageview"],
   span[id*="waline-visitor"],
-  span[class*="waline-visitor"] {
+  span[class*="waline-visitor"],
+  span[class*="visitor-count"],
+  span[class*="visitor"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+  }
+  
+  // 隐藏眼睛图标
+  i[class*="eye"],
+  svg[class*="eye"],
+  [class*="icon"][class*="eye"],
+  [class*="icon"][class*="view"],
+  .icon-eye,
+  .visitor-icon,
+  .view-icon,
+  [class*="eye-icon"] {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
@@ -667,32 +689,35 @@ a.tutorial-card:focus {
     padding: 0 !important;
   }
   
-  // 隐藏包含眼睛图标的浏览量元素
-  i[class*="eye"],
-  svg[class*="eye"],
-  .icon-eye,
-  .visitor-icon,
-  [class*="icon"][class*="eye"],
-  [class*="icon"][class*="view"] {
+  // 隐藏眼睛图标后面的数字（下一个兄弟元素）
+  i[class*="eye"] + *,
+  svg[class*="eye"] + *,
+  [class*="icon"][class*="eye"] + *,
+  .icon-eye + *,
+  .visitor-icon + * {
     display: none !important;
     visibility: hidden !important;
+    opacity: 0 !important;
   }
   
-  // 隐藏浏览量数字（通常在元数据区域）
+  // 隐藏元数据区域中的浏览量
   .meta-info,
   .item-meta,
   .blog-meta,
   .reco-meta,
-  .meta-wrapper {
-    .visitor-count,
-    .waline-visitor-count,
-    [class*="visitor"],
-    [id*="visitor"],
+  .meta-wrapper,
+  .item-info,
+  [class*="meta"] {
+    [id*="waline-visitor"],
+    [class*="waline-visitor"],
     [data-waline-visitor],
-    .page-view,
-    .view-count,
-    span[id*="waline-visitor"],
-    span[class*="waline-visitor"] {
+    [class*="visitor-count"],
+    [class*="visitor"],
+    [class*="page-view"],
+    [class*="view-count"],
+    i[class*="eye"],
+    svg[class*="eye"],
+    [class*="icon"][class*="eye"] {
       display: none !important;
       visibility: hidden !important;
       opacity: 0 !important;
@@ -704,41 +729,145 @@ a.tutorial-card:focus {
   }
 }
 
-// 隐藏所有博客列表中的浏览量显示
-.posts-wrapper,
-.blog-list,
-.reco-wrapper-page,
-.page .reco-wrapper-page {
-  .visitor-count,
-  .waline-visitor-count,
-  [class*="visitor"],
-  [id*="visitor"],
-  [data-waline-visitor],
-  .page-view,
-  .view-count,
-  .waline-pageview,
-  span[id*="waline-visitor"],
-  span[class*="waline-visitor"] {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
+// 针对博客列表页面（/posts.html）隐藏浏览量
+.page[data-page-key*="posts"],
+.page[data-page-key*="posts.html"],
+body:has([data-page-key*="posts"]) {
+  // 隐藏所有博客卡片中的浏览量
+  .reco-blog-item,
+  .blog-item,
+  .item-wrapper,
+  [class*="blog-item"] {
+    // 隐藏浏览量相关的所有元素
+    [id*="waline-visitor"],
+    [class*="waline-visitor"],
+    [data-waline-visitor],
+    [class*="visitor-count"],
+    [class*="visitor"],
+    [class*="page-view"],
+    [class*="view-count"],
+    [class*="pageview"],
+    span[id*="waline-visitor"],
+    span[class*="waline-visitor"],
+    span[class*="visitor"],
+    span[class*="view"] {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0 !important;
+      width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      font-size: 0 !important;
+      line-height: 0 !important;
+    }
+    
+    // 隐藏眼睛图标及其后面的数字
+    i[class*="eye"],
+    svg[class*="eye"],
+    [class*="icon"][class*="eye"],
+    [class*="icon"][class*="view"],
+    .icon-eye,
+    .visitor-icon,
+    .view-icon {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0 !important;
+      width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
+    // 隐藏眼睛图标后面的数字（兄弟元素）
+    i[class*="eye"] + span,
+    i[class*="eye"] + *,
+    svg[class*="eye"] + span,
+    svg[class*="eye"] + *,
+    [class*="icon"][class*="eye"] + span,
+    [class*="icon"][class*="eye"] + * {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+    }
+    
+    // 隐藏元数据区域中的浏览量
+    .meta-info,
+    .item-meta,
+    .blog-meta,
+    .reco-meta,
+    .meta-wrapper,
+    .item-info,
+    [class*="meta"] {
+      [id*="waline-visitor"],
+      [class*="waline-visitor"],
+      [data-waline-visitor],
+      [class*="visitor-count"],
+      [class*="visitor"],
+      [class*="page-view"],
+      [class*="view-count"],
+      i[class*="eye"],
+      svg[class*="eye"],
+      [class*="icon"][class*="eye"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+    }
   }
 }
 
-// 隐藏博客卡片中所有可能的浏览量显示（通用选择器）
-.reco-blog-item *[id*="waline-visitor"],
-.reco-blog-item *[class*="waline-visitor"],
-.reco-blog-item *[data-waline-visitor],
-.reco-blog-item *[class*="visitor-count"],
-.reco-blog-item *[class*="page-view"],
-.reco-blog-item *[class*="view-count"] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  height: 0 !important;
-  width: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
+// 通用选择器：隐藏所有博客列表页面中的浏览量
+.reco-wrapper-page:has(.reco-blog-item),
+.posts-wrapper,
+.blog-list,
+[class*="posts-wrapper"],
+[class*="blog-list"] {
+  .reco-blog-item,
+  .blog-item,
+  [class*="blog-item"] {
+    [id*="waline-visitor"],
+    [class*="waline-visitor"],
+    [data-waline-visitor],
+    [class*="visitor"],
+    [class*="view-count"],
+    [class*="page-view"],
+    i[class*="eye"],
+    svg[class*="eye"],
+    [class*="icon"][class*="eye"] {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0 !important;
+      width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+}
+
+// 更精确的选择器：针对博客列表页面的所有浏览量元素
+body:has([data-page-key*="posts"]) .reco-blog-item *,
+body:has([data-page-key*="posts"]) .blog-item * {
+  &[id*="waline-visitor"],
+  &[class*="waline-visitor"],
+  &[data-waline-visitor],
+  &[class*="visitor-count"],
+  &[class*="visitor"]:not([class*="visitor"]:not([class*="waline"])),
+  &[class*="page-view"],
+  &[class*="view-count"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 }
 
 // ============================================
@@ -746,7 +875,7 @@ a.tutorial-card:focus {
 // ============================================
 
 // 评论区域整体样式
-// 默认隐藏评论，只在博客文章页面显示（通过 JavaScript 控制）
+// 默认隐藏评论，只在留言板页面显示（通过 JavaScript 控制）
 #waline,
 .waline-container,
 .waline-wrapper,
@@ -761,7 +890,7 @@ a.tutorial-card:focus {
   visibility: hidden !important;
 }
 
-// 当 JavaScript 检测到是博客文章页面时，会设置 display: block
+// 当 JavaScript 检测到是留言板页面时，会设置 display: block
 // 这里提供备用样式，确保显示时样式正确
 .waline-wrapper[style*="display: block"],
 .waline-wrapper[style*="display:block"],
@@ -793,7 +922,8 @@ a.tutorial-card:focus {
   padding-right: 0 !important;
 }
 
-// 评论区域可以稍微超出内容区域，让评论框更宽
+// 评论区域可以稍微超出内容区域，让评论框更宽（但不包括留言板页面）
+// 留言板页面的样式在后面定义，会覆盖这个样式
 .page .waline-wrapper {
   margin-left: -2.5rem;
   margin-right: -2.5rem;
@@ -809,6 +939,14 @@ a.tutorial-card:focus {
     margin-right: 0;
     padding-left: 1rem;
     padding-right: 1rem;
+    max-width: 100% !important;
+  }
+
+  // 留言板页面移动端
+  body:has([data-path*="guestbook"]) .waline-wrapper,
+  body:has(.guestbook-info) .waline-wrapper {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
     max-width: 100% !important;
   }
 }
@@ -1439,4 +1577,201 @@ button.waline-btn {
   .waline-item {
     padding: 1.125rem;
   }
+}
+
+// ============================================
+// 隐藏留言板页面的目录
+// ============================================
+.page[data-path*="guestbook"] {
+  .page-toc-wrapper,
+  .page-catalog-container,
+  .catalog-wrapper,
+  .reco-toc,
+  .page-catalog,
+  .catalog-container,
+  .right-sidebar,
+  .page-right-sidebar,
+  .toc-container,
+  .table-of-contents,
+  #toc,
+  .toc,
+  [class*="toc"],
+  [class*="catalog"],
+  [class*="TOC"],
+  [class*="Catalog"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+  }
+}
+
+// 通过路径判断隐藏目录
+body:has([data-path*="guestbook"]) {
+  .page-toc-wrapper,
+  .page-catalog-container,
+  .catalog-wrapper,
+  .reco-toc,
+  .page-catalog,
+  .catalog-container,
+  .right-sidebar,
+  .page-right-sidebar,
+  .toc-container,
+  .table-of-contents,
+  #toc,
+  .toc {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+  }
+}
+
+// ============================================
+// 留言板页面 Waline 样式优化 - 宽度与信息栏对齐
+// ============================================
+// 使用最高优先级覆盖通用样式，确保留言板页面评论区域宽度与信息栏对齐
+body:has([data-path*="guestbook"]) .page .waline-wrapper,
+body:has(.guestbook-info) .page .waline-wrapper,
+body:has([data-path*="guestbook"]) .content__default .waline-wrapper,
+body:has(.guestbook-info) .content__default .waline-wrapper,
+body:has([data-path*="guestbook"]) .theme-reco-content .waline-wrapper,
+body:has(.guestbook-info) .theme-reco-content .waline-wrapper,
+body:has([data-path*="guestbook"]) .page-container .waline-wrapper,
+body:has(.guestbook-info) .page-container .waline-wrapper,
+body:has([data-path*="guestbook"]) .waline-wrapper,
+body:has(.guestbook-info) .waline-wrapper,
+body:has([data-path*="guestbook"]) #waline,
+body:has(.guestbook-info) #waline,
+body:has([data-path*="guestbook"]) .waline-container,
+body:has(.guestbook-info) .waline-container {
+  // 移除通用样式中的负边距和扩展宽度，继承父容器宽度
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+body:has([data-path*="guestbook"]),
+body:has(.guestbook-info) {
+
+  .waline-input-wrapper,
+  .waline-editor,
+  .waline-editor-wrapper,
+  .waline-comment-input {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  // 登录后头像在输入框上方居中显示
+  .waline-login-info,
+  .waline-user-info,
+  .waline-avatar-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-bottom: 1rem !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .waline-login-info .waline-avatar,
+  .waline-user-info .waline-avatar,
+  .waline-avatar-wrapper .waline-avatar,
+  .waline-login-info img,
+  .waline-user-info img {
+    margin: 0 auto !important;
+    display: block !important;
+  }
+
+  // 确保输入框区域布局正确
+  .waline-input-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .waline-input-wrapper > .waline-avatar-wrapper,
+  .waline-input-wrapper > .waline-login-info,
+  .waline-input-wrapper > .waline-user-info {
+    order: -1 !important;
+    margin-bottom: 1rem !important;
+    text-align: center !important;
+  }
+
+  // 登录用户信息容器
+  .waline-login-info {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+
+  .waline-login-info .waline-avatar,
+  .waline-login-info img {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 50% !important;
+  }
+
+  .waline-login-info .waline-user-name {
+    font-size: 14px !important;
+    color: var(--text-color, #2c3e50) !important;
+    margin-top: 0.5rem !important;
+  }
+
+  // 平板设备响应式
+  @media (max-width: 1400px) {
+    .waline-wrapper,
+    #waline,
+    .waline-container {
+      max-width: 95% !important;
+    }
+  }
+}
+
+// ============================================
+// 留言板页面 Waline 宽度强制对齐 - 最高优先级
+// ============================================
+// 放在文件最后，确保优先级最高，覆盖所有之前的样式
+body:has(.guestbook-info) .page .content__default .waline-wrapper,
+body:has(.guestbook-info) .page .content__default #waline,
+body:has(.guestbook-info) .page .content__default .waline-container,
+body:has(.guestbook-info) .page .theme-reco-content .waline-wrapper,
+body:has(.guestbook-info) .page .theme-reco-content #waline,
+body:has(.guestbook-info) .page .theme-reco-content .waline-container,
+body:has(.guestbook-info) .content__default .waline-wrapper,
+body:has(.guestbook-info) .content__default #waline,
+body:has(.guestbook-info) .content__default .waline-container,
+body:has(.guestbook-info) .theme-reco-content .waline-wrapper,
+body:has(.guestbook-info) .theme-reco-content #waline,
+body:has(.guestbook-info) .theme-reco-content .waline-container,
+body:has(.guestbook-info) .page .waline-wrapper,
+body:has(.guestbook-info) .page #waline,
+body:has(.guestbook-info) .page .waline-container,
+body:has(.guestbook-info) .waline-wrapper,
+body:has(.guestbook-info) #waline,
+body:has(.guestbook-info) .waline-container {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+// 确保内部容器也正确
+body:has(.guestbook-info) .waline-wrapper > div,
+body:has(.guestbook-info) .waline-wrapper .waline,
+body:has(.guestbook-info) #waline > div,
+body:has(.guestbook-info) .waline-container > div,
+body:has(.guestbook-info) .waline-wrapper > div > div {
+  max-width: 100% !important;
+  width: 100% !important;
 }
