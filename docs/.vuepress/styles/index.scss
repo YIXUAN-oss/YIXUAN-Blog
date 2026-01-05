@@ -636,6 +636,112 @@ a.tutorial-card:focus {
 }
 
 // ============================================
+// 隐藏博客卡片中的浏览量显示
+// ============================================
+
+// 隐藏博客列表页面中的所有浏览量相关元素
+.reco-blog-item,
+.blog-item,
+.item-wrapper,
+.reco-wrapper-page .reco-blog-item,
+.reco-wrapper-page .reco-blog-item-wrapper,
+.posts-wrapper .reco-blog-item,
+.blog-list .reco-blog-item {
+  // 隐藏浏览量图标和数字
+  .visitor-count,
+  .waline-visitor-count,
+  [class*="visitor"],
+  [id*="visitor"],
+  [data-waline-visitor],
+  .page-view,
+  .view-count,
+  .waline-pageview,
+  span[id*="waline-visitor"],
+  span[class*="waline-visitor"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  // 隐藏包含眼睛图标的浏览量元素
+  i[class*="eye"],
+  svg[class*="eye"],
+  .icon-eye,
+  .visitor-icon,
+  [class*="icon"][class*="eye"],
+  [class*="icon"][class*="view"] {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  // 隐藏浏览量数字（通常在元数据区域）
+  .meta-info,
+  .item-meta,
+  .blog-meta,
+  .reco-meta,
+  .meta-wrapper {
+    .visitor-count,
+    .waline-visitor-count,
+    [class*="visitor"],
+    [id*="visitor"],
+    [data-waline-visitor],
+    .page-view,
+    .view-count,
+    span[id*="waline-visitor"],
+    span[class*="waline-visitor"] {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0 !important;
+      width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+}
+
+// 隐藏所有博客列表中的浏览量显示
+.posts-wrapper,
+.blog-list,
+.reco-wrapper-page,
+.page .reco-wrapper-page {
+  .visitor-count,
+  .waline-visitor-count,
+  [class*="visitor"],
+  [id*="visitor"],
+  [data-waline-visitor],
+  .page-view,
+  .view-count,
+  .waline-pageview,
+  span[id*="waline-visitor"],
+  span[class*="waline-visitor"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+}
+
+// 隐藏博客卡片中所有可能的浏览量显示（通用选择器）
+.reco-blog-item *[id*="waline-visitor"],
+.reco-blog-item *[class*="waline-visitor"],
+.reco-blog-item *[data-waline-visitor],
+.reco-blog-item *[class*="visitor-count"],
+.reco-blog-item *[class*="page-view"],
+.reco-blog-item *[class*="view-count"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+// ============================================
 // Waline 评论系统样式优化
 // ============================================
 

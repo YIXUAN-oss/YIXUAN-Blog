@@ -248,34 +248,6 @@ export default defineClientConfig({
                 setTimeout(toggleComments, 500);
             });
             
-            // 确保 Waline 浏览量统计在所有页面正确工作
-            const ensureWalineVisitor = () => {
-                // 检查 Waline 是否已正确初始化
-                const checkWalineInit = () => {
-                    // 查找所有浏览量显示元素
-                    const visitorElements = document.querySelectorAll('[id*="waline-visitor"], [class*="waline-visitor"], [data-waline-visitor]');
-                    
-                    // 如果主题已经初始化了浏览量，确保它们能正确显示
-                    visitorElements.forEach((el) => {
-                        const element = el as HTMLElement;
-                        if (element.style.display === 'none') {
-                            element.style.display = '';
-                        }
-                    });
-                };
-                
-                // 延迟检查，确保主题已初始化
-                setTimeout(checkWalineInit, 1000);
-                setTimeout(checkWalineInit, 2000);
-            };
-            
-            // 初始执行
-            ensureWalineVisitor();
-            
-            // 路由变化后重新检查
-            router.afterEach(() => {
-                setTimeout(ensureWalineVisitor, 100);
-            });
         }
     },
 

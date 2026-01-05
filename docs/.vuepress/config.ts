@@ -212,12 +212,10 @@ export default defineUserConfig({
             serverURL: process.env.VERCEL 
               ? 'https://waline.yixuan.cyou'  // Vercel 生产环境使用子域名
               : 'https://waline-server-eight-psi.vercel.app', // 开发环境使用原始Waline服务
-            visitor: true, // 启用浏览量统计（重要！）
+            visitor: true, // 启用浏览量统计（VuePress Reco 主题会自动在文章页面显示）
             dark: 'auto', // 自动切换暗色模式
             // 强制要求登录后才能评论（需要服务端配置社交登录）
             login: 'force', // 强制登录，隐藏用户信息输入框
-            // 浏览量统计配置
-            // visitor: true 已启用，VuePress Reco 主题会自动在博客列表和文章页面显示浏览量
             // 表情配置（可选，需要服务端支持）
             // emoji: [
             //   'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
