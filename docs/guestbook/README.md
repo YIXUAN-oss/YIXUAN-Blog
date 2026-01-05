@@ -242,8 +242,18 @@ body:has(.guestbook-info) [id*="waline"] {
 
 <script>
 // 强制设置样式，确保在 Waline 加载后也能生效
+// 只在客户端执行，避免 SSR 错误
 (function() {
-  function forceGuestbookWidth() {
+  // 检查是否在浏览器环境
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return;
+  }
+  
+  // 等待 DOM 加载完成
+  function init() {
+    if (typeof document === 'undefined') return;
+    
+    function forceGuestbookWidth() {
     const isGuestbook = window.location.pathname.includes('/guestbook/') || 
                        window.location.pathname === '/guestbook' ||
                        window.location.pathname.endsWith('/guestbook');
@@ -293,73 +303,83 @@ body:has(.guestbook-info) [id*="waline"] {
     });
   }
   
-  // 立即执行
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', forceGuestbookWidth);
-  } else {
-    forceGuestbookWidth();
-  }
-  
-  // 定期检查（Waline 可能是异步加载的）
-  let count = 0;
-  const interval = setInterval(() => {
-    forceGuestbookWidth();
-    count++;
-    if (count >= 20) clearInterval(interval); // 最多检查 4 秒
-  }, 200);
-  
-  // 路由变化时也执行
-  if (window.location.pathname.includes('/guestbook')) {
-    setTimeout(forceGuestbookWidth, 100);
-    setTimeout(forceGuestbookWidth, 500);
-    setTimeout(forceGuestbookWidth, 1000);
-    setTimeout(forceGuestbookWidth, 2000);
-  }
-  
-  // 获取信息栏的实际宽度，并应用到 Waline 容器
-  function syncWidthWithInfoBox() {
-    const isGuestbook = window.location.pathname.includes('/guestbook/') || 
-                       window.location.pathname === '/guestbook' ||
-                       window.location.pathname.endsWith('/guestbook');
+    // 立即执行
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', forceGuestbookWidth);
+    } else {
+      forceGuestbookWidth();
+    }
     
-    if (!isGuestbook) return;
+    // 定期检查（Waline 可能是异步加载的）
+    let count = 0;
+    const interval = setInterval(() => {
+      forceGuestbookWidth();
+      count++;
+      if (count >= 20) clearInterval(interval); // 最多检查 4 秒
+    }, 200);
     
-    const infoBox = document.querySelector('.guestbook-info');
-    if (!infoBox) return;
+    // 路由变化时也执行
+    if (window.location.pathname.includes('/guestbook')) {
+      setTimeout(forceGuestbookWidth, 100);
+      setTimeout(forceGuestbookWidth, 500);
+      setTimeout(forceGuestbookWidth, 1000);
+      setTimeout(forceGuestbookWidth, 2000);
+    }
     
-    const infoBoxRect = infoBox.getBoundingClientRect();
-    const infoBoxWidth = infoBoxRect.width;
-    
-    // 获取信息栏的父容器（content__default）
-    const contentDefault = document.querySelector('.content__default');
-    if (contentDefault) {
-      const contentRect = contentDefault.getBoundingClientRect();
-      const contentWidth = contentRect.width;
+    // 获取信息栏的实际宽度，并应用到 Waline 容器
+    function syncWidthWithInfoBox() {
+      const isGuestbook = window.location.pathname.includes('/guestbook/') || 
+                         window.location.pathname === '/guestbook' ||
+                         window.location.pathname.endsWith('/guestbook');
       
-      // 将所有 Waline 容器的宽度设置为与内容区域相同
-      document.querySelectorAll('.waline-wrapper, #waline, .waline-container').forEach(el => {
-        const element = el;
-        if (element && element.style) {
-          element.style.setProperty('margin-left', '0', 'important');
-          element.style.setProperty('margin-right', '0', 'important');
-          element.style.setProperty('padding-left', '0', 'important');
-          element.style.setProperty('padding-right', '0', 'important');
-          element.style.setProperty('max-width', contentWidth + 'px', 'important');
-          element.style.setProperty('width', '100%', 'important');
-          element.style.setProperty('box-sizing', 'border-box', 'important');
-        }
-      });
+      if (!isGuestbook) return;
+      
+      const infoBox = document.querySelector('.guestbook-info');
+      if (!infoBox) return;
+      
+      const infoBoxRect = infoBox.getBoundingClientRect();
+      const infoBoxWidth = infoBoxRect.width;
+      
+      // 获取信息栏的父容器（content__default）
+      const contentDefault = document.querySelector('.content__default');
+      if (contentDefault) {
+        const contentRect = contentDefault.getBoundingClientRect();
+        const contentWidth = contentRect.width;
+        
+        // 将所有 Waline 容器的宽度设置为与内容区域相同
+        document.querySelectorAll('.waline-wrapper, #waline, .waline-container').forEach(el => {
+          const element = el;
+          if (element && element.style) {
+            element.style.setProperty('margin-left', '0', 'important');
+            element.style.setProperty('margin-right', '0', 'important');
+            element.style.setProperty('padding-left', '0', 'important');
+            element.style.setProperty('padding-right', '0', 'important');
+            element.style.setProperty('max-width', contentWidth + 'px', 'important');
+            element.style.setProperty('width', '100%', 'important');
+            element.style.setProperty('box-sizing', 'border-box', 'important');
+          }
+        });
+      }
+    }
+    
+    // 执行同步宽度
+    setTimeout(syncWidthWithInfoBox, 500);
+    setTimeout(syncWidthWithInfoBox, 1000);
+    setTimeout(syncWidthWithInfoBox, 2000);
+    setTimeout(syncWidthWithInfoBox, 3000);
+    
+    // 监听窗口大小变化
+    window.addEventListener('resize', syncWidthWithInfoBox);
+  }
+  
+  // 只在客户端执行
+  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
     }
   }
-  
-  // 执行同步宽度
-  setTimeout(syncWidthWithInfoBox, 500);
-  setTimeout(syncWidthWithInfoBox, 1000);
-  setTimeout(syncWidthWithInfoBox, 2000);
-  setTimeout(syncWidthWithInfoBox, 3000);
-  
-  // 监听窗口大小变化
-  window.addEventListener('resize', syncWidthWithInfoBox);
 })();
 </script>
 
