@@ -105,13 +105,14 @@ export default defineClientConfig({
             const initImageLazyLoad = () => {
                 // 为所有图片添加 loading="lazy" 属性（如果还没有）
                 const allImages = document.querySelectorAll('img:not([loading])');
-                allImages.forEach((img: HTMLImageElement) => {
+                allImages.forEach((img) => {
+                    const imageElement = img as HTMLImageElement;
                     // 只对非关键图片启用懒加载（保留关键图片如 logo、avatar 立即加载）
-                    if (!img.src.includes('logo') && !img.src.includes('avatar') && !img.src.includes('favicon')) {
-                        img.loading = 'lazy';
+                    if (!imageElement.src.includes('logo') && !imageElement.src.includes('avatar') && !imageElement.src.includes('favicon')) {
+                        imageElement.loading = 'lazy';
                         // 保存原始 src 到 data-src
-                        if (!img.dataset.src) {
-                            img.dataset.src = img.src;
+                        if (!imageElement.dataset.src) {
+                            imageElement.dataset.src = imageElement.src;
                         }
                     }
                 });
@@ -160,11 +161,12 @@ export default defineClientConfig({
                     });
                 } else {
                     // 不支持 IntersectionObserver 的浏览器，直接加载所有图片
-                    document.querySelectorAll('img[loading="lazy"]').forEach((img: HTMLImageElement) => {
-                        if (img.dataset.src) {
-                            img.src = img.dataset.src;
+                    document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
+                        const imageElement = img as HTMLImageElement;
+                        if (imageElement.dataset.src) {
+                            imageElement.src = imageElement.dataset.src;
                         }
-                        img.classList.add('loaded');
+                        imageElement.classList.add('loaded');
                     });
                 }
             };
@@ -186,6 +188,93 @@ export default defineClientConfig({
                 if (!document.hidden) {
                     setTimeout(initImageLazyLoad, 100);
                 }
+            });
+            
+            // 控制评论显示：只在博客文章页面显示评论
+            const toggleComments = () => {
+                const currentPath = window.location.pathname;
+                // 判断是否为博客文章页面：路径包含 /blogs/ 且不是博客列表页
+                const isBlogPost = currentPath.includes('/blogs/') && 
+                                 currentPath !== '/blogs/' && 
+                                 currentPath !== '/blogs' &&
+                                 !currentPath.endsWith('/blogs/') && 
+                                 !currentPath.endsWith('/blogs') &&
+                                 currentPath.split('/blogs/').length > 1 &&
+                                 currentPath.split('/blogs/')[1].length > 0;
+                
+                // 查找评论容器（包括所有可能的 Waline 容器）
+                const commentContainers = document.querySelectorAll(
+                    '#waline, .waline-wrapper, .waline-container, [id*="waline"], [class*="waline-wrapper"], [class*="waline-container"]'
+                );
+                
+                commentContainers.forEach((container) => {
+                    const element = container as HTMLElement;
+                    if (isBlogPost) {
+                        element.style.display = '';
+                        element.style.visibility = 'visible';
+                    } else {
+                        element.style.display = 'none';
+                        element.style.visibility = 'hidden';
+                    }
+                });
+                
+                // 也检查父容器
+                const pageContainers = document.querySelectorAll('.page, .theme-reco-content, .content__default');
+                pageContainers.forEach((container) => {
+                    const walineInContainer = container.querySelectorAll(
+                        '#waline, .waline-wrapper, .waline-container'
+                    );
+                    walineInContainer.forEach((waline) => {
+                        const element = waline as HTMLElement;
+                        if (isBlogPost) {
+                            element.style.display = '';
+                            element.style.visibility = 'visible';
+                        } else {
+                            element.style.display = 'none';
+                            element.style.visibility = 'hidden';
+                        }
+                    });
+                });
+            };
+            
+            // 初始执行（延迟以确保 DOM 加载完成）
+            setTimeout(toggleComments, 500);
+            setTimeout(toggleComments, 1000);
+            setTimeout(toggleComments, 2000);
+            
+            // 路由变化后重新执行
+            router.afterEach(() => {
+                setTimeout(toggleComments, 100);
+                setTimeout(toggleComments, 500);
+            });
+            
+            // 确保 Waline 浏览量统计在所有页面正确工作
+            const ensureWalineVisitor = () => {
+                // 检查 Waline 是否已正确初始化
+                const checkWalineInit = () => {
+                    // 查找所有浏览量显示元素
+                    const visitorElements = document.querySelectorAll('[id*="waline-visitor"], [class*="waline-visitor"], [data-waline-visitor]');
+                    
+                    // 如果主题已经初始化了浏览量，确保它们能正确显示
+                    visitorElements.forEach((el) => {
+                        const element = el as HTMLElement;
+                        if (element.style.display === 'none') {
+                            element.style.display = '';
+                        }
+                    });
+                };
+                
+                // 延迟检查，确保主题已初始化
+                setTimeout(checkWalineInit, 1000);
+                setTimeout(checkWalineInit, 2000);
+            };
+            
+            // 初始执行
+            ensureWalineVisitor();
+            
+            // 路由变化后重新检查
+            router.afterEach(() => {
+                setTimeout(ensureWalineVisitor, 100);
             });
         }
     },
@@ -286,103 +375,10 @@ export default defineClientConfig({
             setTimeout(initProfileCard, 500);
             setTimeout(initProfileCard, 1000);
             setTimeout(initProfileCard, 2000);
-
-            // 控制评论显示：只在博客文章页面显示评论
-            const toggleComments = () => {
-                const currentPath = window.location.pathname;
-                // 判断是否为博客文章页面：路径包含 /blogs/ 且不是博客列表页
-                const isBlogPost = currentPath.includes('/blogs/') && 
-                                 currentPath !== '/blogs/' && 
-                                 currentPath !== '/blogs' &&
-                                 !currentPath.endsWith('/blogs/') && 
-                                 !currentPath.endsWith('/blogs') &&
-                                 currentPath.split('/blogs/').length > 1 &&
-                                 currentPath.split('/blogs/')[1].length > 0;
-                
-                // 查找评论容器（包括所有可能的 Waline 容器）
-                const commentContainers = document.querySelectorAll(
-                    '#waline, .waline-wrapper, .waline-container, [id*="waline"], [class*="waline-wrapper"], [class*="waline-container"]'
-                );
-                
-                commentContainers.forEach((container) => {
-                    const element = container as HTMLElement;
-                    if (isBlogPost) {
-                        element.style.display = '';
-                        element.style.visibility = 'visible';
-                    } else {
-                        element.style.display = 'none';
-                        element.style.visibility = 'hidden';
-                    }
-                });
-                
-                // 也检查父容器
-                const pageContainers = document.querySelectorAll('.page, .theme-reco-content, .content__default');
-                pageContainers.forEach((container) => {
-                    const walineInContainer = container.querySelectorAll(
-                        '#waline, .waline-wrapper, .waline-container'
-                    );
-                    walineInContainer.forEach((waline) => {
-                        const element = waline as HTMLElement;
-                        if (isBlogPost) {
-                            element.style.display = '';
-                            element.style.visibility = 'visible';
-                        } else {
-                            element.style.display = 'none';
-                            element.style.visibility = 'hidden';
-                        }
-                    });
-                });
-            };
             
-            // 初始执行（延迟以确保 DOM 加载完成）
-            if (typeof window !== 'undefined') {
-                setTimeout(toggleComments, 500);
-                setTimeout(toggleComments, 1000);
-                setTimeout(toggleComments, 2000);
-            }
-            
-            // 路由变化后重新执行
-            router.afterEach(() => {
-                setTimeout(toggleComments, 100);
-                setTimeout(toggleComments, 500);
-            });
-            
-            // 确保 Waline 浏览量统计在所有页面正确工作
-            // VuePress Reco 主题会自动处理，这里只是确保配置正确
-            const ensureWalineVisitor = () => {
-                if (typeof window === 'undefined') return;
-                
-                // 检查 Waline 是否已正确初始化
-                const checkWalineInit = () => {
-                    // 查找所有浏览量显示元素
-                    const visitorElements = document.querySelectorAll('[id*="waline-visitor"], [class*="waline-visitor"], [data-waline-visitor]');
-                    
-                    // 如果主题已经初始化了浏览量，确保它们能正确显示
-                    visitorElements.forEach((el) => {
-                        const element = el as HTMLElement;
-                        if (element.style.display === 'none') {
-                            element.style.display = '';
-                        }
-                    });
-                };
-                
-                // 延迟检查，确保主题已初始化
-                setTimeout(checkWalineInit, 1000);
-                setTimeout(checkWalineInit, 2000);
-            };
-            
-            // 初始执行
-            ensureWalineVisitor();
-            
-            // 路由变化后重新检查
-            router.afterEach(() => {
-                setTimeout(ensureWalineVisitor, 100);
-            });
-            
-            // 监听路由变化
+            // 监听路由变化（通过 VuePress 路由）
             if (typeof window !== 'undefined' && (window as any).__VUEPRESS_ROUTER__) {
                 (window as any).__VUEPRESS_ROUTER__.afterEach(() => {
-                    setTimeout(toggleComments, 100);
                     setTimeout(initProfileCard, 1000);
                     
                     // 路由变化后重新添加搜索快捷键
