@@ -640,6 +640,7 @@ a.tutorial-card:focus {
 // ============================================
 
 // 评论区域整体样式
+// 默认隐藏评论，只在博客文章页面显示（通过 JavaScript 控制）
 #waline,
 .waline-container,
 .waline-wrapper,
@@ -648,7 +649,62 @@ a.tutorial-card:focus {
   margin-top: 3rem;
   padding-top: 2rem;
   border-top: 1px solid var(--border-color, #eaecef);
-  max-width: 100%;
+  max-width: 100% !important;
+  width: 100% !important;
+  display: none !important; // 默认隐藏，由 JavaScript 控制显示
+  visibility: hidden !important;
+}
+
+// 当 JavaScript 检测到是博客文章页面时，会设置 display: block
+// 这里提供备用样式，确保显示时样式正确
+.waline-wrapper[style*="display: block"],
+.waline-wrapper[style*="display:block"],
+#waline[style*="display: block"],
+#waline[style*="display:block"] {
+  display: block !important;
+  visibility: visible !important;
+}
+
+// 评论框容器宽度优化 - 确保充分利用页面宽度
+.waline-wrapper > div,
+.waline-container > div,
+.waline-wrapper .waline,
+.waline-container .waline {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+// 确保评论区域不受父容器宽度限制，充分利用页面宽度
+.page .waline-wrapper,
+.theme-reco-content .waline-wrapper,
+.content__default .waline-wrapper,
+.page-container .waline-wrapper {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+// 评论区域可以稍微超出内容区域，让评论框更宽
+.page .waline-wrapper {
+  margin-left: -2.5rem;
+  margin-right: -2.5rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  max-width: calc(100% + 5rem) !important;
+}
+
+// 移动端保持正常宽度
+@media (max-width: 768px) {
+  .page .waline-wrapper {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 100% !important;
+  }
 }
 
 // 评论输入框区域
@@ -658,9 +714,12 @@ a.tutorial-card:focus {
   background: var(--bg-color-secondary, #f6f8fa);
   border: 1px solid var(--border-color, #eaecef);
   border-radius: 12px;
-  padding: 1.25rem;
+  padding: 1.5rem;
   margin-bottom: 2rem;
   transition: all 0.3s ease;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
   
   &:hover {
     border-color: var(--accent-color, #3eaf7c);
@@ -752,13 +811,15 @@ a.tutorial-card:focus {
   background: transparent;
   border: none;
   border-radius: 8px;
-  padding: 0.75rem;
+  padding: 1rem;
   font-size: 15px;
   line-height: 1.6;
   color: var(--text-color, #2c3e50);
   resize: vertical;
-  min-height: 100px;
-  width: 100%;
+  min-height: 120px;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
   transition: all 0.2s ease;
   

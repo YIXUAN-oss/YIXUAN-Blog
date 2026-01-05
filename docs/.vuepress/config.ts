@@ -216,6 +216,8 @@ export default defineUserConfig({
             dark: 'auto', // 自动切换暗色模式
             // 强制要求登录后才能评论（需要服务端配置社交登录）
             login: 'force', // 强制登录，隐藏用户信息输入框
+            // 浏览量统计配置
+            // visitor: true 已启用，VuePress Reco 主题会自动在博客列表和文章页面显示浏览量
             // 表情配置（可选，需要服务端支持）
             // emoji: [
             //   'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
