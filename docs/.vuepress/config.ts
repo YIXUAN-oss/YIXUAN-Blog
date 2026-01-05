@@ -18,7 +18,7 @@ export default defineUserConfig({
     bundler: viteBundler(),
 
     // 配置 URL 格式：启用 cleanUrls 可生成不带 .html 扩展名的 URL
-    // 注意：这会改变生成的 URL 格式，可能影响现有链接
+    // 注意：VuePress 2.x 可能不支持此配置
     // cleanUrls: true, // 如果需要，取消注释以启用
     head: [
         ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }],
@@ -214,6 +214,21 @@ export default defineUserConfig({
               : 'https://waline-server-eight-psi.vercel.app', // 开发环境使用原始Waline服务
             visitor: true, // 启用浏览量统计（重要！）
             dark: 'auto', // 自动切换暗色模式
+            // 要求用户必须填写昵称和邮箱才能评论（登录验证）
+            requiredMeta: ['nick', 'mail'], // 必须填写昵称和邮箱
+            // 可选：如果配置了社交登录，可以强制要求登录
+            // login: 'force', // 强制登录（需要在服务端配置社交登录）
+            // 表情配置（可选，需要服务端支持）
+            // emoji: [
+            //   'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
+            //   'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+            // ],
+            // 图片上传（可选，需要服务端配置）
+            // imageUploader: true,
+            // 代码高亮（可选）
+            // highlighter: true,
+            // 数学公式支持（可选）
+            // mathTagSupport: true,
             locale: {
               placeholder: '请输入评论...',
             },

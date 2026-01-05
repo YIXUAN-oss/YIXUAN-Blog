@@ -634,3 +634,570 @@ a.tutorial-card:focus {
     padding-left: 0 !important;
   }
 }
+
+// ============================================
+// Waline 评论系统样式优化
+// ============================================
+
+// 评论区域整体样式
+#waline,
+.waline-container,
+.waline-wrapper,
+.vuepress-reco-wrapper-page .waline-wrapper,
+.page .waline-wrapper {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color, #eaecef);
+  max-width: 100%;
+}
+
+// 评论输入框区域
+.waline-input-wrapper,
+.waline-editor,
+.waline-editor-wrapper {
+  background: var(--bg-color-secondary, #f6f8fa);
+  border: 1px solid var(--border-color, #eaecef);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: var(--accent-color, #3eaf7c);
+    box-shadow: 0 2px 8px rgba(62, 175, 124, 0.1);
+  }
+  
+  &:focus-within {
+    border-color: var(--accent-color, #3eaf7c);
+    box-shadow: 0 4px 12px rgba(62, 175, 124, 0.15);
+  }
+}
+
+// 评论输入框
+.waline-editor textarea,
+.waline-input,
+.waline-editor textarea {
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-color, #2c3e50);
+  resize: vertical;
+  min-height: 100px;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  transition: all 0.2s ease;
+  
+  &::placeholder {
+    color: var(--text-color-secondary, #8b949e);
+  }
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+// 输入框工具栏
+.waline-toolbar,
+.waline-editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color, #eaecef);
+  
+  button,
+  .toolbar-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-color-secondary, #8b949e);
+    cursor: pointer;
+    padding: 0.375rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background: var(--bg-color-secondary, #f6f8fa);
+      color: var(--accent-color, #3eaf7c);
+    }
+    
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+// 评论提交按钮
+.waline-btn,
+.waline-submit,
+.waline-submit-btn,
+button.waline-btn {
+  background: var(--accent-color, #3eaf7c);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.625rem 1.5rem;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(62, 175, 124, 0.2);
+  
+  &:hover {
+    background: #2d8f5f;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(62, 175, 124, 0.3);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+// 字符计数
+.waline-word-count {
+  font-size: 12px;
+  color: var(--text-color-secondary, #8b949e);
+  margin-left: auto;
+}
+
+// 评论列表容器
+.waline-comment-list,
+.waline-list {
+  margin-top: 2rem;
+}
+
+// 评论标题和排序
+.waline-comment-count,
+.waline-count {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-color, #2c3e50);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+// 排序选项
+.waline-sort-btn,
+.waline-sort {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 14px;
+  
+  button,
+  .sort-item {
+    background: transparent;
+    border: 1px solid var(--border-color, #eaecef);
+    border-radius: 6px;
+    padding: 0.375rem 0.875rem;
+    color: var(--text-color-secondary, #8b949e);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 13px;
+    
+    &:hover {
+      border-color: var(--accent-color, #3eaf7c);
+      color: var(--accent-color, #3eaf7c);
+    }
+    
+    &.active {
+      background: var(--accent-color, #3eaf7c);
+      border-color: var(--accent-color, #3eaf7c);
+      color: #ffffff;
+    }
+  }
+}
+
+// 单个评论项
+.waline-comment,
+.waline-item,
+.waline-comment-item {
+  background: var(--bg-color, #ffffff);
+  border: 1px solid var(--border-color, #eaecef);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  transition: all 0.3s ease;
+  position: relative;
+  
+  &:hover {
+    border-color: var(--accent-color, #3eaf7c);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  // 评论项之间的分隔线
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--border-color, #eaecef);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  &:not(:last-child)::after {
+    opacity: 0.5;
+  }
+}
+
+// 评论头部（用户信息）
+.waline-comment-header,
+.waline-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.875rem;
+}
+
+// 用户头像
+.waline-avatar,
+.waline-comment-avatar,
+.waline-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color, #eaecef);
+  transition: all 0.3s ease;
+  object-fit: cover;
+  
+  &:hover {
+    border-color: var(--accent-color, #3eaf7c);
+    transform: scale(1.05);
+  }
+}
+
+// 用户信息
+.waline-comment-info,
+.waline-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+// 用户名
+.waline-comment-author,
+.waline-author {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-color, #2c3e50);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+// 用户标签（博主、管理员等）
+.waline-badge,
+.waline-author-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  margin-left: 0.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+// 验证标记
+.waline-verified {
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent-color, #3eaf7c);
+  margin-left: 0.25rem;
+  
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+// 评论时间和设备信息
+.waline-comment-time,
+.waline-time {
+  font-size: 13px;
+  color: var(--text-color-secondary, #8b949e);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+// 评论内容
+.waline-comment-content,
+.waline-content {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-color, #2c3e50);
+  margin: 1rem 0;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  
+  p {
+    margin: 0.5rem 0;
+    
+    &:first-child {
+      margin-top: 0;
+    }
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  // 代码块样式
+  code {
+    background: var(--code-bg-color, #f6f8fa);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: 'Consolas', 'Monaco', monospace;
+  }
+  
+  // 链接样式
+  a {
+    color: var(--accent-color, #3eaf7c);
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// 评论操作按钮
+.waline-comment-action,
+.waline-action {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color, #eaecef);
+}
+
+// 操作按钮（点赞、回复等）
+.waline-action-btn,
+.waline-like,
+.waline-reply {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: transparent;
+  border: none;
+  color: var(--text-color-secondary, #8b949e);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0.375rem 0.625rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: var(--bg-color-secondary, #f6f8fa);
+    color: var(--accent-color, #3eaf7c);
+  }
+  
+  svg,
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+// 点赞按钮激活状态
+.waline-like.active {
+  color: #ff6b6b;
+  
+  &:hover {
+    color: #ff5252;
+  }
+}
+
+// 管理员操作按钮
+.waline-admin-action {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color, #eaecef);
+  
+  button {
+    background: transparent;
+    border: 1px solid var(--border-color, #eaecef);
+    border-radius: 6px;
+    padding: 0.375rem 0.875rem;
+    font-size: 12px;
+    color: var(--text-color-secondary, #8b949e);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      border-color: var(--accent-color, #3eaf7c);
+      color: var(--accent-color, #3eaf7c);
+    }
+  }
+}
+
+// 回复评论样式
+.waline-reply-item,
+.waline-nested,
+.waline-reply {
+  margin-left: 2rem;
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--border-color, #eaecef);
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, 
+      var(--accent-color, #3eaf7c) 0%, 
+      transparent 100%);
+    opacity: 0.3;
+  }
+  
+  .waline-comment,
+  .waline-item {
+    background: var(--bg-color-secondary, #f6f8fa);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+// 加载状态
+.waline-loading {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-color-secondary, #8b949e);
+  font-size: 14px;
+}
+
+// 空状态
+.waline-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-color-secondary, #8b949e);
+  font-size: 14px;
+}
+
+// Powered by Waline 链接
+.waline-powered {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color, #eaecef);
+  font-size: 12px;
+  color: var(--text-color-secondary, #8b949e);
+  
+  a {
+    color: var(--text-color-secondary, #8b949e);
+    text-decoration: none;
+    
+    &:hover {
+      color: var(--accent-color, #3eaf7c);
+    }
+  }
+}
+
+// 暗色模式适配
+[data-theme="dark"] {
+  .waline-input-wrapper,
+  .waline-editor {
+    background: var(--bg-color-secondary, #161b22);
+    border-color: var(--border-color, #30363d);
+    
+    &:hover {
+      border-color: var(--accent-color, #3eaf7c);
+      box-shadow: 0 2px 8px rgba(62, 175, 124, 0.2);
+    }
+  }
+  
+  .waline-comment,
+  .waline-item {
+    background: var(--bg-color-secondary, #161b22);
+    border-color: var(--border-color, #30363d);
+    
+    &:hover {
+      border-color: var(--accent-color, #3eaf7c);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+  }
+  
+  .waline-reply-item .waline-comment {
+    background: var(--bg-color, #0d1117);
+  }
+  
+  .waline-action-btn:hover {
+    background: var(--bg-color, #0d1117);
+  }
+}
+
+// 移动端响应式
+@media (max-width: 768px) {
+  .waline-input-wrapper,
+  .waline-editor {
+    padding: 1rem;
+  }
+  
+  .waline-comment,
+  .waline-item {
+    padding: 1rem;
+  }
+  
+  .waline-comment-count {
+    font-size: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .waline-sort-btn {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .waline-reply-item {
+    margin-left: 1rem;
+    padding-left: 0.75rem;
+  }
+  
+  .waline-comment-header {
+    flex-wrap: wrap;
+  }
+  
+  .waline-action {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+}
+
+// 平板端优化
+@media (max-width: 1024px) and (min-width: 769px) {
+  .waline-comment,
+  .waline-item {
+    padding: 1.125rem;
+  }
+}
