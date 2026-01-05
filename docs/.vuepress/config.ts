@@ -36,7 +36,7 @@ export default defineUserConfig({
 
         // 自定义搜索框样式
         ['style', {}, `
-            .search-box { width: 280px !important; min-width: 280px !important; max-width: 280px !important; }
+            .search-box { width: 230px !important; min-width: 230px !important; max-width: 230px !important; }
             .search-box input { width: 100% !important; }
             @media (max-width: 768px) {
                 .search-box { width: 200px !important; min-width: 200px !important; max-width: 200px !important; }
