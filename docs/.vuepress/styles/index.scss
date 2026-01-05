@@ -1372,3 +1372,84 @@ button.waline-btn {
     padding: 1.125rem;
   }
 }
+
+// ============================================
+// 隐藏博客列表页面的浏览量，只在文章详情页显示
+// ============================================
+
+// 博客列表页面（posts.html 或首页博客列表）隐藏浏览量
+.reco-blog-wrapper,
+.reco-blog,
+.home-blog-wrapper,
+.home-blog,
+.blog-wrapper,
+.blog-list,
+.reco-blog-list {
+  // 隐藏浏览量相关的元素
+  .item-wrapper .item-meta .visitor-count,
+  .item-wrapper .item-meta .views,
+  .item-wrapper .item-meta .visitor,
+  .item-wrapper .item-meta [class*="visitor"],
+  .item-wrapper .item-meta [class*="view"],
+  .item-wrapper .item-meta [class*="Views"],
+  .item-wrapper .item-meta [class*="Visitor"],
+  .item-wrapper .item-meta span:has(svg[class*="eye"]),
+  .item-wrapper .item-meta span:has(svg[viewBox*="24"]),
+  .item-wrapper .item-meta .reco-visitor,
+  .item-wrapper .item-meta .reco-views,
+  .item-wrapper .item-meta .waline-visitor-count,
+  .item-wrapper .item-meta .waline-pageview {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  // 隐藏包含浏览量图标的元素
+  .item-wrapper .item-meta > span:has(svg),
+  .item-wrapper .item-meta > div:has(svg) {
+    // 检查是否包含浏览量相关的文本或图标
+    &:has-text("0"),
+    &:has-text("1"),
+    &:has-text("2"),
+    &:has-text("3"),
+    &:has-text("4"),
+    &:has-text("5"),
+    &:has-text("6"),
+    &:has-text("7"),
+    &:has-text("8"),
+    &:has-text("9") {
+      // 如果包含数字且是浏览量相关，则隐藏
+      display: none !important;
+    }
+  }
+}
+
+// 更精确的选择器：针对博客列表页面的浏览量
+body:not(.page) .reco-blog-wrapper .item-wrapper .item-meta .visitor-count,
+body:not(.page) .reco-blog-wrapper .item-wrapper .item-meta .views,
+body:not(.page) .reco-blog-wrapper .item-wrapper .item-meta .visitor,
+body:not(.page) .home-blog-wrapper .item-wrapper .item-meta .visitor-count,
+body:not(.page) .home-blog-wrapper .item-wrapper .item-meta .views,
+body:not(.page) .home-blog-wrapper .item-wrapper .item-meta .visitor,
+.reco-blog-wrapper .item-wrapper .item-meta span[title*="浏览"],
+.reco-blog-wrapper .item-wrapper .item-meta span[title*="view"],
+.reco-blog-wrapper .item-wrapper .item-meta span[title*="View"],
+.home-blog-wrapper .item-wrapper .item-meta span[title*="浏览"],
+.home-blog-wrapper .item-wrapper .item-meta span[title*="view"],
+.home-blog-wrapper .item-wrapper .item-meta span[title*="View"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+// 使用 JavaScript 辅助：通过添加类名来区分列表页和详情页
+// JavaScript 代码已在 client.ts 中实现，用于动态隐藏博客列表页面的浏览量
+// 更精确的隐藏逻辑通过 JavaScript 实现，可以识别浏览量图标和文本

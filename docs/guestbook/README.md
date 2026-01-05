@@ -20,15 +20,6 @@ toc: false
   <p>欢迎大家在此留下你的建议和意见，或者在 <a href="https://github.com/YIXUAN-oss/YIXUAN-Blog/issues" target="_blank" rel="noopener noreferrer">GitHub Issue<svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> 提交你的问题，或来 <a href="https://github.com/YIXUAN-oss/YIXUAN-Blog/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions<svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> 进行讨论。</p>
 </div>
 
-<div class="guestbook-actions">
-  <span class="last-update">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-    </svg>
-    最后更新时间 2026/01/05 11:18:26
-  </span>
-</div>
-
 ## 💬 评论区
 
 <style scoped>
@@ -102,40 +93,6 @@ toc: false
   opacity: 0.7;
 }
 
-.guestbook-actions {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin: 20px 0;
-  padding: 15px 0;
-  border-bottom: 1px solid var(--border-color, #eaecef);
-}
-
-.edit-link {
-  display: inline-flex;
-  align-items: center;
-  color: var(--text-color-secondary, #6a737d);
-  text-decoration: none;
-  font-size: 0.9em;
-  transition: color 0.3s;
-}
-
-.edit-link:hover {
-  color: var(--accent-color, #3eaf7c);
-}
-
-.last-update {
-  display: inline-flex;
-  align-items: center;
-  color: var(--text-color-secondary, #6a737d);
-  font-size: 0.9em;
-}
-
-@media (max-width: 768px) {
-  .guestbook-actions {
-    justify-content: flex-start;
-  }
-}
 
 /* 隐藏留言板页面的目录 */
 .page-toc-wrapper,
