@@ -201,7 +201,7 @@ export default defineUserConfig({
           options: {
             serverURL: process.env.VERCEL 
               ? 'https://waline.yixuan.cyou'  // Vercel 生产环境使用子域名
-              : 'https://waline-server-eight-psi.vercel.app', // 开发环境使用原始Waline服务
+              : 'https://waline.yixuan.cyou', // 开发环境使用原始Waline服务
             visitor: true, // 启用浏览量统计（VuePress Reco 主题会自动在文章页面显示）
             dark: 'auto', // 自动切换暗色模式
             // 不强制登录，允许匿名评论

@@ -400,6 +400,428 @@ export default defineClientConfig({
                 }
             }, 200);
             
+            // 在博客列表页加载 Waline 浏览量统计（已禁用，不在卡片上显示浏览量）
+            const initBlogListPageviews = () => {
+                // 已禁用博客卡片上的浏览量显示，直接返回
+                return;
+                
+                try {
+                    const currentPath = window.location.pathname;
+                    // 判断是否为博客列表页面（posts.html 或首页）
+                    const isBlogListPage = currentPath === '/posts.html' || 
+                                          currentPath === '/posts' ||
+                                          currentPath === '/' ||
+                                          currentPath.endsWith('/posts.html') ||
+                                          currentPath.endsWith('/posts');
+                    
+                    // 判断是否为文章详情页（包含具体文章路径，不是列表页）
+                    const isArticlePage = currentPath.includes('/posts/') && 
+                                         !currentPath.endsWith('/posts') &&
+                                         !currentPath.endsWith('/posts.html');
+                    
+                    // 只在博客列表页面初始化浏览量
+                    if (isBlogListPage && !isArticlePage) {
+                        // 如果已经初始化过且找到了链接，就不再重复执行
+                        if ((window as any).__pageviewInitialized && (window as any).__pageviewLinksFound) {
+                            return;
+                        }
+                        console.log('[Pageview] Initializing blog list pageviews...');
+                        console.log('[Pageview] Current path:', currentPath);
+                        console.log('[Pageview] isBlogListPage:', isBlogListPage, 'isArticlePage:', isArticlePage);
+                        
+                        // 输出页面上所有可能的博客相关元素
+                        const allPossibleSelectors = [
+                            '.item-wrapper',
+                            '.reco-blog-wrapper',
+                            '.home-blog-wrapper',
+                            '.blog-wrapper',
+                            '.blog-list',
+                            '.reco-blog-list',
+                            '[class*="blog"]',
+                            '[class*="item"]',
+                            '[class*="post"]',
+                            'article',
+                            '.card',
+                            '.post-card'
+                        ];
+                        
+                        console.log('[Pageview] Checking page structure...');
+                        allPossibleSelectors.forEach(selector => {
+                            try {
+                                const elements = document.querySelectorAll(selector);
+                                if (elements.length > 0) {
+                                    console.log(`[Pageview] Found ${elements.length} elements with selector: ${selector}`);
+                                    if (elements.length <= 3) {
+                                        // 只输出前3个元素的结构
+                                        elements.forEach((el, idx) => {
+                                            console.log(`[Pageview] Element ${idx} (${selector}):`, el.className, el.tagName);
+                                        });
+                                    }
+                                }
+                            } catch (e) {
+                                // 忽略选择器错误
+                            }
+                        });
+                        // 获取 Waline serverURL（从已存在的 Waline 实例或配置中获取）
+                        const getWalineServerURL = (): string => {
+                            // 方法1: 从 Waline 实例中获取
+                            const walineInstance = (window as any).Waline;
+                            if (walineInstance && walineInstance.options && walineInstance.options.serverURL) {
+                                return walineInstance.options.serverURL;
+                            }
+                            
+                            // 方法2: 从页面中的 script 标签或配置中查找
+                            const walineScript = document.querySelector('script[src*="waline"]');
+                            if (walineScript) {
+                                // 尝试从 Waline 的初始化代码中提取
+                                const scripts = document.querySelectorAll('script');
+                                for (const script of scripts) {
+                                    const content = script.textContent || '';
+                                    if (content.includes('serverURL') || content.includes('waline.yixuan.cyou')) {
+                                        const match = content.match(/serverURL['":\s]*['"]([^'"]+)['"]/);
+                                        if (match) {
+                                            return match[1];
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            // 方法3: 默认值
+                            return 'https://waline.yixuan.cyou';
+                        };
+                        
+                        const serverURL = getWalineServerURL();
+                        console.log('[Pageview] Using Waline serverURL:', serverURL);
+                        
+                        // 尝试多种选择器来查找博客链接
+                        // 首先尝试直接查找所有包含 /posts/ 的链接（最通用）
+                        // 但要排除导航栏、侧边栏等
+                        const excludeSelectors = [
+                            'nav a',
+                            '.navbar a',
+                            '.sidebar a',
+                            '.toc a',
+                            'header a',
+                            'footer a'
+                        ];
+                        
+                        let allPostLinks = Array.from(document.querySelectorAll('a[href*="/posts/"]'));
+                        
+                        // 过滤掉导航栏和侧边栏的链接
+                        allPostLinks = allPostLinks.filter(link => {
+                            const element = link as HTMLElement;
+                            // 检查是否在排除的选择器中
+                            for (const excludeSelector of excludeSelectors) {
+                                if (element.closest(excludeSelector.replace(' a', ''))) {
+                                    return false;
+                                }
+                            }
+                            // 检查是否在主要内容区域
+                            const mainContent = element.closest('.content, .main-content, .page-content, .theme-reco-content, .content__default, .page, main');
+                            return mainContent !== null;
+                        });
+                        
+                        let blogLinks: NodeListOf<Element> | null = null;
+                        
+                        if (allPostLinks.length > 0) {
+                            // 创建一个临时的 NodeList
+                            const tempDiv = document.createElement('div');
+                            allPostLinks.forEach(link => tempDiv.appendChild(link.cloneNode(true)));
+                            blogLinks = tempDiv.querySelectorAll('a') as any;
+                            console.log('[Pageview] Found', allPostLinks.length, 'blog links in main content (filtered from', document.querySelectorAll('a[href*="/posts/"]').length, 'total)');
+                        } else {
+                            // 如果没找到，尝试其他选择器
+                            const linkSelectors = [
+                                '.item-wrapper .item-title a',
+                                '.reco-blog-wrapper .item-wrapper .item-title a',
+                                '.home-blog-wrapper .item-wrapper .item-title a',
+                                '.item-wrapper a[href*="/posts/"]',
+                                '.reco-blog-wrapper a[href*="/posts/"]',
+                                '.home-blog-wrapper a[href*="/posts/"]',
+                                '.item-title a',
+                                '.item-wrapper a',
+                                '.reco-blog-wrapper a',
+                                '.home-blog-wrapper a',
+                                'article a',
+                                '.card a',
+                                '.post-card a'
+                            ];
+                            
+                            for (const selector of linkSelectors) {
+                                blogLinks = document.querySelectorAll(selector);
+                                if (blogLinks.length > 0) {
+                                    console.log('[Pageview] Found', blogLinks.length, 'blog links using selector:', selector);
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        // 如果找到了链接，转换为数组以便后续处理
+                        if (blogLinks && blogLinks.length > 0) {
+                            blogLinks = allPostLinks as any;
+                        }
+                        
+                        // 如果还是没找到，输出调试信息
+                        if (!blogLinks || blogLinks.length === 0) {
+                            console.warn('[Pageview] No blog links found. Checking DOM structure...');
+                            
+                            // 检查页面上所有的链接
+                            const allLinks = document.querySelectorAll('a[href]');
+                            const postLinks = Array.from(allLinks).filter(link => {
+                                const href = (link as HTMLAnchorElement).href;
+                                return href.includes('/posts/') || href.includes('/articles/') || href.includes('/tutorials/');
+                            });
+                            console.log('[Pageview] Found', postLinks.length, 'post/article links on page');
+                            if (postLinks.length > 0 && postLinks.length <= 5) {
+                                postLinks.forEach((link, idx) => {
+                                    console.log(`[Pageview] Link ${idx}:`, (link as HTMLAnchorElement).href, 'Parent:', link.parentElement?.className);
+                                });
+                            }
+                            
+                            // 检查实际存在的元素
+                            const itemWrappers = document.querySelectorAll('.item-wrapper, .reco-blog-wrapper, .home-blog-wrapper');
+                            console.log('[Pageview] Found', itemWrappers.length, 'item wrappers');
+                            
+                            // 检查页面的主要内容区域
+                            const mainContent = document.querySelector('.content, .main-content, .page-content, .theme-reco-content, .content__default');
+                            if (mainContent) {
+                                console.log('[Pageview] Found main content area:', mainContent.className);
+                                const linksInContent = mainContent.querySelectorAll('a[href*="/posts/"]');
+                                console.log('[Pageview] Links in main content:', linksInContent.length);
+                            }
+                            
+                            // 如果还没有链接，等待 DOM 加载（但限制重试次数）
+                            const retryCount = (window as any).__pageviewRetryCount || 0;
+                            if (retryCount < 5) {
+                                (window as any).__pageviewRetryCount = retryCount + 1;
+                                console.log(`[Pageview] Retrying... (${retryCount + 1}/5)`);
+                                setTimeout(initBlogListPageviews, 2000);
+                            } else {
+                                console.warn('[Pageview] Max retries reached, stopping. Please check if you are on a blog list page.');
+                                delete (window as any).__pageviewRetryCount;
+                            }
+                            return;
+                        }
+                        
+                        // 重置重试计数
+                        delete (window as any).__pageviewRetryCount;
+                        
+                        // 标记已找到链接
+                        (window as any).__pageviewLinksFound = true;
+                        
+                        blogLinks!.forEach((link) => {
+                            const href = (link as HTMLAnchorElement).href;
+                            if (!href) return;
+                            
+                            try {
+                                // 解析 URL 获取路径
+                                const url = new URL(href, window.location.origin);
+                                let path = url.pathname;
+                                
+                                // 移除 base 路径（如果有）
+                                const base = (window as any).__VUEPRESS_BASE__ || '/';
+                                if (path.startsWith(base)) {
+                                    path = path.slice(base.length);
+                                }
+                                if (!path.startsWith('/')) {
+                                    path = '/' + path;
+                                }
+                                
+                                // 查找对应的浏览量显示元素
+                                const itemWrapper = link.closest('.item-wrapper');
+                                if (!itemWrapper) return;
+                                
+                                // 查找浏览量显示元素（包含眼睛图标的 span）
+                                // 尝试多种选择器来找到浏览量元素
+                                const possibleSelectors = [
+                                    '.item-meta .visitor-count',
+                                    '.item-meta .reco-visitor',
+                                    '.item-meta .waline-visitor-count',
+                                    '.item-meta .waline-pageview',
+                                    '.item-meta span:has(svg)',
+                                    '.item-meta > span',
+                                    '.item-meta > div'
+                                ];
+                                
+                                let viewElement: HTMLElement | null = null;
+                                
+                                // 先尝试使用特定的类名选择器
+                                for (const selector of possibleSelectors) {
+                                    const elements = itemWrapper.querySelectorAll(selector);
+                                    for (const el of elements) {
+                                        const element = el as HTMLElement;
+                                        const svg = element.querySelector('svg');
+                                        const text = (element.textContent || '').trim();
+                                        
+                                        // 检查是否是浏览量元素（包含眼睛图标或数字）
+                                        if (svg) {
+                                            const viewBox = svg.getAttribute('viewBox') || '';
+                                            const path = svg.querySelector('path');
+                                            const pathD = path?.getAttribute('d') || '';
+                                            
+                                            // 检查是否是眼睛图标（常见的眼睛图标特征）
+                                            const isEyeIcon = viewBox.includes('24') && 
+                                                             (pathD.includes('M12') || pathD.includes('M9') || 
+                                                              pathD.includes('M15') || pathD.includes('M18'));
+                                            
+                                            // 如果包含眼睛图标，或者文本是纯数字，则认为是浏览量元素
+                                            if (isEyeIcon || /^\d+$/.test(text)) {
+                                                viewElement = element;
+                                                break;
+                                            }
+                                        } else if (/^\d+$/.test(text) && text !== '0') {
+                                            // 如果没有 SVG 但文本是数字（且不是0），也可能是浏览量
+                                            viewElement = element;
+                                            break;
+                                        }
+                                    }
+                                    if (viewElement) break;
+                                }
+                                
+                                // 如果还没找到，尝试遍历所有 meta 元素
+                                if (!viewElement) {
+                                    const metaElements = itemWrapper.querySelectorAll('.item-meta > span, .item-meta > div');
+                                    metaElements.forEach((metaEl) => {
+                                        const el = metaEl as HTMLElement;
+                                        const svg = el.querySelector('svg');
+                                        const text = (el.textContent || '').trim();
+                                        
+                                        // 检查是否是浏览量元素（包含眼睛图标）
+                                        if (svg) {
+                                            const viewBox = svg.getAttribute('viewBox') || '';
+                                            if (viewBox.includes('24')) {
+                                                viewElement = el;
+                                            }
+                                        }
+                                    });
+                                }
+                                
+                                if (!viewElement) {
+                                    console.warn('[Pageview] View element not found for link:', href);
+                                    return;
+                                }
+                                
+                                console.log('[Pageview] Found view element for path:', path, 'current value:', viewElement.textContent);
+                                
+                                // 调用 Waline 的浏览量 API
+                                // Waline 的浏览量 API 路径：/api/comment?type=visitor&path=...
+                                const apiUrl = `${serverURL}/api/comment?type=visitor&path=${encodeURIComponent(path)}`;
+                                
+                                console.log('[Pageview] Fetching pageview for path:', path, 'from:', apiUrl);
+                                
+                                fetch(apiUrl, {
+                                    method: 'GET',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        // 如果返回 404，说明该路径还没有浏览量数据，这是正常的
+                                        if (response.status === 404) {
+                                            return null;
+                                        }
+                                        throw new Error(`HTTP error! status: ${response.status}`);
+                                    }
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    if (data === null) {
+                                        // 404 响应，没有浏览量数据，保持显示 0
+                                        return;
+                                    }
+                                    
+                                    // Waline API 返回的数据格式可能是：
+                                    // - 直接是数字
+                                    // - { count: number }
+                                    // - { data: number }
+                                    let count = 0;
+                                    if (typeof data === 'number') {
+                                        count = data;
+                                    } else if (data && typeof data === 'object') {
+                                        count = data.count || data.data || data.time || 0;
+                                    }
+                                    
+                                    if (viewElement) {
+                                        console.log('[Pageview] Updating pageview for', path, 'to', count);
+                                        // 更新浏览量，保留 SVG 图标
+                                        const svg = viewElement.querySelector('svg');
+                                        if (svg) {
+                                            // 克隆 SVG 以避免重复引用问题
+                                            const svgClone = svg.cloneNode(true) as SVGElement;
+                                            viewElement.innerHTML = '';
+                                            viewElement.appendChild(svgClone);
+                                            viewElement.appendChild(document.createTextNode(' ' + count));
+                                        } else {
+                                            viewElement.textContent = String(count);
+                                        }
+                                    } else {
+                                        console.warn('[Pageview] View element not found for path:', path);
+                                    }
+                                })
+                                .catch(err => {
+                                    // 输出错误信息以便调试
+                                    console.debug('Failed to load pageview for', path, 'from', apiUrl, err);
+                                });
+                            } catch (err) {
+                                // 静默处理错误
+                                console.debug('Error processing link:', err);
+                            }
+                        });
+                    }
+                } catch (e) {
+                    console.warn('initBlogListPageviews error:', e);
+                }
+            };
+            
+            // 初始执行（延迟更长时间，确保 DOM 完全加载）
+            setTimeout(() => {
+                (window as any).__pageviewRetryCount = 0;
+                initBlogListPageviews();
+            }, 2000);
+            setTimeout(() => {
+                if (!(window as any).__pageviewInitialized) {
+                    (window as any).__pageviewRetryCount = 0;
+                    initBlogListPageviews();
+                }
+            }, 4000);
+            
+            // 路由变化后重新执行
+            router.afterEach(() => {
+                (window as any).__pageviewRetryCount = 0;
+                setTimeout(() => {
+                    initBlogListPageviews();
+                }, 1000);
+            });
+            
+            // 监听 DOM 变化，确保动态加载的内容也能加载浏览量（使用防抖）
+            if (typeof MutationObserver !== 'undefined') {
+                let pageviewDebounceTimer: ReturnType<typeof setTimeout> | null = null;
+                const pageviewObserver = new MutationObserver(() => {
+                    const currentPath = window.location.pathname;
+                    const isBlogListPage = currentPath === '/posts.html' || 
+                                          currentPath === '/posts' ||
+                                          currentPath === '/' ||
+                                          currentPath.endsWith('/posts.html') ||
+                                          currentPath.endsWith('/posts');
+                    if (isBlogListPage) {
+                        // 防抖处理，避免频繁调用
+                        if (pageviewDebounceTimer) {
+                            clearTimeout(pageviewDebounceTimer);
+                        }
+                        pageviewDebounceTimer = setTimeout(() => {
+                            (window as any).__pageviewRetryCount = 0;
+                            initBlogListPageviews();
+                        }, 2000);
+                    }
+                });
+                
+                pageviewObserver.observe(document.body, {
+                    childList: true,
+                    subtree: true
+                });
+            }
+            
         }
     },
 
@@ -499,6 +921,169 @@ export default defineClientConfig({
             setTimeout(initProfileCard, 500);
             setTimeout(initProfileCard, 1000);
             setTimeout(initProfileCard, 2000);
+            
+            // 隐藏博客卡片上的浏览量和小眼睛图标
+            const hideBlogCardPageviews = () => {
+                try {
+                    // 查找所有博客卡片（使用多种选择器）
+                    const itemWrappers = document.querySelectorAll('.item-wrapper, .reco-blog-wrapper .item-wrapper, .home-blog-wrapper .item-wrapper');
+                    
+                    itemWrappers.forEach((wrapper) => {
+                        const itemMeta = wrapper.querySelector('.item-meta');
+                        if (!itemMeta) return;
+                        
+                        // 方法1: 隐藏所有包含SVG的元素（浏览量通常有眼睛图标）
+                        // 注意：:has()选择器可能不被所有浏览器支持，所以也查找SVG元素本身
+                        const elementsWithSvg = Array.from(itemMeta.querySelectorAll('span, div')).filter(el => {
+                            return el.querySelector('svg') !== null;
+                        });
+                        const svgElements = itemMeta.querySelectorAll('svg');
+                        // 隐藏包含SVG的容器元素
+                        elementsWithSvg.forEach((el) => {
+                            const element = el as HTMLElement;
+                            element.style.setProperty('display', 'none', 'important');
+                            element.style.setProperty('visibility', 'hidden', 'important');
+                            element.style.setProperty('opacity', '0', 'important');
+                            element.style.setProperty('width', '0', 'important');
+                            element.style.setProperty('height', '0', 'important');
+                            element.style.setProperty('overflow', 'hidden', 'important');
+                        });
+                        
+                        // 隐藏SVG元素本身，并隐藏其父元素
+                        svgElements.forEach((svg) => {
+                            const svgElement = svg as SVGElement;
+                            const parent = svgElement.parentElement;
+                            if (parent && parent.closest('.item-meta')) {
+                                parent.style.setProperty('display', 'none', 'important');
+                                parent.style.setProperty('visibility', 'hidden', 'important');
+                                parent.style.setProperty('opacity', '0', 'important');
+                                parent.style.setProperty('width', '0', 'important');
+                                parent.style.setProperty('height', '0', 'important');
+                                parent.style.setProperty('overflow', 'hidden', 'important');
+                            }
+                        });
+                        
+                        // 方法2: 查找所有可能包含浏览量的元素（更通用的方法）
+                        const allChildren = itemMeta.querySelectorAll('span, div');
+                        allChildren.forEach((el) => {
+                            const element = el as HTMLElement;
+                            const svg = element.querySelector('svg');
+                            const text = (element.textContent || '').trim();
+                            
+                            // 如果包含SVG图标
+                            if (svg) {
+                                const viewBox = svg.getAttribute('viewBox') || '';
+                                // 检查是否是眼睛图标（24x24 viewBox是常见的图标尺寸）
+                                if (viewBox.includes('24')) {
+                                    element.style.setProperty('display', 'none', 'important');
+                                    element.style.setProperty('visibility', 'hidden', 'important');
+                                    element.style.setProperty('opacity', '0', 'important');
+                                    element.style.setProperty('width', '0', 'important');
+                                    element.style.setProperty('height', '0', 'important');
+                                    element.style.setProperty('overflow', 'hidden', 'important');
+                                    element.style.setProperty('margin', '0', 'important');
+                                    element.style.setProperty('padding', '0', 'important');
+                                }
+                            }
+                            
+                            // 如果文本是纯数字（可能是浏览量）
+                            if (/^\d+$/.test(text)) {
+                                // 检查元素或其父元素是否包含SVG
+                                const hasSvg = element.querySelector('svg') !== null || 
+                                              element.parentElement?.querySelector('svg') !== null;
+                                if (hasSvg) {
+                                    element.style.setProperty('display', 'none', 'important');
+                                    element.style.setProperty('visibility', 'hidden', 'important');
+                                    element.style.setProperty('opacity', '0', 'important');
+                                }
+                            }
+                        });
+                        
+                        // 方法3: 隐藏包含特定类名的元素
+                        const classSelectors = [
+                            '.visitor-count',
+                            '.reco-visitor',
+                            '.waline-visitor-count',
+                            '.waline-pageview',
+                            '.waline-pageview-count',
+                            '[class*="visitor"]',
+                            '[class*="pageview"]',
+                            '[class*="view-count"]'
+                        ];
+                        
+                        classSelectors.forEach(selector => {
+                            try {
+                                const elements = itemMeta.querySelectorAll(selector);
+                                elements.forEach((el) => {
+                                    const element = el as HTMLElement;
+                                    element.style.setProperty('display', 'none', 'important');
+                                    element.style.setProperty('visibility', 'hidden', 'important');
+                                    element.style.setProperty('opacity', '0', 'important');
+                                    element.style.setProperty('width', '0', 'important');
+                                    element.style.setProperty('height', '0', 'important');
+                                    element.style.setProperty('overflow', 'hidden', 'important');
+                                });
+                            } catch (e) {
+                                // 忽略选择器错误
+                            }
+                        });
+                        
+                        // 方法4: 隐藏最后一个子元素（如果它包含SVG或数字）
+                        const lastChild = itemMeta.lastElementChild as HTMLElement;
+                        if (lastChild) {
+                            const hasSvg = lastChild.querySelector('svg') !== null;
+                            const text = (lastChild.textContent || '').trim();
+                            const isNumber = /^\d+$/.test(text);
+                            
+                            if (hasSvg || isNumber) {
+                                lastChild.style.setProperty('display', 'none', 'important');
+                                lastChild.style.setProperty('visibility', 'hidden', 'important');
+                                lastChild.style.setProperty('opacity', '0', 'important');
+                            }
+                        }
+                    });
+                } catch (e) {
+                    console.debug('Error hiding blog card pageviews:', e);
+                }
+            };
+            
+            // 立即执行
+            hideBlogCardPageviews();
+            
+            // 延迟执行，确保DOM完全加载
+            setTimeout(hideBlogCardPageviews, 100);
+            setTimeout(hideBlogCardPageviews, 500);
+            setTimeout(hideBlogCardPageviews, 1000);
+            setTimeout(hideBlogCardPageviews, 2000);
+            setTimeout(hideBlogCardPageviews, 3000);
+            
+            // 监听DOM变化，确保动态加载的内容也能隐藏浏览量
+            if (typeof MutationObserver !== 'undefined') {
+                let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+                const pageviewObserver = new MutationObserver(() => {
+                    // 防抖处理，避免频繁调用
+                    if (debounceTimer) {
+                        clearTimeout(debounceTimer);
+                    }
+                    debounceTimer = setTimeout(() => {
+                        hideBlogCardPageviews();
+                    }, 100);
+                });
+                
+                pageviewObserver.observe(document.body, {
+                    childList: true,
+                    subtree: true
+                });
+            }
+            
+            // 路由变化时也执行
+            if (typeof window !== 'undefined' && (window as any).__VUEPRESS_ROUTER__) {
+                (window as any).__VUEPRESS_ROUTER__.afterEach(() => {
+                    setTimeout(hideBlogCardPageviews, 100);
+                    setTimeout(hideBlogCardPageviews, 500);
+                    setTimeout(hideBlogCardPageviews, 1000);
+                });
+            }
             
             // 监听路由变化（通过 VuePress 路由）
             if (typeof window !== 'undefined' && (window as any).__VUEPRESS_ROUTER__) {
