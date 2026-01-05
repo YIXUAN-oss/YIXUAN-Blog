@@ -14,9 +14,9 @@ tags:
 author: 懿轩
 ---
 
-#  一、基础环境搭建
+##  一、基础环境搭建
 
-## 1.1 Git 下载与安装
+### 1.1 Git 下载与安装
 
 下载地址：
 
@@ -26,7 +26,7 @@ author: 懿轩
 
 [【2025最新】下载安装 Git 详细教程 （Windows）-CSDN博客](https://blog.csdn.net/2301_80035882/article/details/155000175?spm=1011.2415.3001.5331)
 
-## 1.2 Java JDK17 下载与安装
+### 1.2 Java JDK17 下载与安装
 
 下载地址：
 
@@ -38,11 +38,11 @@ author: 懿轩
 
 
 
-# 二、Flutter SDK 下载安装和开发环境搭建
+## 二、Flutter SDK 下载安装和开发环境搭建
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/39a383ef7d9348da8a770053f7ad15c7.png" alt="img" style="zoom: 67%; border-radius: 8px;" />
 
-## 2.1 DevEco Studio下载安装
+### 2.1 DevEco Studio下载安装
 
 我这里版本为：
 
@@ -78,7 +78,7 @@ author: 懿轩
 >
 > OpenHarmony 文件夹下还有一个 Sdk 文件夹
 
-### 1.下载官网压缩包
+#### 1.下载官网压缩包
 
 下载地址：
 
@@ -88,7 +88,7 @@ author: 懿轩
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/1f229fdac6a143be958728ceca7ac9cd.png" alt="img" style="zoom: 67%; border-radius: 8px;" />
 
-### 2.下载完成后解压缩包双击打开.exe进入安装页面
+#### 2.下载完成后解压缩包双击打开.exe进入安装页面
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/0c75bc3f899545f5a06106c6995b2715.png" alt="img" style="zoom: 67%; border-radius: 8px;" />
 
@@ -97,28 +97,28 @@ author: 懿轩
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/39f3982e2bd1446eb006318bc6b762c8.png" alt="img" style="zoom: 67%; border-radius: 8px;" />
 
 
-### 3.选择安装位置
+#### 3.选择安装位置
 
 尽量不要选择C盘，如果C盘空间充足也可以
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/0520a12fe7c7401b8444e2d838401610.png" alt="img" style="zoom: 67%; border-radius: 8px;" />
 
 
-### 4.选择安装选项
+#### 4.选择安装选项
 
 全选点击进入下一步
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/11af90a65c7e425e9db711aab0c9a126.png" alt="img" style="zoom: 67%; border-radius: 8px;" />
 
 
-### 5.选择开始菜单目录
+#### 5.选择开始菜单目录
 
 默认即可，点击安装
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/42d05d74820743a399212edc170a356c.png" alt="img" style="zoom: 67%; border-radius: 8px;" />
 
 
-### 6.开始安装
+#### 6.开始安装
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/5ca0163db80a4e71affdf51065ac6dad.png" alt="img" style="zoom: 67%; border-radius: 8px;" />
 
@@ -127,9 +127,9 @@ author: 懿轩
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/e76fe874332848aebc8ac5d7301603b5.png" alt="img" style="zoom: 67%; border-radius: 8px;" />
 
 
-## 2.2 DevEco Studio 相关配置
+### 2.2 DevEco Studio 相关配置
 
-### 1.新建一个项目
+#### 1.新建一个项目
 
 双击桌面图标进入应用
 
@@ -149,7 +149,7 @@ author: 懿轩
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/a525259427f9444fa4e7e0039733ace5.png" alt="img" style="zoom: 50%; border-radius: 8px;" />
 
 
-### 2. 配置显示字体
+#### 2. 配置显示字体
 
 选择左上角 File 下的 Settings
 
@@ -160,7 +160,7 @@ author: 懿轩
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/03b6f3b6610942d283d26e9e9f33be43.png" alt="img" style="zoom: 50%; border-radius: 8px;" />
 
 
-### 3.设置安装OpenHarmony SDK
+#### 3.设置安装OpenHarmony SDK
 
 在Settings页面下的OpenHarmony SDK
 
@@ -196,7 +196,7 @@ author: 懿轩
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/38daa192fdaf46929c45db05e570fdbb.png" alt="img" style="zoom: 33%; border-radius: 8px;" />
 
 
-### 4.设置安装ArkUI-x
+#### 4.设置安装ArkUI-x
 
 选择安装路径：
 
@@ -228,7 +228,7 @@ author: 懿轩
 
 点击蓝按钮OK关闭。
 
-### 5.配置安装虚拟机模拟器
+#### 5.配置安装虚拟机模拟器
 
 点击Device Manager
 
@@ -287,13 +287,13 @@ author: 懿轩
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/996ec4da4a4e4ad79c93cedaf407ce6e.png" alt="img" style="zoom: 33%; border-radius: 8px;" />
 
-### 6.运行项目
+#### 6.运行项目
 
 模拟器启动成功后，点击右上角运行按钮，即可在模拟器看见相关页面
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/50753c85025f499e8bee72a5d8ec77b4.png" alt="img" style="zoom: 67%; border-radius: 8px;" />
 
-## 2.3 配置鸿蒙SDK环境变量
+### 2.3 配置鸿蒙SDK环境变量
 
 **默认在Terminal中，默认不识别hdc命令，需要将hdc所在的路径添加到环境变量（根据自己的deveco studio安装的路径自行调整）**
 
@@ -332,9 +332,9 @@ F:\Chengxusheji\HarmonyOS\DevEco Studio\sdk
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/5ee7ffeacc1349d1b6ed63d639e06a09.png" alt="img" style="zoom: 50%; border-radius: 8px;" />
 
-## 2.4 下载适配鸿蒙的flutter SDK
+### 2.4 下载适配鸿蒙的flutter SDK
 
-### 1.开始下载
+#### 1.开始下载
 
 利用前面下载安装好的 Git ：
 
@@ -363,7 +363,7 @@ git clone -b oh-3.27.4-dev https://gitcode.com/openharmony-tpc/flutter_flutter.g
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/53d4462ff95741c7a12fa0c014e95f80.png" alt="img" style="zoom: 67%; border-radius: 8px;" />
 
-### 2.配置环境变量
+#### 2.配置环境变量
 
 2.1. 拷贝windows的flutter目录下的bin完整路径
 
@@ -424,7 +424,7 @@ https://storage.flutter-io.cn
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/7b1e000ab82c4ffc8f84e1c826305471.png" alt="img" style="zoom: 50%; border-radius: 8px;" />
 
-### 3.检查Flutter版本
+#### 3.检查Flutter版本
 
 ```
 flutter --version
@@ -433,7 +433,7 @@ flutter --version
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/7008f3a17efa451dbd883d5c7abed533.png" alt="img" style="zoom: 50%; border-radius: 8px;" />
 
 
-### 4.诊断flutter环境
+#### 4.诊断flutter环境
 
 ```
 flutter doctor -v
@@ -442,9 +442,9 @@ flutter doctor -v
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/0bc1eba8521c46228d6f273edb3531c6.png" alt="img" style="zoom: 50%; border-radius: 8px;" />
 
 
-# 三、创建并编译项目
+## 三、创建并编译项目
 
-## 3.1 创建项目
+### 3.1 创建项目
 
 执行以下命令创建一个项目，`<projectName>` 替换成你自己的项目名
 
@@ -494,7 +494,7 @@ flutter create --platforms ohos flutter_harmonyos
 
 如果选择关闭impeller渲染，可将json文件中的value改为false。
 
-## 3.2 构建app
+### 3.2 构建app
 
 在创建的项目路径下，用powershell执行以下命令构建
 
@@ -524,7 +524,7 @@ flutter build app --release
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/453416b795174835bb6c15ce17f493a5.png" alt="img" style="zoom: 67%; border-radius: 8px;" />
 
 
-## 3.3 打开项目
+### 3.3 打开项目
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/16f569180e9549a0b12db1194acf211f.png" alt="img" style="zoom: 67%; border-radius: 8px;" />
 
@@ -560,7 +560,7 @@ flutter build app --release
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/dc3c0f7c816b49efa98ffa687abe07ac.png" alt="img" style="zoom: 33%; border-radius: 8px;" />
 
-## 3.4 配置自动签名
+### 3.4 配置自动签名
 
 选择项目结构(Project Structure)
 
@@ -581,31 +581,31 @@ flutter build app --release
 
 校准完之后，即可签名成功
 
-## 3.4 编译与启动项目
+### 3.4 编译与启动项目
 
 启动虚拟模拟器，并点击右上角绿色按钮运行如下：
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/c6720026b97044298d0cdb8b40646030.png" alt="img" style="zoom: 33%; border-radius: 8px;" />
 
-## 3.5 修改目标设备
+### 3.5 修改目标设备
 
 默认项目是为手机构建的，假如需要支持电脑和平板端，需要修改一下配置
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/b0b4e306c0704371924f02522c6dba36.png" alt="img" style="zoom: 50%; border-radius: 8px;" />
 
-# 四、打开已有项目（已有开源项目需要打开时查看此步骤）
+## 四、打开已有项目（已有开源项目需要打开时查看此步骤）
 
 以kelivo-ohos这个项目为例。这个项目是一个大模型应用软件适配的鸿蒙版本
 
 [GitHub地址：https://github.com/Chevey339/kelivo-ohos](https://github.com/Chevey339/kelivo-ohos)
 
-## 4.1 源码准备
+### 4.1 源码准备
 
 下载好源码之后，我们解压并进入到源码目录，并打开poweshell
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/53bf920d48e5463ba54ba76e72ada4df.png" alt="img" style="zoom: 33%; border-radius: 8px;" />
 
-## 4.2 开始编译
+### 4.2 开始编译
 
 执行以下命令进行编译
 
@@ -618,7 +618,7 @@ flutter build app --release
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/8095f19dbe3b4752b25cc6f49d5ee5ee.png" alt="img" style="zoom: 67%; border-radius: 8px;" />
 
-## 4.3 升级flutter sdk（可选）
+### 4.3 升级flutter sdk（可选）
 
 我们访问仓库，看一下最新的发行版版本：
 
@@ -658,7 +658,7 @@ flutter build app --release
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/aaa431735fa1422ea265daa64e25a04b.png" alt="img" style="zoom: 50%; border-radius: 8px;" />
 
-## 4.4 下载flutter_packages库（可选）
+### 4.4 下载flutter_packages库（可选）
 
 从这个网址下载官方适配的库：[flutter_packages - GitCode](https://gitcode.com/openharmony-tpc/flutter_packages)
 
@@ -703,7 +703,7 @@ https://gitcode.com/openharmony-sig/fluttertpc_open_filex/tree/br_v4.5.0_ohos
 > - 改名为：mcp_client
 > - 放在源码目录下，并且，要修改一下里面的pubspec.yaml，把sdk: ^3.7.0 改为 sdk: ^3.6.2
 
-## 4.5 固定依赖版本
+### 4.5 固定依赖版本
 
 打开源码里的pubspec.yaml，把win32和ffi的版本固定一下。
 
@@ -717,7 +717,7 @@ https://gitcode.com/openharmony-sig/fluttertpc_open_filex/tree/br_v4.5.0_ohos
 
 <img src="https://cdn.jsdelivr.net/gh/YIXUAN-oss/yixuan-blog-image-hosting@master/blogs/ced7613c01804bf0bbc57428b94175be.png" alt="img" style="zoom: 50%; border-radius: 8px;" />
 
-## 4.6 补全build-profile.json5
+### 4.6 补全build-profile.json5
 
 将以下自动生成的默认build-profile.json5模板，放到源码的ohos中，找到 build-profile.json5（如果没有创建一个build-profile.json5文件），粘贴以下代码
 
@@ -764,7 +764,7 @@ https://gitcode.com/openharmony-sig/fluttertpc_open_filex/tree/br_v4.5.0_ohos
 ```
 
 
-## 4.7 添加粘贴权限
+### 4.7 添加粘贴权限
 
 默认移植的flutter程序，是没办法粘贴内容的，我们需要添加获取剪切板权限
 

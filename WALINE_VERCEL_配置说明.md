@@ -208,30 +208,49 @@ commentConfig: {
 },
 ```
 
-##### 5.1. 配置登录验证（可选）
+##### 5.1. 配置登录验证
 
-**基础验证（已配置）**：
-- 使用 `requiredMeta: ['nick', 'mail']` 要求用户必须填写昵称和邮箱才能评论
-- 这是最基本的验证方式，可以有效防止匿名评论
+**当前配置（强制登录）**：
+- 已启用 `login: 'force'`，要求用户必须通过社交账号登录后才能评论
+- 用户信息输入框（昵称、邮箱、网址）已隐藏
+- 用户登录后会自动获取社交账号信息（头像、昵称等）
 
-**高级验证（社交登录）**：
-如果需要更严格的登录验证（如通过 GitHub、Google 等社交账号登录），需要：
+**配置步骤**：
 
-1. **在 Waline 服务端配置环境变量**（Vercel 项目设置中）：
-   - `GITHUB_CLIENT_ID`: GitHub OAuth App 的 Client ID
-   - `GITHUB_CLIENT_SECRET`: GitHub OAuth App 的 Client Secret
-   - 其他社交登录配置（如 Google、Twitter 等）
-
-2. **创建 GitHub OAuth App**：
+1. **创建 GitHub OAuth App**：
    - 访问 https://github.com/settings/developers
    - 点击 "New OAuth App"
-   - 填写应用信息，Authorization callback URL 设置为：`https://waline.yixuan.cyou/oauth/github/callback`
-   - 获取 Client ID 和 Client Secret
+   - 填写应用信息：
+     - **Application name**: 例如 "YiXuan Blog Comments"
+     - **Homepage URL**: `https://www.yixuan.cyou`
+     - **Authorization callback URL**: `https://waline.yixuan.cyou/oauth/github/callback`
+   - 点击 "Register application"
+   - 获取 **Client ID** 和 **Client Secret**
 
-3. **在客户端配置中启用强制登录**：
+2. **在 Waline 服务端配置环境变量**（Vercel 项目设置中）：
+   - 登录 Vercel，进入你的 Waline 项目（例如：`waline-server-eight-psi`）
+   - 点击左侧菜单 **Settings** → **Environment Variables**
+   - 添加以下环境变量：
+     - `GITHUB_CLIENT_ID`: 填入刚才获取的 Client ID
+     - `GITHUB_CLIENT_SECRET`: 填入刚才获取的 Client Secret
+   - 点击 **Save** 保存
+   - 重新部署项目（Vercel 会自动检测环境变量变更并重新部署）
+
+3. **客户端配置**（已完成）：
    ```typescript
    login: 'force', // 强制要求登录
    ```
+
+**其他社交登录（可选）**：
+如果需要支持更多社交登录方式，可以在服务端添加相应的环境变量：
+- Google: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`
+- Twitter: `TWITTER_CLIENT_ID`, `TWITTER_CLIENT_SECRET`
+- 等等
+
+**注意事项**：
+- 配置完成后，未登录用户将看到登录按钮，点击后跳转到 GitHub 授权页面
+- 登录成功后，用户信息会自动填充，无需手动输入
+- 用户信息输入框已通过 CSS 隐藏，不会显示在界面上
 
 ##### 6. 验证配置
 

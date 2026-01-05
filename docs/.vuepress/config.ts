@@ -214,10 +214,8 @@ export default defineUserConfig({
               : 'https://waline-server-eight-psi.vercel.app', // 开发环境使用原始Waline服务
             visitor: true, // 启用浏览量统计（重要！）
             dark: 'auto', // 自动切换暗色模式
-            // 要求用户必须填写昵称和邮箱才能评论（登录验证）
-            requiredMeta: ['nick', 'mail'], // 必须填写昵称和邮箱
-            // 可选：如果配置了社交登录，可以强制要求登录
-            // login: 'force', // 强制登录（需要在服务端配置社交登录）
+            // 强制要求登录后才能评论（需要服务端配置社交登录）
+            login: 'force', // 强制登录，隐藏用户信息输入框
             // 表情配置（可选，需要服务端支持）
             // emoji: [
             //   'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
