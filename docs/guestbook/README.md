@@ -20,16 +20,7 @@ toc: false
   <p>欢迎大家在此留下你的建议和意见，或者在 <a href="https://github.com/YIXUAN-oss/YIXUAN-Blog/issues" target="_blank" rel="noopener noreferrer">GitHub Issue<svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> 提交你的问题，或来 <a href="https://github.com/YIXUAN-oss/YIXUAN-Blog/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions<svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> 进行讨论。</p>
 </div>
 
-<div class="guestbook-actions">
-  <span class="last-update">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-    </svg>
-    最后更新时间 2026/01/05 11:18:26
-  </span>
-</div>
-
-## 💬 评论区
+## 💬 留言区
 
 <style scoped>
 /* 确保留言板页面内容正常显示 */
@@ -124,17 +115,17 @@ toc: false
   color: var(--accent-color, #3eaf7c);
 }
 
+/* 隐藏最后更新时间 */
+.guestbook-actions,
 .last-update {
-  display: inline-flex;
-  align-items: center;
-  color: var(--text-color-secondary, #6a737d);
-  font-size: 0.9em;
-}
-
-@media (max-width: 768px) {
-  .guestbook-actions {
-    justify-content: flex-start;
-  }
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* 隐藏留言板页面的目录 */
@@ -370,6 +361,74 @@ body:has(.guestbook-info) [id*="waline"] {
     
     // 监听窗口大小变化
     window.addEventListener('resize', syncWidthWithInfoBox);
+    
+    // 将 Waline 中的"评论"替换为"留言"，并设置占位符文本
+    function replaceCommentText() {
+      const isGuestbook = window.location.pathname.includes('/guestbook/') || 
+                         window.location.pathname === '/guestbook' ||
+                         window.location.pathname.endsWith('/guestbook');
+      
+      if (!isGuestbook) return;
+      
+      // 设置占位符文本
+      const textarea = document.querySelector('#waline textarea, .waline-wrapper textarea, .waline-container textarea, [id*="waline"] textarea, [class*="waline"] textarea');
+      if (textarea && textarea.getAttribute('placeholder') !== '请输入留言，填写邮箱可收到回复哦！...') {
+        textarea.setAttribute('placeholder', '请输入留言，填写邮箱可收到回复哦！...');
+      }
+      
+      // 查找所有包含评论文本的元素
+      const walker = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT,
+        null
+      );
+      
+      let node;
+      const textNodes = [];
+      while (node = walker.nextNode()) {
+        // 只在 Waline 容器内查找
+        const walineContainer = node.parentElement?.closest('#waline, .waline-wrapper, .waline-container, [id*="waline"], [class*="waline"]');
+        if (walineContainer && node.textContent) {
+          // 替换"评论"为"留言"
+          if (node.textContent.includes('评论')) {
+            textNodes.push(node);
+          }
+        }
+      }
+      
+      textNodes.forEach(textNode => {
+        if (textNode.textContent) {
+          textNode.textContent = textNode.textContent.replace(/评论/g, '留言');
+        }
+      });
+      
+      // 也查找评论数量显示元素（如 "1 评论"）
+      const commentCountElements = document.querySelectorAll('.waline-comment-count, .waline-count, [class*="comment-count"], [class*="count"]');
+      commentCountElements.forEach(el => {
+        if (el.textContent && el.textContent.includes('评论')) {
+          el.textContent = el.textContent.replace(/评论/g, '留言');
+        }
+      });
+    }
+    
+    // 定期执行替换（Waline 可能是异步加载的）
+    setTimeout(replaceCommentText, 500);
+    setTimeout(replaceCommentText, 1000);
+    setTimeout(replaceCommentText, 2000);
+    setTimeout(replaceCommentText, 3000);
+    
+    // 使用 MutationObserver 监听 DOM 变化
+    if (typeof MutationObserver !== 'undefined') {
+      const observer = new MutationObserver(() => {
+        replaceCommentText();
+      });
+      
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+    }
   }
   
   // 只在客户端执行

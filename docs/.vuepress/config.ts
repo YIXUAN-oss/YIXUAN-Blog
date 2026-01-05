@@ -218,7 +218,8 @@ export default defineUserConfig({
             // 数学公式支持（可选）
             // mathTagSupport: true,
             locale: {
-              placeholder: '请输入评论...',
+              placeholder: '请输入留言，填写邮箱可收到回复哦！...',
+              website: '网址(http://)',
             },
           },
         },
