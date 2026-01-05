@@ -16,6 +16,10 @@ export default defineUserConfig({
 
     // 使用 Vite 打包工具
     bundler: viteBundler(),
+
+    // 配置 URL 格式：启用 cleanUrls 可生成不带 .html 扩展名的 URL
+    // 注意：这会改变生成的 URL 格式，可能影响现有链接
+    // cleanUrls: true, // 如果需要，取消注释以启用
     head: [
         ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }],
         ['meta', { name: 'keywords', content: '懿轩,YiXuan,博客,技术博客,Java,Python,前端开发' }],
