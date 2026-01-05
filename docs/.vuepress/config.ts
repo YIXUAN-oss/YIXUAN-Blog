@@ -200,13 +200,13 @@ export default defineUserConfig({
         // },
         
         // 方案二：使用 Waline（推荐，功能更强大，支持浏览量统计）
-        // 通过 Vercel Serverless Function 代理，使用同一域名
-        // 在生产环境（Vercel）使用同一域名的代理路径，开发环境使用原始服务
+        // 使用子域名 waline.yixuan.cyou 独立部署，无需代理
+        // 在生产环境（Vercel）使用子域名，开发环境使用原始服务
         commentConfig: {
           type: 'waline',
           options: {
             serverURL: process.env.VERCEL 
-              ? 'https://www.yixuan.cyou/api/waline'  // Vercel 生产环境使用同一域名代理
+              ? 'https://waline.yixuan.cyou'  // Vercel 生产环境使用子域名
               : 'https://waline-server-eight-psi.vercel.app', // 开发环境使用原始Waline服务
             visitor: true, // 启用浏览量统计（重要！）
             dark: 'auto', // 自动切换暗色模式
