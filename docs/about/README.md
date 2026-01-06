@@ -6,14 +6,7 @@ sidebar: false
 
 # 👋 关于我
 
-<div class="profile-header">
-  <div class="avatar-section">
-    <p class="welcome-text">👋 Welcome</p>
-    <img src="/logo.png" class="avatar" alt="Logo" style="border-radius: 8px;" />
-    <h2>懿轩 (YiXuan)</h2>
-    <p class="tagline">代码诗人 | 终身学习者 | 开源爱好者</p>
-  </div>
-</div>
+<AboutMeQuickCard />
 
 ## 💫 个人简介
 

@@ -8,6 +8,7 @@ import IconMessageBoard from './components/IconMessageBoard.vue'
 import IconUser from './components/IconUser.vue'
 import FriendshipLinks from './components/FriendshipLinks.vue'
 import GlobalMusicPlayer from './components/GlobalMusicPlayer.vue'
+import AboutMeQuickCard from './components/AboutMeQuickCard.vue'
 
 export default defineClientConfig({
     enhance({ app, router, siteData }) {
@@ -21,6 +22,8 @@ export default defineClientConfig({
         app.component('IconUser', IconUser)
         // 注册友情链接组件
         app.component('FriendshipLinks', FriendshipLinks)
+        // 注册关于页 10 秒小卡片组件
+        app.component('AboutMeQuickCard', AboutMeQuickCard)
         // 添加搜索框快捷键提示
         if (typeof window !== 'undefined') {
             const addSearchShortcut = () => {
