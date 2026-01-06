@@ -9,15 +9,11 @@ toc: false
 # 留言板
 
 <div class="guestbook-info">
-  <div class="info-box">
-    <div class="info-icon-circle">
-      <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-      </svg>
-    </div>
-    <span class="info-title">信息</span>
-  </div>
-  <p>欢迎大家在此留下你的建议和意见，或者在 <a href="https://github.com/YIXUAN-oss/YIXUAN-Blog/issues" target="_blank" rel="noopener noreferrer">GitHub Issue<svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> 提交你的问题，或来 <a href="https://github.com/YIXUAN-oss/YIXUAN-Blog/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions<svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a> 进行讨论。</p>
+
+::: info 留言板信息
+欢迎大家在此留下你的建议和意见，或者在 <a href="https://github.com/YIXUAN-oss/YIXUAN-Blog/issues" target="_blank" rel="noopener noreferrer">GitHub Issue</a> 提交你的问题，或来 <a href="https://github.com/YIXUAN-oss/YIXUAN-Blog/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions</a> 进行讨论。
+:::
+
 </div>
 
 ## 💬 留言区
