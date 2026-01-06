@@ -90,8 +90,9 @@ const duration = ref(0)
 const popupVisible = ref(false)
 const trackIndex = ref(0)
 const playlist = [
-  { name: '雀跃', url: '/queyue.mp3' },
-  { name: '恋人', url: '/lianren.mp3' },
+  { name: '雀跃', url: '/music/queyue.mp3' },
+  { name: '恋人', url: '/music/lianren.mp3' },
+  { name: '怀念', url: '/music/wohuainiande.mp3' },
 ]
 const currentTrack = computed(() => playlist[trackIndex.value % playlist.length])
 
