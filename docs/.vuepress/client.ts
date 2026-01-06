@@ -7,6 +7,7 @@ import IconPen from './components/IconPen.vue'
 import IconMessageBoard from './components/IconMessageBoard.vue'
 import IconUser from './components/IconUser.vue'
 import FriendshipLinks from './components/FriendshipLinks.vue'
+import GlobalMusicPlayer from './components/GlobalMusicPlayer.vue'
 
 export default defineClientConfig({
     enhance({ app, router, siteData }) {
@@ -1157,7 +1158,7 @@ export default defineClientConfig({
         }
     },
 
-    rootComponents: [],
+    rootComponents: [GlobalMusicPlayer],
 })
 
 
