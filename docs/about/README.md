@@ -233,7 +233,7 @@ sidebar: false
 
 .skill-tag {
   display: inline-block;
-  background: var(--bg-color-secondary, #f6f8fa);
+  background: var(--bg-color-secondary);
   border: 1px solid var(--border-color, #eaecef);
   padding: 8px 16px;
   border-radius: 20px;
@@ -255,7 +255,7 @@ sidebar: false
 }
 
 .philosophy-item {
-  background: var(--bg-color-secondary, #f6f8fa);
+  background: var(--bg-color-secondary);
   border: 1px solid var(--border-color, #eaecef);
   border-radius: 10px;
   padding: 20px;
@@ -281,7 +281,7 @@ sidebar: false
 }
 
 .goals-list {
-  background: var(--bg-color-secondary, #f6f8fa);
+  background: var(--bg-color-secondary);
   border-radius: 10px;
   padding: 30px;
   margin: 30px 0;
@@ -305,7 +305,7 @@ sidebar: false
 }
 
 .contact-card {
-  background: var(--bg-color-secondary, #f6f8fa);
+  background: var(--bg-color-secondary);
   border: 1px solid var(--border-color, #eaecef);
   border-radius: 10px;
   padding: 25px;
@@ -340,7 +340,7 @@ sidebar: false
 }
 
 .motto-box {
-  background: var(--bg-color-secondary, #f6f8fa);
+  background: var(--bg-color-secondary);
   border-left: 4px solid #5B8FF9;
   padding: 20px 25px;
   margin: 20px 0;

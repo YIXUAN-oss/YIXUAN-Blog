@@ -21,7 +21,7 @@ toc: false
 <style scoped>
 /* 确保留言板页面内容正常显示 */
 .guestbook-info {
-  background: #f7f7fe;
+  background: var(--bg-color-secondary);
   border-left: 4px solid #5f69e8;
   border-radius: 8px;
   padding: 30px;

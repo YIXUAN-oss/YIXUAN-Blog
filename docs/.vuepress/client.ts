@@ -24,6 +24,134 @@ export default defineClientConfig({
         app.component('FriendshipLinks', FriendshipLinks)
         // 注册关于页 10 秒小卡片组件
         app.component('AboutMeQuickCard', AboutMeQuickCard)
+
+        /**
+         * 访客来源提示小文案
+         * - 从搜索引擎进入：显示「你是在找答案吗？」
+         * - 从首页进入：显示「欢迎继续探索」
+         * - 站内其他页面：显示「欢迎在站内继续逛逛～」
+         */
+        const showVisitorHint = (message: string) => {
+            if (typeof window === 'undefined' || !message) return
+
+            const id = 'visitor-hint-banner'
+            let banner = document.getElementById(id) as HTMLDivElement | null
+
+            if (!banner) {
+                banner = document.createElement('div')
+                banner.id = id
+                banner.style.position = 'fixed'
+                banner.style.right = '18px'
+                banner.style.bottom = '20px'
+                banner.style.zIndex = '9998'
+                banner.style.padding = '8px 14px'
+                banner.style.borderRadius = '999px'
+                banner.style.fontSize = '12px'
+                banner.style.fontWeight = '500'
+                banner.style.boxShadow = '0 10px 25px rgba(15, 23, 42, 0.35)'
+                banner.style.backdropFilter = 'blur(10px)'
+                banner.style.transition = 'opacity 0.25s ease, transform 0.25s ease'
+                banner.style.cursor = 'default'
+                banner.style.pointerEvents = 'auto'
+                banner.style.maxWidth = '260px'
+                banner.style.lineHeight = '1.5'
+                banner.style.display = 'flex'
+                banner.style.alignItems = 'center'
+                banner.style.gap = '6px'
+
+                // 允许点击关闭
+                banner.addEventListener('click', () => {
+                    banner!.style.opacity = '0'
+                    banner!.style.transform = 'translateY(8px)'
+                })
+
+                document.body.appendChild(banner)
+            }
+
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+            if (isDark) {
+                banner.style.background = 'rgba(15, 23, 42, 0.9)'
+                banner.style.color = '#e5e7eb'
+                banner.style.border = '1px solid rgba(148, 163, 184, 0.75)'
+            } else {
+                banner.style.background = 'rgba(248, 250, 252, 0.98)'
+                banner.style.color = '#111827'
+                banner.style.border = '1px solid rgba(148, 163, 184, 0.6)'
+            }
+
+            banner.textContent = message
+            banner.style.opacity = '1'
+            banner.style.transform = 'translateY(0)'
+
+            // 自动消失
+            try {
+                const w = window as any
+                if (w.__visitorHintTimer) {
+                    clearTimeout(w.__visitorHintTimer)
+                }
+                w.__visitorHintTimer = setTimeout(() => {
+                    if (!banner) return
+                    banner.style.opacity = '0'
+                    banner.style.transform = 'translateY(8px)'
+                }, 8000)
+            } catch {
+                // ignore
+            }
+        }
+
+        const computeVisitorMessage = (toPath: string, fromPath: string | null) => {
+            if (typeof window === 'undefined') return ''
+
+            const clean = (p: string | null | undefined) => {
+                if (!p) return ''
+                return p.replace(/index\.html$/, '')
+            }
+
+            const to = clean(toPath)
+            const from = clean(fromPath || '')
+
+            // 不在首页时才提示
+            const isHome = to === '/' || to === ''
+            if (isHome) return ''
+
+            const ref = document.referrer || ''
+            const sameOrigin = !!ref && ref.startsWith(window.location.origin)
+            const searchDomains = ['google.', 'bing.', 'baidu.', 'duckduckgo.', 'yandex.', 'sm.cn', 'sogou.', 'search.yahoo.']
+            const isFromSearch = !!ref && searchDomains.some((d) => ref.includes(d))
+
+            if (isFromSearch) {
+                return '你是从搜索来到这里的，在找答案吗？✨'
+            }
+
+            if (from === '/' || from === '') {
+                return '欢迎从首页继续探索 🚀'
+            }
+
+            if (sameOrigin || from) {
+                return '欢迎在站内继续逛逛～'
+            }
+
+            return ''
+        }
+
+        // 初次进入页面，根据 referrer 显示一次
+        if (typeof window !== 'undefined') {
+            setTimeout(() => {
+                const msg = computeVisitorMessage(window.location.pathname, null)
+                if (msg) showVisitorHint(msg)
+            }, 1200)
+        }
+
+        // 路由跳转时，根据来源显示提示
+        router.afterEach((to, from) => {
+            try {
+                const msg = computeVisitorMessage(to.path, from?.path || null)
+                if (msg) showVisitorHint(msg)
+            } catch (e) {
+                console.debug('visitor hint error:', e)
+            }
+        })
+
         // 添加搜索框快捷键提示
         if (typeof window !== 'undefined') {
             const addSearchShortcut = () => {

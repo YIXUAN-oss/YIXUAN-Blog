@@ -1373,3 +1373,53 @@ button.waline-btn {
   }
 }
 
+// ============================================
+// 友情链接页面样式（亮色 + 深色）
+// ============================================
+// 亮色模式下的卡片背景和边框（参考官方 magic-card 的实现方式）
+.friendship-links-container .link-card {
+  background: #f6f8fa;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+// 暗色模式下的卡片背景和边框（模仿教程中心 magic-card 写法）
+[data-theme="dark"] .friendship-links-container .link-card {
+  background: rgb(28, 28, 30) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  /* 文本颜色仍然走主题变量 */
+  color: var(--text-color) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-theme="dark"] .friendship-links-container .link-card:hover {
+  background: rgb(38, 38, 40) !important;
+  border-color: #565fd3 !important;
+  box-shadow: 0 12px 40px rgba(86, 95, 211, 0.4) !important;
+}
+
+// 深色模式下，友情链接页面上方文字颜色适配为主题变量
+[data-theme="dark"] .friendship-links-container {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .friendship-links-container .page-description,
+[data-theme="dark"] .friendship-links-container .category-title,
+[data-theme="dark"] .friendship-links-container .link-title {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .friendship-links-container .link-desc {
+  color: var(--text-color-secondary);
+}
+
+[data-theme="dark"] .friendship-links-container .apply-section h2,
+[data-theme="dark"] .friendship-links-container .apply-section .apply-content p,
+[data-theme="dark"] .friendship-links-container .apply-section .apply-content ul li {
+  color: var(--text-color);
+}

@@ -97,7 +97,7 @@ sidebar: false
 ---
 
 <div style="text-align: center; margin-top: 40px; padding: 20px;">
-  <p style="color: var(--text-color-secondary, #6a737d);">
+  <p style="color: var(--text-color-secondary);">
     ✨ 生活不止代码，还有诗和远方 ✨
   </p>
 </div>
@@ -122,7 +122,8 @@ sidebar: false
 }
 
 .diary-item {
-  background: var(--bg-color-secondary, #f6f8fa);
+  /* 背景与边框都走主题变量，适配明暗模式 */
+  background: var(--bg-color-secondary);
   border-left: 4px solid #5B8FF9;
   border-radius: 8px;
   padding: 25px;
@@ -136,7 +137,7 @@ sidebar: false
 }
 
 .diary-date {
-  color: #5B8FF9;
+  color: var(--accent-color);
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -147,7 +148,7 @@ sidebar: false
 }
 
 .diary-content {
-  color: var(--text-color, #2c3e50);
+  color: var(--text-color);
   line-height: 1.8;
 }
 
@@ -156,7 +157,8 @@ sidebar: false
 }
 
 .quote-box {
-  background: var(--bg-color-secondary, #f6f8fa);
+  /* 背景与边框走主题变量，适配明暗模式 */
+  background: var(--bg-color-secondary);
   border-left: 4px solid #5B8FF9;
   padding: 30px;
   margin: 40px 0;
@@ -168,14 +170,14 @@ sidebar: false
   font-size: 1.1em;
   line-height: 1.8;
   margin: 0;
-  color: var(--text-color, #2c3e50);
+  color: var(--text-color);
   border: none;
 }
 
 .quote-author {
   text-align: right;
   margin-top: 15px;
-  color: var(--text-color-secondary, #6a737d);
+  color: var(--text-color-secondary);
   font-weight: bold;
 }
 

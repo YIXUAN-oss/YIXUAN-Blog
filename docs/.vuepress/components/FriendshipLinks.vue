@@ -499,7 +499,7 @@ const handleImageError = (e: Event) => {
   font-weight: 700;
   text-align: center;
   margin-bottom: 1rem;
-  background: linear-gradient(120deg, #3eaf7c, #42d392);
+  background: linear-gradient(120deg, #565fd3, #42d392);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -507,7 +507,7 @@ const handleImageError = (e: Event) => {
 
 .page-description {
   text-align: center;
-  color: var(--text-color-secondary, #6a737d);
+  color: var(--text-color-secondary);
   font-size: 1.1rem;
   margin-bottom: 3rem;
 }
@@ -540,14 +540,14 @@ const handleImageError = (e: Event) => {
 .category-title {
   font-size: 1.8rem;
   font-weight: 600;
-  color: var(--text-color, #2c3e50);
+  color: var(--text-color);
   margin-bottom: 0.5rem;
 }
 
 .category-divider {
   height: 3px;
   width: 60px;
-  background: linear-gradient(90deg, #3eaf7c, #42d392);
+  background: linear-gradient(90deg, #565fd3, #42d392);
   border-radius: 2px;
 }
 
@@ -565,20 +565,24 @@ const handleImageError = (e: Event) => {
 
 .link-card {
   display: block;
-  background: var(--bg-color-secondary, #f6f8fa);
-  border: 1px solid var(--border-color, #e1e4e8);
+  /* 背景色和边框颜色改由全局样式控制，避免覆盖暗色模式样式 */
   border-radius: 12px;
   padding: 1.5rem;
   text-decoration: none;
   color: inherit;
   transition: all 0.3s ease;
   cursor: pointer;
+  /* 确保边框显示 - 使用 !important 防止被 Tailwind 重置覆盖 */
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
 }
 
 .link-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(62, 175, 124, 0.15);
-  border-color: #3eaf7c;
+  /* 将悬停阴影从绿色改为与你主题一致的紫色调 */
+  box-shadow: 0 8px 20px rgba(86, 95, 211, 0.25);
+  border-color: #565fd3;
 }
 
 .card-content {
@@ -614,7 +618,7 @@ const handleImageError = (e: Event) => {
 .link-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--text-color, #2c3e50);
+  color: var(--text-color);
   margin: 0 0 0.5rem 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -623,11 +627,12 @@ const handleImageError = (e: Event) => {
 
 .link-desc {
   font-size: 0.9rem;
-  color: var(--text-color-secondary, #6a737d);
+  color: var(--text-color-secondary);
   margin: 0;
   line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -644,12 +649,12 @@ const handleImageError = (e: Event) => {
 .apply-section h2 {
   font-size: 1.6rem;
   font-weight: 600;
-  color: var(--text-color, #2c3e50);
+  color: var(--text-color);
   margin-bottom: 1rem;
 }
 
 .apply-content p {
-  color: var(--text-color, #2c3e50);
+  color: var(--text-color);
   line-height: 1.8;
   margin-bottom: 1rem;
 }
@@ -662,7 +667,7 @@ const handleImageError = (e: Event) => {
 
 .apply-content ul li {
   padding: 0.5rem 0;
-  color: var(--text-color, #2c3e50);
+  color: var(--text-color);
   font-size: 1rem;
 }
 
@@ -673,7 +678,7 @@ const handleImageError = (e: Event) => {
 }
 
 .contact-info a {
-  color: #3eaf7c;
+  color: var(--accent-color);
   text-decoration: none;
   font-weight: 500;
   border-bottom: 1px solid transparent;
@@ -681,23 +686,6 @@ const handleImageError = (e: Event) => {
 }
 
 .contact-info a:hover {
-  border-bottom-color: #3eaf7c;
-}
-
-/* 暗色主题适配 */
-@media (prefers-color-scheme: dark) {
-  .link-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .link-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 8px 20px rgba(62, 175, 124, 0.3);
-  }
-  
-  .logo-wrapper {
-    background: rgba(255, 255, 255, 0.9);
-  }
+  border-bottom-color: var(--accent-color);
 }
 </style>
