@@ -316,6 +316,7 @@ export default defineClientConfig({
             
             let guestbookInterval: ReturnType<typeof setInterval> | null = null;
             let guestbookObserver: MutationObserver | null = null;
+            let commentObserver: MutationObserver | null = null;
             let guestbookTimeouts: Array<ReturnType<typeof setTimeout>> = [];
             
             const cleanupGuestbookRoutines = () => {
@@ -329,12 +330,32 @@ export default defineClientConfig({
                     guestbookObserver.disconnect();
                     guestbookObserver = null;
                 }
+                if (commentObserver) {
+                    commentObserver.disconnect();
+                    commentObserver = null;
+                }
+            };
+            
+            const startCommentObserver = () => {
+                // 监听 Waline 节点的增删，确保非留言板页面立即隐藏
+                try {
+                    if (commentObserver) commentObserver.disconnect();
+                    commentObserver = new MutationObserver(() => toggleComments());
+                    commentObserver.observe(document.body, {
+                        childList: true,
+                        subtree: true
+                    });
+                } catch (e) {
+                    // 观测失败时继续运行，避免页面崩溃
+                    console.warn('commentObserver error:', e);
+                }
             };
             
             const runGuestbookEnhancements = () => {
                 cleanupGuestbookRoutines();
                 
                 // 即便不在留言板也先确保评论容器被隐藏
+                startCommentObserver();
                 toggleComments();
                 
                 if (!isGuestbookPage()) {
@@ -376,7 +397,8 @@ export default defineClientConfig({
                 }, 400);
             };
             
-            // 初始执行（延迟以确保 DOM 加载完成）
+            // 初始执行（立即 + 延迟兜底，确保不闪烁）
+            runGuestbookEnhancements();
             guestbookTimeouts.push(setTimeout(runGuestbookEnhancements, 300));
             
             // 路由变化后重新执行且移除旧监听
