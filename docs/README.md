@@ -46,7 +46,7 @@ features:
     details: 代码复制、阅读进度、平滑滚动等实用功能
 footer:
   record: MIT License
-  recordLink: 'https://github.com/YIXUAN-oss/YIXUAN-Blog'
+  recordLink: 'https://github.com/YIXUAN-oss/Blog-Template'
   cyberSecurityRecord: 懿轩的博客
   cyberSecurityLink: 'https://github.com/YIXUAN-oss'
   startYear: 2025
@@ -1536,7 +1536,7 @@ onMounted(() => {
 <h3>喜欢这个博客？</h3>
 <p>如果觉得内容不错，欢迎 Star 支持！有任何疑问，随时通过邮件或 GitHub 交流！</p>
 <div class="cta-buttons">
-<a href="https://github.com/YIXUAN-oss/YIXUAN-Blog" target="_blank" class="cta-btn primary">⭐ Star 支持</a>
+<a href="https://github.com/YIXUAN-oss/Blog-Template" target="_blank" class="cta-btn primary">⭐ Star 支持</a>
 <a href="about/" class="cta-btn secondary">👤 了解更多</a>
 </div>
 </div>

@@ -11,7 +11,7 @@ toc: false
 <div class="guestbook-info">
 
 ::: info 留言板信息
-欢迎大家在此留下你的建议和意见，或者在 <a href="https://github.com/YIXUAN-oss/YIXUAN-Blog/issues" target="_blank" rel="noopener noreferrer">GitHub Issue</a> 提交你的问题，或来 <a href="https://github.com/YIXUAN-oss/YIXUAN-Blog/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions</a> 进行讨论。
+欢迎大家在此留下你的建议和意见，或者在 <a href="https://github.com/YIXUAN-oss/Blog-Template/issues" target="_blank" rel="noopener noreferrer">GitHub Issue</a> 提交你的问题，或来 <a href="https://github.com/YIXUAN-oss/Blog-Template/discussions" target="_blank" rel="noopener noreferrer">GitHub Discussions</a> 进行讨论。
 :::
 
 </div>

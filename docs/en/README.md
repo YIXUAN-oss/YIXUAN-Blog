@@ -47,7 +47,7 @@ features:
     details: Code copy, reading progress, smooth scrolling and other practical functions
 footer:
   record: MIT License
-  recordLink: 'https://github.com/YIXUAN-oss/YIXUAN-Blog'
+  recordLink: 'https://github.com/YIXUAN-oss/Blog-Template'
   cyberSecurityRecord: YiXuan's Blog
   cyberSecurityLink: 'https://github.com/YIXUAN-oss'
   startYear: 2025
@@ -1537,7 +1537,7 @@ onMounted(() => {
 <h3>Like This Blog?</h3>
 <p>If you find the content helpful, please give it a Star! Feel free to reach out via email or GitHub for any questions!</p>
 <div class="cta-buttons">
-<a href="https://github.com/YIXUAN-oss/YIXUAN-Blog" target="_blank" class="cta-btn primary">⭐ Star Support</a>
+<a href="https://github.com/YIXUAN-oss/Blog-Template" target="_blank" class="cta-btn primary">⭐ Star Support</a>
 <a href="about/" class="cta-btn secondary">👤 Learn More</a>
 </div>
 </div>
