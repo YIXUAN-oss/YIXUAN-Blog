@@ -1378,11 +1378,27 @@ button.waline-btn {
 // ============================================
 // 亮色模式下的卡片背景和边框（参考官方 magic-card 的实现方式）
 .friendship-links-container .link-card {
+  // 先统一去掉所有链接默认样式，避免继承主题的链接颜色和下划线
+  text-decoration: none !important;
+  border-bottom: none !important;
+  color: inherit !important;
+
   background: #f6f8fa;
   border: 1px solid rgba(0, 0, 0, 0.12) !important;
   border-width: 1px !important;
   border-style: solid !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+// 卡片内部文字颜色：标题使用主文本色，描述使用次级文本色（适配亮色/暗色）
+.friendship-links-container .link-card .link-title {
+  color: var(--text-color) !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+.friendship-links-container .link-card .link-desc {
+  color: var(--text-color-secondary) !important;
 }
 
 // 暗色模式下的卡片背景和边框（模仿教程中心 magic-card 写法）

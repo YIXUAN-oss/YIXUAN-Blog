@@ -499,10 +499,7 @@ const handleImageError = (e: Event) => {
   font-weight: 700;
   text-align: center;
   margin-bottom: 1rem;
-  background: linear-gradient(120deg, #565fd3, #42d392);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-color);
 }
 
 .page-description {
@@ -546,9 +543,9 @@ const handleImageError = (e: Event) => {
 
 .category-divider {
   height: 3px;
-  width: 60px;
-  background: linear-gradient(90deg, #565fd3, #42d392);
-  border-radius: 2px;
+  width: 72px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #a855f7, #6366f1);
 }
 
 .links-grid {
@@ -565,24 +562,18 @@ const handleImageError = (e: Event) => {
 
 .link-card {
   display: block;
-  /* 背景色和边框颜色改由全局样式控制，避免覆盖暗色模式样式 */
   border-radius: 12px;
+  border: 1px solid #e8e8e8;
   padding: 1.5rem;
   text-decoration: none;
   color: inherit;
   transition: all 0.3s ease;
   cursor: pointer;
-  /* 确保边框显示 - 使用 !important 防止被 Tailwind 重置覆盖 */
-  border: 1px solid rgba(0, 0, 0, 0.12) !important;
-  border-width: 1px !important;
-  border-style: solid !important;
 }
 
 .link-card:hover {
   transform: translateY(-5px);
-  /* 将悬停阴影从绿色改为与你主题一致的紫色调 */
-  box-shadow: 0 8px 20px rgba(86, 95, 211, 0.25);
-  border-color: #565fd3;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .card-content {
@@ -598,10 +589,11 @@ const handleImageError = (e: Event) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: white;
+  background: var(--bg-color);
   border-radius: 10px;
   padding: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
 }
 
 .link-logo {
@@ -641,9 +633,9 @@ const handleImageError = (e: Event) => {
 .apply-section {
   margin-top: 4rem;
   padding: 2rem;
-  background: linear-gradient(135deg, rgba(62, 175, 124, 0.1), rgba(66, 211, 146, 0.1));
+  background: var(--bg-color-secondary);
   border-radius: 12px;
-  border: 1px solid rgba(62, 175, 124, 0.3);
+  border: 1px solid var(--border-color);
 }
 
 .apply-section h2 {
@@ -674,11 +666,11 @@ const handleImageError = (e: Event) => {
 .contact-info {
   margin-top: 1.5rem;
   padding-top: 1.5rem;
-  border-top: 1px dashed rgba(62, 175, 124, 0.3);
+  border-top: 1px dashed var(--border-color);
 }
 
 .contact-info a {
-  color: var(--accent-color);
+  color: var(--text-color);
   text-decoration: none;
   font-weight: 500;
   border-bottom: 1px solid transparent;
@@ -686,6 +678,6 @@ const handleImageError = (e: Event) => {
 }
 
 .contact-info a:hover {
-  border-bottom-color: var(--accent-color);
+  border-bottom-color: var(--text-color);
 }
 </style>
