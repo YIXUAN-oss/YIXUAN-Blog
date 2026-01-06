@@ -223,6 +223,17 @@ export default defineUserConfig({
             },
           },
         },
+
+        // 主题多语言配置：自定义右上角语言切换显示文本
+        locales: {
+          '/': {
+            // 语言下拉菜单中显示的名称
+            selectLanguageName: '简体中文',
+          },
+          '/en/': {
+            selectLanguageName: 'English',
+          },
+        },
     }),
 
 

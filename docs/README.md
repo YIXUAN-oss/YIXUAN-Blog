@@ -96,6 +96,14 @@ footer:
 <span class="social-text">GitHub</span>
 </a>
 </div>
+
+<!-- 赞赏二维码 -->
+<div class="profile-donate">
+  <div class="profile-donate-title">💖 如果你觉得内容对你有帮助，可以扫码赞赏支持一下～</div>
+  <div class="profile-donate-image">
+    <img src="/zhifubao.jpg" alt="支付宝赞赏码" loading="lazy" />
+  </div>
+</div>
 </div>
 </div>
 </div>
@@ -710,6 +718,34 @@ onMounted(() => {
 
 .social-link:hover .social-text {
   color: var(--text-color, #2c3e50);
+}
+
+/* 赞赏区域 */
+.profile-donate {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border-color, #eaecef);
+}
+
+.profile-donate-title {
+  font-size: 0.78em;
+  color: var(--text-color-secondary, #6a737d);
+  margin-bottom: 6px;
+}
+
+.profile-donate-image {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-color-secondary, #f8f9fa);
+}
+
+.profile-donate-image img {
+  display: block;
+  max-width: 160px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 12px;
 }
 
 /* 分隔线 */

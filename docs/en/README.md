@@ -97,6 +97,14 @@ footer:
 <span class="social-text">GitHub</span>
 </a>
 </div>
+
+<!-- Donation QR -->
+<div class="profile-donate">
+  <div class="profile-donate-title">💖 If this blog helps you, feel free to support via QR code below.</div>
+  <div class="profile-donate-image">
+    <img src="/zhifubao.jpg" alt="Alipay donation QR" loading="lazy" />
+  </div>
+</div>
 </div>
 </div>
 </div>
@@ -711,6 +719,34 @@ onMounted(() => {
 
 .social-link:hover .social-text {
   color: var(--text-color, #2c3e50);
+}
+
+/* Donation section */
+.profile-donate {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border-color, #eaecef);
+}
+
+.profile-donate-title {
+  font-size: 0.78em;
+  color: var(--text-color-secondary, #6a737d);
+  margin-bottom: 6px;
+}
+
+.profile-donate-image {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-color-secondary, #f8f9fa);
+}
+
+.profile-donate-image img {
+  display: block;
+  max-width: 160px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 12px;
 }
 
 /* 分隔线 */
