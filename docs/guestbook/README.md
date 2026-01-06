@@ -1,6 +1,6 @@
 ---
 title: 留言板
-date: 2026-01-01 08:30:48
+date: 2026-01-01 
 sidebar: false
 article: false
 toc: false

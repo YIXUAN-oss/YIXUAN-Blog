@@ -192,13 +192,16 @@ export default defineClientConfig({
                 }
             });
             
+            const isGuestbookPage = () => {
+                const currentPath = window.location.pathname;
+                return currentPath.includes('/guestbook/') ||
+                       currentPath === '/guestbook' ||
+                       currentPath.endsWith('/guestbook');
+            };
+            
             // 控制评论显示：只在留言板页面显示评论
             const toggleComments = () => {
-                const currentPath = window.location.pathname;
-                // 判断是否为留言板页面：路径包含 /guestbook/
-                const isGuestbook = currentPath.includes('/guestbook/') || 
-                                   currentPath === '/guestbook' ||
-                                   currentPath.endsWith('/guestbook');
+                const isGuestbook = isGuestbookPage();
                 
                 // 查找评论容器（包括所有可能的 Waline 容器）
                 const commentContainers = document.querySelectorAll(
@@ -207,13 +210,8 @@ export default defineClientConfig({
                 
                 commentContainers.forEach((container) => {
                     const element = container as HTMLElement;
-                    if (isGuestbook) {
-                        element.style.display = '';
-                        element.style.visibility = 'visible';
-                    } else {
-                        element.style.display = 'none';
-                        element.style.visibility = 'hidden';
-                    }
+                    element.style.display = isGuestbook ? '' : 'none';
+                    element.style.visibility = isGuestbook ? 'visible' : 'hidden';
                 });
                 
                 // 也检查父容器
@@ -224,181 +222,167 @@ export default defineClientConfig({
                     );
                     walineInContainer.forEach((waline) => {
                         const element = waline as HTMLElement;
-                        if (isGuestbook) {
-                            element.style.display = '';
-                            element.style.visibility = 'visible';
-                        } else {
-                            element.style.display = 'none';
-                            element.style.visibility = 'hidden';
-                        }
+                        element.style.display = isGuestbook ? '' : 'none';
+                        element.style.visibility = isGuestbook ? 'visible' : 'hidden';
                     });
                 });
             };
             
             // 隐藏留言板页面的目录
             const hideToc = () => {
+                if (!isGuestbookPage()) return;
+                
                 try {
-                    const currentPath = window.location.pathname;
-                    // 判断是否为留言板页面：路径包含 /guestbook/
-                    const isGuestbook = currentPath.includes('/guestbook/') || 
-                                       currentPath === '/guestbook' ||
-                                       currentPath.endsWith('/guestbook');
+                    // 查找所有可能的目录容器（使用更精确的选择器）
+                    const tocSelectors = [
+                        '.page-toc-wrapper',
+                        '.page-catalog-container',
+                        '.catalog-wrapper',
+                        '.reco-toc',
+                        '.page-catalog',
+                        '.catalog-container',
+                        '.right-sidebar',
+                        '.page-right-sidebar',
+                        '.toc-container',
+                        '.table-of-contents',
+                        '#toc'
+                    ];
                     
-                    if (isGuestbook) {
-                        // 查找所有可能的目录容器（使用更精确的选择器）
-                        const tocSelectors = [
-                            '.page-toc-wrapper',
-                            '.page-catalog-container',
-                            '.catalog-wrapper',
-                            '.reco-toc',
-                            '.page-catalog',
-                            '.catalog-container',
-                            '.right-sidebar',
-                            '.page-right-sidebar',
-                            '.toc-container',
-                            '.table-of-contents',
-                            '#toc'
-                        ];
-                        
-                        tocSelectors.forEach(selector => {
-                            try {
-                                const elements = document.querySelectorAll(selector);
-                                elements.forEach((element) => {
-                                    if (element && element.parentElement) {
-                                        const el = element as HTMLElement;
-                                        el.style.display = 'none';
-                                        el.style.visibility = 'hidden';
-                                    }
-                                });
-                            } catch (e) {
-                                // 忽略选择器错误
-                            }
-                        });
-                    }
+                    tocSelectors.forEach(selector => {
+                        try {
+                            const elements = document.querySelectorAll(selector);
+                            elements.forEach((element) => {
+                                if (element && element.parentElement) {
+                                    const el = element as HTMLElement;
+                                    el.style.display = 'none';
+                                    el.style.visibility = 'hidden';
+                                }
+                            });
+                        } catch (e) {
+                            // 忽略选择器错误
+                        }
+                    });
                 } catch (e) {
                     // 忽略错误，避免影响页面渲染
                     console.warn('hideToc error:', e);
                 }
             };
-
+            
             // 调整留言板页面评论区域宽度，使其与信息栏对齐
             const adjustGuestbookWidth = () => {
+                if (!isGuestbookPage()) return;
+                
                 try {
-                    const currentPath = window.location.pathname;
-                    const isGuestbook = currentPath.includes('/guestbook/') || 
-                                       currentPath === '/guestbook' ||
-                                       currentPath.endsWith('/guestbook');
+                    // 查找所有 Waline 容器及其父容器
+                    const walineSelectors = [
+                        '.waline-wrapper',
+                        '#waline',
+                        '.waline-container',
+                        '.page .waline-wrapper',
+                        '.content__default .waline-wrapper',
+                        '.theme-reco-content .waline-wrapper'
+                    ];
                     
-                    if (isGuestbook) {
-                        // 查找所有 Waline 容器及其父容器
-                        const walineSelectors = [
-                            '.waline-wrapper',
-                            '#waline',
-                            '.waline-container',
-                            '.page .waline-wrapper',
-                            '.content__default .waline-wrapper',
-                            '.theme-reco-content .waline-wrapper'
-                        ];
-                        
-                        walineSelectors.forEach(selector => {
-                            try {
-                                const elements = document.querySelectorAll(selector);
-                                elements.forEach((element) => {
-                                    const el = element as HTMLElement;
-                                    // 使用 !important 通过 setProperty 设置
-                                    el.style.setProperty('margin-left', '0', 'important');
-                                    el.style.setProperty('margin-right', '0', 'important');
-                                    el.style.setProperty('padding-left', '0', 'important');
-                                    el.style.setProperty('padding-right', '0', 'important');
-                                    el.style.setProperty('max-width', '100%', 'important');
-                                    el.style.setProperty('width', '100%', 'important');
-                                    el.style.setProperty('box-sizing', 'border-box', 'important');
-                                    
-                                    // 也处理内部容器
-                                    const innerContainers = el.querySelectorAll('.waline, .waline-wrapper > div, .waline-container > div');
-                                    innerContainers.forEach((innerEl) => {
-                                        const inner = innerEl as HTMLElement;
-                                        inner.style.setProperty('max-width', '100%', 'important');
-                                        inner.style.setProperty('width', '100%', 'important');
-                                    });
+                    walineSelectors.forEach(selector => {
+                        try {
+                            const elements = document.querySelectorAll(selector);
+                            elements.forEach((element) => {
+                                const el = element as HTMLElement;
+                                // 使用 !important 通过 setProperty 设置
+                                el.style.setProperty('margin-left', '0', 'important');
+                                el.style.setProperty('margin-right', '0', 'important');
+                                el.style.setProperty('padding-left', '0', 'important');
+                                el.style.setProperty('padding-right', '0', 'important');
+                                el.style.setProperty('max-width', '100%', 'important');
+                                el.style.setProperty('width', '100%', 'important');
+                                el.style.setProperty('box-sizing', 'border-box', 'important');
+                                
+                                // 也处理内部容器
+                                const innerContainers = el.querySelectorAll('.waline, .waline-wrapper > div, .waline-container > div');
+                                innerContainers.forEach((innerEl) => {
+                                    const inner = innerEl as HTMLElement;
+                                    inner.style.setProperty('max-width', '100%', 'important');
+                                    inner.style.setProperty('width', '100%', 'important');
                                 });
-                            } catch (e) {
-                                // 忽略选择器错误
-                            }
-                        });
-                    }
+                            });
+                        } catch (e) {
+                            // 忽略选择器错误
+                        }
+                    });
                 } catch (e) {
                     console.warn('adjustGuestbookWidth error:', e);
                 }
             };
             
-            // 初始执行（延迟以确保 DOM 加载完成）
-            setTimeout(toggleComments, 500);
-            setTimeout(toggleComments, 1000);
-            setTimeout(toggleComments, 2000);
-            setTimeout(hideToc, 500);
-            setTimeout(adjustGuestbookWidth, 500);
-            setTimeout(adjustGuestbookWidth, 1000);
-            setTimeout(adjustGuestbookWidth, 2000);
+            let guestbookInterval: ReturnType<typeof setInterval> | null = null;
+            let guestbookObserver: MutationObserver | null = null;
+            let guestbookTimeouts: Array<ReturnType<typeof setTimeout>> = [];
             
-            // 路由变化后重新执行
-            router.afterEach(() => {
-                setTimeout(toggleComments, 100);
-                setTimeout(toggleComments, 500);
-                setTimeout(hideToc, 500);
-                setTimeout(adjustGuestbookWidth, 500);
-                setTimeout(adjustGuestbookWidth, 1000);
-            });
-
-            // 监听 DOM 变化，确保动态加载的内容也能应用样式
-            if (typeof MutationObserver !== 'undefined') {
-                const observer = new MutationObserver(() => {
-                    const currentPath = window.location.pathname;
-                    const isGuestbook = currentPath.includes('/guestbook/') || 
-                                       currentPath === '/guestbook' ||
-                                       currentPath.endsWith('/guestbook');
-                    if (isGuestbook) {
-                        adjustGuestbookWidth();
-                    }
-                });
+            const cleanupGuestbookRoutines = () => {
+                guestbookTimeouts.forEach(timeout => clearTimeout(timeout));
+                guestbookTimeouts = [];
+                if (guestbookInterval) {
+                    clearInterval(guestbookInterval);
+                    guestbookInterval = null;
+                }
+                if (guestbookObserver) {
+                    guestbookObserver.disconnect();
+                    guestbookObserver = null;
+                }
+            };
+            
+            const runGuestbookEnhancements = () => {
+                cleanupGuestbookRoutines();
                 
-                observer.observe(document.body, {
-                    childList: true,
-                    subtree: true
-                });
-            }
-
-            // 定期检查并应用样式（确保 Waline 加载后也能应用）
-            const checkAndAdjust = () => {
-                const currentPath = window.location.pathname;
-                const isGuestbook = currentPath.includes('/guestbook/') || 
-                                   currentPath === '/guestbook' ||
-                                   currentPath.endsWith('/guestbook');
-                if (isGuestbook) {
+                // 即便不在留言板也先确保评论容器被隐藏
+                toggleComments();
+                
+                if (!isGuestbookPage()) {
+                    return;
+                }
+                
+                const runAll = () => {
+                    toggleComments();
+                    hideToc();
+                    adjustGuestbookWidth();
+                };
+                
+                runAll();
+                
+                guestbookTimeouts.push(
+                    setTimeout(runAll, 300),
+                    setTimeout(runAll, 800),
+                    setTimeout(runAll, 1600)
+                );
+                
+                if (typeof MutationObserver !== 'undefined') {
+                    guestbookObserver = new MutationObserver(() => adjustGuestbookWidth());
+                    guestbookObserver.observe(document.body, {
+                        childList: true,
+                        subtree: true
+                    });
+                }
+                
+                guestbookInterval = setInterval(() => {
+                    if (!isGuestbookPage()) {
+                        cleanupGuestbookRoutines();
+                        toggleComments();
+                        return;
+                    }
                     const hasWaline = document.querySelector('.waline-wrapper, #waline, .waline-container');
                     if (hasWaline) {
                         adjustGuestbookWidth();
-                        return true; // 找到了 Waline，返回 true
                     }
-                }
-                return false; // 没找到或不是留言板页面
+                }, 400);
             };
-
-            // 每 200ms 检查一次，最多检查 30 次（6秒），确保 Waline 完全加载后也能应用
-            let checkCount = 0;
-            const checkInterval = setInterval(() => {
-                const found = checkAndAdjust();
-                checkCount++;
-                // 如果找到了 Waline 且已经应用了样式，继续检查几次确保稳定
-                if (found && checkCount > 5) {
-                    // 再检查几次确保样式稳定应用
-                    if (checkCount >= 15) {
-                        clearInterval(checkInterval);
-                    }
-                } else if (checkCount >= 30) {
-                    clearInterval(checkInterval);
-                }
-            }, 200);
+            
+            // 初始执行（延迟以确保 DOM 加载完成）
+            guestbookTimeouts.push(setTimeout(runGuestbookEnhancements, 300));
+            
+            // 路由变化后重新执行且移除旧监听
+            router.afterEach(() => {
+                runGuestbookEnhancements();
+            });
             
             // 在博客列表页加载 Waline 浏览量统计（已禁用，不在卡片上显示浏览量）
             const initBlogListPageviews = () => {
@@ -548,21 +532,22 @@ export default defineClientConfig({
                             ];
                             
                             for (const selector of linkSelectors) {
-                                blogLinks = document.querySelectorAll(selector);
-                                if (blogLinks.length > 0) {
-                                    console.log('[Pageview] Found', blogLinks.length, 'blog links using selector:', selector);
+                                const currentLinks = document.querySelectorAll(selector);
+                                if (currentLinks.length > 0) {
+                                    blogLinks = currentLinks;
+                                    console.log('[Pageview] Found', currentLinks.length, 'blog links using selector:', selector);
                                     break;
                                 }
                             }
                         }
                         
-                        // 如果找到了链接，转换为数组以便后续处理
-                        if (blogLinks && blogLinks.length > 0) {
-                            blogLinks = allPostLinks as any;
-                        }
-                        
+                        // 选出最终使用的链接列表（优先主内容区域的 /posts/ 链接）
+                        const resolvedBlogLinks = allPostLinks.length > 0
+                            ? Array.from(allPostLinks)
+                            : Array.from(blogLinks ?? []);
+
                         // 如果还是没找到，输出调试信息
-                        if (!blogLinks || blogLinks.length === 0) {
+                        if (resolvedBlogLinks.length === 0) {
                             console.warn('[Pageview] No blog links found. Checking DOM structure...');
                             
                             // 检查页面上所有的链接
@@ -584,11 +569,9 @@ export default defineClientConfig({
                             
                             // 检查页面的主要内容区域
                             const mainContent = document.querySelector('.content, .main-content, .page-content, .theme-reco-content, .content__default');
-                            if (mainContent) {
-                                console.log('[Pageview] Found main content area:', mainContent.className);
-                                const linksInContent = mainContent.querySelectorAll('a[href*="/posts/"]');
-                                console.log('[Pageview] Links in main content:', linksInContent.length);
-                            }
+                            console.log('[Pageview] Found main content area:', mainContent?.className || 'none');
+                            const linksInContent = mainContent?.querySelectorAll('a[href*="/posts/"]') || [];
+                            console.log('[Pageview] Links in main content:', linksInContent.length);
                             
                             // 如果还没有链接，等待 DOM 加载（但限制重试次数）
                             const retryCount = (window as any).__pageviewRetryCount || 0;
@@ -609,7 +592,7 @@ export default defineClientConfig({
                         // 标记已找到链接
                         (window as any).__pageviewLinksFound = true;
                         
-                        blogLinks!.forEach((link) => {
+                        resolvedBlogLinks.forEach((link) => {
                             const href = (link as HTMLAnchorElement).href;
                             if (!href) return;
                             
