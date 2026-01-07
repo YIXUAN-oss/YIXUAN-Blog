@@ -230,6 +230,18 @@ const linksData = ref<Category[]>([
         description: '全球最大的代码托管平台'
       },
       {
+        title: 'Gitee',
+        logo: 'https://gitee.com/favicon.ico',
+        link: 'https://gitee.com/',
+        description: '中国领先的代码托管平台'
+      },
+      {
+        title: 'GitCode',
+        logo: 'https://gitcode.net/favicon.ico',
+        link: 'https://gitcode.net/',
+        description: 'CSDN 代码托管平台'
+      },
+      {
         title: 'VS Code',
         logo: 'https://code.visualstudio.com/favicon.ico',
         link: 'https://code.visualstudio.com/',
@@ -281,6 +293,42 @@ const linksData = ref<Category[]>([
         logo: 'https://cdn.oaistatic.com/assets/favicon-o20kmmos.svg',
         link: 'https://chat.openai.com/',
         description: 'OpenAI 对话式 AI'
+      },
+      {
+        title: '通义千问',
+        logo: 'https://tongyi.aliyun.com/favicon.ico',
+        link: 'https://tongyi.aliyun.com/',
+        description: '阿里巴巴大模型 AI 助手'
+      },
+      {
+        title: 'DeepSeeK',
+        logo: 'https://www.deepseek.com/favicon.ico',
+        link: 'https://www.deepseek.com/',
+        description: '深度求索 AI 助手'
+      },
+      {
+        title: 'Kimi',
+        logo: 'https://kimi.moonshot.cn/favicon.ico',
+        link: 'https://kimi.moonshot.cn/',
+        description: '月之暗面 AI 助手'
+      },
+      {
+        title: '豆包',
+        logo: 'https://www.doubao.com/favicon.ico',
+        link: 'https://www.doubao.com/',
+        description: '字节跳动 AI 助手'
+      },
+      {
+        title: '天工AI',
+        logo: 'https://www.tiangong.cn/favicon.ico',
+        link: 'https://www.tiangong.cn/',
+        description: '昆仑万维 AI 助手'
+      },
+      {
+        title: '文心一言',
+        logo: 'https://yiyan.baidu.com/favicon.ico',
+        link: 'https://yiyan.baidu.com/',
+        description: '百度 AI 助手'
       },
       {
         title: 'GitHub Copilot',
@@ -452,6 +500,12 @@ const linksData = ref<Category[]>([
         logo: 'https://static.figma.com/app/icon/1/favicon.png',
         link: 'https://www.figma.com/',
         description: '协作式界面设计工具'
+      },
+      {
+        title: '即时设计',
+        logo: 'https://js.design/favicon.ico',
+        link: 'https://js.design/',
+        description: '在线协作 UI 设计工具'
       },
       {
         title: 'Pexels',
