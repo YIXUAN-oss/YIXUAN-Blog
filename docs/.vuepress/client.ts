@@ -9,6 +9,7 @@ import IconUser from './components/IconUser.vue'
 import FriendshipLinks from './components/FriendshipLinks.vue'
 import GlobalMusicPlayer from './components/GlobalMusicPlayer.vue'
 import AboutMeQuickCard from './components/AboutMeQuickCard.vue'
+import ArticleWordCount from './components/ArticleWordCount.vue'
 
 export default defineClientConfig({
     enhance({ app, router, siteData }) {
@@ -24,6 +25,163 @@ export default defineClientConfig({
         app.component('FriendshipLinks', FriendshipLinks)
         // 注册关于页 10 秒小卡片组件
         app.component('AboutMeQuickCard', AboutMeQuickCard)
+        // 注册文章字数统计组件
+        app.component('ArticleWordCount', ArticleWordCount)
+        
+        // 插入文章字数统计组件的函数
+        const insertWordCount = () => {
+            if (typeof window === 'undefined') return
+            
+            // 判断是否为文章页面（排除首页、列表页等）
+            const currentPath = window.location.pathname
+            const isArticlePage = currentPath.includes('/posts/') || 
+                                 currentPath.includes('/blogs/') ||
+                                 currentPath.includes('/tutorials/') ||
+                                 (currentPath.includes('/diary/') && !currentPath.endsWith('/diary/'))
+            
+            // 排除首页、列表页、关于页等
+            const excludePaths = ['/', '/posts.html', '/posts', '/about/', '/friendship/', '/guestbook/', '/diary/']
+            const isExcluded = excludePaths.some(path => currentPath === path || currentPath.endsWith(path))
+            
+            if (!isArticlePage || isExcluded) {
+                // 移除已存在的字数统计组件
+                const existing = document.querySelector('.article-word-count-wrapper')
+                if (existing) {
+                    existing.remove()
+                }
+                return
+            }
+            
+            // 检查是否已经插入过
+            if (document.querySelector('.article-word-count-wrapper')) {
+                return
+            }
+            
+            // 尝试多种选择器找到文章标题或元信息区域
+            const titleSelectors = [
+                '.page-title',
+                'h1.page-title',
+                '.page h1',
+                '.theme-reco-content h1',
+                '.content__default h1',
+                'article h1',
+                '.page-header h1'
+            ]
+            
+            let insertTarget: HTMLElement | null = null
+            let insertPosition: 'after' | 'before' = 'after'
+            
+            // 优先在标题下方插入
+            for (const selector of titleSelectors) {
+                const element = document.querySelector(selector) as HTMLElement | null
+                if (element) {
+                    insertTarget = element
+                    insertPosition = 'after'
+                    break
+                }
+            }
+            
+            // 如果没找到标题，尝试找元信息区域
+            if (!insertTarget) {
+                const metaSelectors = [
+                    '.page-meta',
+                    '.page-info',
+                    '.article-meta',
+                    '.post-meta',
+                    '.theme-reco-content > .page-meta',
+                    '.content__default > .page-meta'
+                ]
+                
+                for (const selector of metaSelectors) {
+                    const element = document.querySelector(selector) as HTMLElement | null
+                    if (element) {
+                        insertTarget = element
+                        insertPosition = 'after'
+                        break
+                    }
+                }
+            }
+            
+            // 如果还是没找到，尝试在内容区域开头插入
+            if (!insertTarget) {
+                const contentSelectors = [
+                    '.content__default',
+                    '.theme-reco-content',
+                    '.page-content',
+                    'article',
+                    '.page'
+                ]
+                
+                for (const selector of contentSelectors) {
+                    const element = document.querySelector(selector) as HTMLElement | null
+                    if (element) {
+                        insertTarget = element
+                        insertPosition = 'before'
+                        break
+                    }
+                }
+            }
+            
+            if (!insertTarget) {
+                return
+            }
+            
+            // 创建容器
+            const wrapper = document.createElement('div')
+            wrapper.className = 'article-word-count-wrapper'
+            
+            // 插入到目标位置
+            if (insertPosition === 'after') {
+                insertTarget.insertAdjacentElement('afterend', wrapper)
+            } else {
+                // 如果是 before，插入到第一个子元素之前
+                const firstChild = insertTarget.firstElementChild
+                if (firstChild) {
+                    insertTarget.insertBefore(wrapper, firstChild)
+                } else {
+                    insertTarget.appendChild(wrapper)
+                }
+            }
+            
+            // 使用 Vue 3 的 createApp 挂载组件
+            import('vue').then(({ createApp }) => {
+                const wordCountApp = createApp(ArticleWordCount)
+                wordCountApp.mount(wrapper)
+            }).catch((err) => {
+                console.warn('Failed to mount word count component:', err)
+            })
+        }
+        
+        // 延迟执行，确保 DOM 已加载
+        if (typeof window !== 'undefined') {
+            setTimeout(insertWordCount, 500)
+            setTimeout(insertWordCount, 1000)
+            setTimeout(insertWordCount, 2000)
+        }
+        
+        // 路由变化时重新插入
+        router.afterEach(() => {
+            setTimeout(insertWordCount, 300)
+            setTimeout(insertWordCount, 800)
+        })
+        
+        // 监听 DOM 变化
+        if (typeof window !== 'undefined' && typeof MutationObserver !== 'undefined') {
+            let wordCountDebounceTimer: ReturnType<typeof setTimeout> | null = null
+            const wordCountObserver = new MutationObserver(() => {
+                if (wordCountDebounceTimer) {
+                    clearTimeout(wordCountDebounceTimer)
+                }
+                wordCountDebounceTimer = setTimeout(() => {
+                    insertWordCount()
+                }, 500)
+            })
+            
+            wordCountObserver.observe(document.body, {
+                childList: true,
+                subtree: true
+            })
+        }
 
         /**
          * 访客来源提示小文案

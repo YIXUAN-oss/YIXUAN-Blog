@@ -1439,3 +1439,19 @@ button.waline-btn {
 [data-theme="dark"] .friendship-links-container .apply-section .apply-content ul li {
   color: var(--text-color);
 }
+
+// ============================================
+// 文章字数统计组件样式
+// ============================================
+.article-word-count-wrapper {
+  margin: 0;
+  padding: 0;
+}
+
+// 确保字数统计组件在文章页面正确显示
+.page .article-word-count-wrapper,
+.theme-reco-content .article-word-count-wrapper,
+.content__default .article-word-count-wrapper {
+  display: block;
+  width: 100%;
+}
