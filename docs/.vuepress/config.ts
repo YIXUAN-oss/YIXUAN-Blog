@@ -14,8 +14,65 @@ export default defineUserConfig({
     // GitHub Pages: 使用 /YIXUAN-Blog/
     base: process.env.VERCEL || process.env.NODE_ENV === 'development' ? '/' : '/YIXUAN-Blog/',
 
-    // 使用 Vite 打包工具
-    bundler: viteBundler(),
+    // 使用 Vite 打包工具，优化构建配置
+    bundler: viteBundler({
+        viteOptions: {
+            build: {
+                // 启用代码分割
+                rollupOptions: {
+                    output: {
+                        // 手动分包策略
+                        manualChunks: (id) => {
+                            // node_modules 中的包单独打包
+                            if (id.includes('node_modules')) {
+                                // Vue 相关库单独打包
+                                if (id.includes('vue') || id.includes('@vue')) {
+                                    return 'vue-vendor';
+                                }
+                                // 主题相关库单独打包
+                                if (id.includes('vuepress-theme-reco')) {
+                                    return 'theme-vendor';
+                                }
+                                // 其他第三方库
+                                return 'vendor';
+                            }
+                        },
+                        // 优化 chunk 文件命名
+                        chunkFileNames: 'assets/js/[name]-[hash].js',
+                        entryFileNames: 'assets/js/[name]-[hash].js',
+                        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
+                    },
+                },
+                // 启用压缩
+                minify: 'terser',
+                terserOptions: {
+                    compress: {
+                        drop_console: false, // 保留 console，方便调试
+                        drop_debugger: true,
+                    },
+                },
+                // 启用 CSS 代码分割
+                cssCodeSplit: true,
+                // 设置 chunk 大小警告限制
+                chunkSizeWarningLimit: 1000,
+                // 启用 sourcemap（生产环境可关闭以减小体积）
+                sourcemap: false,
+            },
+            // 优化依赖预构建
+            optimizeDeps: {
+                include: [
+                    'vue',
+                    '@vuepress/client',
+                    'vuepress-theme-reco',
+                ],
+            },
+            // 服务器配置（开发环境）
+            server: {
+                // 启用 HTTP/2
+                http2: true,
+            },
+        },
+    }),
 
     // 配置 URL 格式：启用 cleanUrls 可生成不带 .html 扩展名的 URL
     // 注意：VuePress 2.x 可能不支持此配置
@@ -27,12 +84,19 @@ export default defineUserConfig({
         ['meta', { name: 'algolia-site-verification', content: '965773E690A426DF' }],
         ['link', { rel: 'icon', href: '/favicon.png' }],
         
+        // 关键资源预加载
+        ['link', { rel: 'preload', href: '/logo.png', as: 'image' }],
+        ['link', { rel: 'preload', href: '/avatar.png', as: 'image' }],
+        
         // 图片 CDN 优化：DNS 预解析和预连接
         ['link', { rel: 'dns-prefetch', href: 'https://cdn.jsdelivr.net' }],
         ['link', { rel: 'preconnect', href: 'https://cdn.jsdelivr.net', crossorigin: 'anonymous' }],
         // 备用 CDN 预连接（如果使用其他 CDN）
         ['link', { rel: 'dns-prefetch', href: 'https://gitcode.net' }],
         ['link', { rel: 'dns-prefetch', href: 'https://gitee.com' }],
+        // Waline 评论系统预连接
+        ['link', { rel: 'dns-prefetch', href: 'https://waline.yixuan.cyou' }],
+        ['link', { rel: 'preconnect', href: 'https://waline.yixuan.cyou', crossorigin: 'anonymous' }],
 
         // 自定义搜索框样式
         ['style', {}, `
@@ -43,12 +107,33 @@ export default defineUserConfig({
             }
         `],
 
-        // Umami 统计分析
-        ['script', {
-            defer: true,
-            src: 'https://cloud.umami.is/script.js',
-            'data-website-id': '5842114b-aed4-4e47-b3a6-777e091ef357'
-        }],
+        // Umami 统计分析 - 延迟加载，不阻塞页面渲染
+        // 使用 requestIdleCallback 或 setTimeout 延迟加载
+        ['script', {}, `
+            (function() {
+                function loadUmami() {
+                    if (document.getElementById('umami-script')) return;
+                    var script = document.createElement('script');
+                    script.id = 'umami-script';
+                    script.defer = true;
+                    script.src = 'https://cloud.umami.is/script.js';
+                    script.setAttribute('data-website-id', '5842114b-aed4-4e47-b3a6-777e091ef357');
+                    document.head.appendChild(script);
+                }
+                // 页面加载完成后再加载
+                if (document.readyState === 'complete') {
+                    setTimeout(loadUmami, 2000);
+                } else {
+                    window.addEventListener('load', function() {
+                        setTimeout(loadUmami, 2000);
+                    });
+                }
+                // 如果浏览器支持 requestIdleCallback，使用它
+                if (window.requestIdleCallback) {
+                    window.requestIdleCallback(loadUmami, { timeout: 3000 });
+                }
+            })();
+        `],
     ],
 
     theme: recoTheme({

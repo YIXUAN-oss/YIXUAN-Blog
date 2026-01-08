@@ -392,7 +392,7 @@ export default defineClientConfig({
             });
         }
         
-        // 优化图片懒加载
+        // 优化图片懒加载 - 使用原生 loading="lazy" 和 IntersectionObserver
         if (typeof window !== 'undefined') {
             const initImageLazyLoad = () => {
                 // 为所有图片添加 loading="lazy" 属性（如果还没有）
@@ -400,17 +400,25 @@ export default defineClientConfig({
                 allImages.forEach((img) => {
                     const imageElement = img as HTMLImageElement;
                     // 只对非关键图片启用懒加载（保留关键图片如 logo、avatar 立即加载）
-                    if (!imageElement.src.includes('logo') && !imageElement.src.includes('avatar') && !imageElement.src.includes('favicon')) {
+                    if (!imageElement.src.includes('logo') && 
+                        !imageElement.src.includes('avatar') && 
+                        !imageElement.src.includes('favicon') &&
+                        !imageElement.closest('header') &&
+                        !imageElement.closest('nav')) {
+                        // 使用原生懒加载（现代浏览器支持）
                         imageElement.loading = 'lazy';
-                        // 保存原始 src 到 data-src
-                        if (!imageElement.dataset.src) {
-                            imageElement.dataset.src = imageElement.src;
+                        // 添加解码提示，提升性能
+                        imageElement.decoding = 'async';
+                        // 添加 fetchpriority 提示（如果浏览器支持）
+                        if (!imageElement.hasAttribute('fetchpriority')) {
+                            imageElement.setAttribute('fetchpriority', 'low');
                         }
                     }
                 });
 
-                // 使用 IntersectionObserver 实现懒加载
-                if ('IntersectionObserver' in window) {
+                // 使用 IntersectionObserver 作为备用方案（原生 loading="lazy" 不支持时）
+                // 注意：现代浏览器已支持原生懒加载，此代码主要用于兼容旧浏览器
+                if ('IntersectionObserver' in window && !('loading' in HTMLImageElement.prototype)) {
                     const imageObserver = new IntersectionObserver(
                         (entries) => {
                             entries.forEach((entry) => {
@@ -442,7 +450,7 @@ export default defineClientConfig({
                             });
                         },
                         {
-                            rootMargin: '50px', // 提前 50px 开始加载
+                            rootMargin: '100px', // 提前 100px 开始加载，提升用户体验
                             threshold: 0.01
                         }
                     );
@@ -450,15 +458,6 @@ export default defineClientConfig({
                     // 观察所有懒加载图片
                     document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
                         imageObserver.observe(img);
-                    });
-                } else {
-                    // 不支持 IntersectionObserver 的浏览器，直接加载所有图片
-                    document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
-                        const imageElement = img as HTMLImageElement;
-                        if (imageElement.dataset.src) {
-                            imageElement.src = imageElement.dataset.src;
-                        }
-                        imageElement.classList.add('loaded');
                     });
                 }
             };
