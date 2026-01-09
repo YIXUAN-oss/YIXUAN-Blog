@@ -1,5 +1,5 @@
 ---
-title: Pandoc 使用手册 安装与多格式转换指南（Windows）
+title:【2025 最新】Pandoc 使用手册 安装与多格式转换指南（Windows）
 date: 2025-12-29
 categories:
   - 开发工具
