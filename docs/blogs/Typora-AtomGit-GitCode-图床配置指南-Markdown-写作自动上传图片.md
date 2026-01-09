@@ -3,12 +3,9 @@ title: Typora + AtomGit GitCode 图床配置指南：Markdown 写作自动上传
 date: 2025-12-25
 categories:
   - 开发工具
-  - Markdown
 tags:
   - Typora
-  - GitCode
   - 图床
-  - PicGo
   - Markdown
 author: 懿轩
 ---

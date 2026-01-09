@@ -2,12 +2,9 @@
 title: VMware虚拟机Linux系统下载安装MinIO
 date: 2025-11-05
 categories:
-  - 对象存储
   - 中间件
 tags:
   - MinIO
-  - Linux
-  - CentOS 7
   - 对象存储
   - S3
 author: 懿轩

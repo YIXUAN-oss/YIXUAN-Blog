@@ -1120,6 +1120,50 @@ export default defineClientConfig({
     },
 
     setup() {
+        // 初始化 Mermaid 图表支持
+        if (typeof window !== 'undefined') {
+            const initMermaid = () => {
+                if (typeof (window as any).mermaid !== 'undefined') {
+                    const mermaid = (window as any).mermaid;
+                    mermaid.initialize({ 
+                        startOnLoad: true,
+                        theme: 'default',
+                        securityLevel: 'loose'
+                    });
+                    // 渲染所有 mermaid 代码块
+                    const mermaidElements = document.querySelectorAll('code.language-mermaid, pre code.language-mermaid');
+                    mermaidElements.forEach((element) => {
+                        const code = element.textContent || '';
+                        if (code.trim() && !element.parentElement?.classList.contains('mermaid')) {
+                            const wrapper = document.createElement('div');
+                            wrapper.className = 'mermaid';
+                            wrapper.textContent = code;
+                            const pre = element.closest('pre');
+                            if (pre) {
+                                pre.parentElement?.replaceChild(wrapper, pre);
+                            }
+                        }
+                    });
+                    // 执行渲染
+                    mermaid.run();
+                }
+            };
+            
+            // 页面加载时初始化
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMermaid);
+            } else {
+                setTimeout(initMermaid, 100);
+            }
+            
+            // 路由切换后重新初始化
+            if (typeof window !== 'undefined' && (window as any).__VUEPRESS_ROUTER__) {
+                (window as any).__VUEPRESS_ROUTER__.afterEach(() => {
+                    setTimeout(initMermaid, 300);
+                });
+            }
+        }
+        
         // 添加阅读进度条
         if (typeof window !== 'undefined') {
             const progressBar = document.createElement('div');

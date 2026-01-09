@@ -3,14 +3,11 @@ title: DeepSeek+Cursor+Devbox+Sealos带你零代码搞定实战项目开发
 date: 2025-11-03
 categories:
   - AI开发
-  - 实战项目
-tags:
-  - DeepSeek
-  - Cursor
-  - Devbox
-  - Sealos
   - 云原生
+tags:
   - AI编程
+  - 云原生
+  - Cursor
 author: 懿轩
 ---
 

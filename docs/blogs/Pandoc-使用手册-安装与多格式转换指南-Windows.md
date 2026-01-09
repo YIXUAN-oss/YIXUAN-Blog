@@ -2,16 +2,11 @@
 title: Pandoc 使用手册 安装与多格式转换指南（Windows）
 date: 2025-12-29
 categories:
-  - 工具教程
-  - 文档转换
-  - Windows
+  - 开发工具
 tags:
   - Pandoc
-  - Windows
   - 文档转换
   - Markdown
-  - 安装教程
-  - 格式转换
 author: 懿轩
 ---
 

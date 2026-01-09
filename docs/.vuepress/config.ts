@@ -1,16 +1,9 @@
 import { defineUserConfig } from 'vuepress'
 import { viteBundler } from '@vuepress/bundler-vite'
 import { recoTheme } from 'vuepress-theme-reco'
-import { markdownChartPlugin } from '@vuepress/plugin-markdown-chart'
 // import { docsearchPlugin } from '@vuepress/plugin-docsearch' // 已改用主题内置 Algolia
 
 export default defineUserConfig({
-    // 启用 Mermaid 图表支持
-    plugins: [
-        markdownChartPlugin({
-            mermaid: true, // 启用 Mermaid 支持
-        }),
-    ],
     lang: 'zh-CN',
     title: '懿轩的博客',
     description: '分享技术、记录生活 | YiXuan\'s Blog',
@@ -104,6 +97,30 @@ export default defineUserConfig({
         // Waline 评论系统预连接
         ['link', { rel: 'dns-prefetch', href: 'https://waline.yixuan.cyou' }],
         ['link', { rel: 'preconnect', href: 'https://waline.yixuan.cyou', crossorigin: 'anonymous' }],
+        
+        // Mermaid 图表支持 - 使用 CDN 方式，避免版本冲突
+        ['link', { rel: 'dns-prefetch', href: 'https://cdn.jsdelivr.net' }],
+        ['script', { src: 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js' }],
+        ['script', {}, `
+            (function() {
+                function initMermaid() {
+                    if (typeof mermaid !== 'undefined') {
+                        mermaid.initialize({ 
+                            startOnLoad: true,
+                            theme: 'default',
+                            securityLevel: 'loose'
+                        });
+                    } else {
+                        setTimeout(initMermaid, 100);
+                    }
+                }
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initMermaid);
+                } else {
+                    initMermaid();
+                }
+            })();
+        `],
 
         // 自定义搜索框样式
         ['style', {}, `

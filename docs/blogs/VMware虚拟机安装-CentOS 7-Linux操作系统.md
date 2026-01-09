@@ -3,13 +3,10 @@ title: VMware虚拟机安装CentOS 7 Linux操作系统
 date: 2025-11-05
 categories:
   - 运维部署
-  - 虚拟化技术
 tags:
   - VMware
-  - CentOS 7
+  - CentOS
   - Linux
-  - 虚拟机
-  - 系统安装
 author: 懿轩
 ---
 

@@ -3,11 +3,8 @@ title: VMware虚拟机Linux系统下载安装Redis
 date: 2025-11-05
 categories:
   - 数据库
-  - 中间件
 tags:
   - Redis
-  - Linux
-  - CentOS 7
   - 缓存
   - NoSQL
 author: 懿轩
