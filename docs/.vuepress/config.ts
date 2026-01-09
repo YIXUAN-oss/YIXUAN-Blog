@@ -1,9 +1,16 @@
 import { defineUserConfig } from 'vuepress'
 import { viteBundler } from '@vuepress/bundler-vite'
 import { recoTheme } from 'vuepress-theme-reco'
+import { markdownChartPlugin } from '@vuepress/plugin-markdown-chart'
 // import { docsearchPlugin } from '@vuepress/plugin-docsearch' // 已改用主题内置 Algolia
 
 export default defineUserConfig({
+    // 启用 Mermaid 图表支持
+    plugins: [
+        markdownChartPlugin({
+            mermaid: true, // 启用 Mermaid 支持
+        }),
+    ],
     lang: 'zh-CN',
     title: '懿轩的博客',
     description: '分享技术、记录生活 | YiXuan\'s Blog',
