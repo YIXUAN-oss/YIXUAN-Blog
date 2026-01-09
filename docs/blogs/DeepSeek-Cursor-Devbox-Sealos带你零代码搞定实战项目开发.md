@@ -1,5 +1,5 @@
 ---
-title:【2026 最新】DeepSeek+Cursor+Devbox+Sealos带你零代码搞定实战项目开发
+title: DeepSeek+Cursor+Devbox+Sealos带你零代码搞定实战项目开发
 date: 2025-11-03
 categories:
   - AI开发

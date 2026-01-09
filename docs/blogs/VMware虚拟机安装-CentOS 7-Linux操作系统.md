@@ -1,5 +1,5 @@
 ---
-title:【2025 最新】 VMware虚拟机安装CentOS 7 Linux操作系统
+title: VMware虚拟机安装CentOS 7 Linux操作系统
 date: 2025-11-05
 categories:
   - 运维部署

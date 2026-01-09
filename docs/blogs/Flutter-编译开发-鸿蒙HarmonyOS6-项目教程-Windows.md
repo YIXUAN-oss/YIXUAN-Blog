@@ -1,5 +1,5 @@
 ---
-title:【2025 最新】Flutter 编译开发 鸿蒙HarmonyOS 6 项目教程（Windows）
+title: Flutter 编译开发 鸿蒙HarmonyOS 6 项目教程（Windows）
 date: 2025-12-26
 categories:
   - 移动开发

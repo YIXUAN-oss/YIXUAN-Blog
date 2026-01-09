@@ -1,5 +1,5 @@
 ---
-title:【2025 最新】VMware虚拟机Linux系统下载安装Redis
+title: VMware虚拟机Linux系统下载安装Redis
 date: 2025-11-05
 categories:
   - 数据库
